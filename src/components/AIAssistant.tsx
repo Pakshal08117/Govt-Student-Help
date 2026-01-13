@@ -18,8 +18,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { generateIntelligentResponse, handleSpecificQuery } from "@/services/aiService";
-import { detectLifeSituation, generateFollowUpQuestion } from "@/services/conversationalAI";
+import { generateCachedResponse, handleSpecificQuery } from "@/services/aiService";
 
 interface ChatMessage {
   id: string;
@@ -67,36 +66,10 @@ export default function AIAssistant() {
     window.speechSynthesis.speak(utterance);
   }, [isMuted, lang]);
 
-  // This function is now handled by aiService.ts
-
   // Generate AI response using intelligent service
   const generateAIResponse = useCallback(async (userInput: string): Promise<ChatMessage> => {
     await new Promise(resolve => setTimeout(resolve, 800));
     const input = userInput.toLowerCase();
-
-    // FIRST: Check for life situations (widow, disabled child, unemployment, etc.)
-    const lifeSituationResponse = detectLifeSituation(userInput, lang);
-    if (lifeSituationResponse) {
-      // Add follow-up questions
-      const followUp = generateFollowUpQuestion(userInput, lang);
-      return {
-        id: Date.now().toString(),
-        type: 'ai',
-        content: lifeSituationResponse + followUp,
-        timestamp: new Date()
-      };
-    }
-
-    // Check for specific queries (tracking, contact, documents)
-    const specificResponse = handleSpecificQuery(userInput, lang);
-    if (specificResponse) {
-      return {
-        id: Date.now().toString(),
-        type: 'ai',
-        content: specificResponse,
-        timestamp: new Date()
-      };
-    }
 
     // Voice commands for navigation
     if (input.includes('open schemes') || input.includes('योजना उघडा') || input.includes('योजनाएं खोलें')) {
@@ -120,7 +93,7 @@ export default function AIAssistant() {
     }
 
     // Use intelligent AI service for problem analysis and solutions
-    const intelligentResponse = generateIntelligentResponse(userInput, lang);
+    const intelligentResponse = generateCachedResponse(userInput, lang);
 
     return {
       id: Date.now().toString(),
@@ -480,9 +453,9 @@ export default function AIAssistant() {
 // Helper function for welcome message
 function getWelcomeMessage(lang: string): string {
   const messages = {
-    en: "👋 Hello! I'm your Intelligent AI Assistant.\n\n🎤 Click microphone and tell me your problem!\n🎯 I'll analyze and suggest the best schemes!\n\n💡 Examples:\n• 'I need medical treatment'\n• 'My daughter needs school fees'\n• 'I'm a farmer, need financial help'\n• 'How to track my application?'\n\n✨ I understand your problems and provide real solutions!",
-    mr: "👋 नमस्कार! मी तुमचा बुद्धिमान AI सहाय्यक आहे.\n\n🎤 मायक्रोफोन क्लिक करा आणि समस्या सांगा!\n🎯 मी विश्लेषण करून सर्वोत्तम योजना सुचवेन!\n\n💡 उदाहरणे:\n• 'मला वैद्यकीय उपचार हवे'\n• 'माझ्या मुलीला शाळेच्या फीसाठी मदत हवी'\n• 'मी शेतकरी आहे, आर्थिक मदत हवी'\n• 'माझा अर्ज कसा ट्रॅक करावा?'\n\n✨ मी तुमच्या समस्या समजतो आणि खरे उपाय देतो!",
-    hi: "👋 नमस्ते! मैं आपका बुद्धिमान AI सहायक हूं।\n\n🎤 माइक्रोफ़ोन क्लिक करें और समस्या बताएं!\n🎯 मैं विश्लेषण करके सर्वोत्तम योजनाएं सुझाऊंगा!\n\n💡 उदाहरण:\n• 'मुझे चिकित्सा उपचार चाहिए'\n• 'मेरी बेटी को स्कूल की फीस चाहिए'\n• 'मैं किसान हूं, वित्तीय मदद चाहिए'\n• 'अपना आवेदन कैसे ट्रैक करें?'\n\n✨ मैं आपकी समस्याएं समझता हूं और असली समाधान देता हूं!"
+    en: "👋 Hello! I'm your Intelligent AI Assistant for Government & Student Help Platform.\n\n🎯 **What I Can Help You With:**\n• Find perfect government schemes for your needs\n• Voice & text interaction in 12 languages\n• Real-time application guidance\n• Document assistance & requirements\n• Navigate platform features\n\n🎤 **Voice Commands Examples:**\n• 'I need medical treatment'\n• 'My daughter needs school fees'\n• 'I'm a farmer, need financial help'\n• 'Open schemes page'\n• 'What features does this website have?'\n\n🌟 **Platform Features:**\n• 40+ Government Schemes & Scholarships\n• Support in 12 Indian Languages\n• 24x7 Helpline Support (1077)\n• Government Verified Information\n• Real-time Application Tracking\n\n✨ Just click the microphone and tell me your problem, or ask about any platform feature!",
+    mr: "👋 नमस्कार! मी तुमचा बुद्धिमान AI सहाय्यक आहे सरकारी व विद्यार्थी मदत प्लॅटफॉर्मसाठी.\n\n🎯 **मी तुम्हाला यामध्ये मदत करू शकतो:**\n• तुमच्या गरजेनुसार योग्य सरकारी योजना शोधणे\n• 12 भाषांमध्ये आवाज व मजकूर संवाद\n• रिअल-टाइम अर्ज मार्गदर्शन\n• कागदपत्र सहाय्य व आवश्यकता\n• प्लॅटफॉर्म वैशिष्ट्यांमध्ये नेव्हिगेट करणे\n\n🎤 **आवाज कमांड उदाहरणे:**\n• 'मला वैद्यकीय उपचार हवे'\n• 'माझ्या मुलीला शाळेच्या फीसाठी मदत हवी'\n• 'मी शेतकरी आहे, आर्थिक मदत हवी'\n• 'योजना पृष्ठ उघडा'\n• 'या वेबसाइटची कोणती वैशिष्ट्ये आहेत?'\n\n🌟 **प्लॅटफॉर्म वैशिष्ट्ये:**\n• 40+ सरकारी योजना आणि शिष्यवृत्ती\n• 12 भारतीय भाषांमध्ये सहाय्य\n• 24x7 हेल्पलाइन सहाय्य (1077)\n• सरकार सत्यापित माहिती\n• रिअल-टाइम अर्ज ट्रॅकिंग\n\n✨ फक्त मायक्रोफोनवर क्लिक करा आणि तुमची समस्या सांगा, किंवा कोणत्याही प्लॅटफॉर्म वैशिष्ट्याबद्दल विचारा!",
+    hi: "👋 नमस्ते! मैं आपका बुद्धिमान AI सहायक हूं सरकारी व छात्र सहायता प्लेटफॉर्म के लिए।\n\n🎯 **मैं आपकी इनमें मदद कर सकता हूं:**\n• आपकी जरूरतों के अनुसार सही सरकारी योजनाएं खोजना\n• 12 भाषाओं में आवाज व टेक्स्ट बातचीत\n• रियल-टाइम आवेदन मार्गदर्शन\n• दस्तावेज़ सहायता व आवश्यकताएं\n• प्लेटफॉर्म फीचर्स में नेवीगेट करना\n\n🎤 **आवाज कमांड उदाहरण:**\n• 'मुझे चिकित्सा उपचार चाहिए'\n• 'मेरी बेटी को स्कूल की फीस चाहिए'\n• 'मैं किसान हूं, वित्तीय मदद चाहिए'\n• 'योजनाएं पेज खोलें'\n• 'इस वेबसाइट की क्या विशेषताएं हैं?'\n\n🌟 **प्लेटफॉर्म विशेषताएं:**\n• 40+ सरकारी योजनाएं और छात्रवृत्ति\n• 12 भारतीय भाषाओं में सहायता\n• 24x7 हेल्पलाइन सहायता (1077)\n• सरकार सत्यापित जानकारी\n• रियल-टाइम आवेदन ट्रैकिंग\n\n✨ बस माइक्रोफ़ोन पर क्लिक करें और अपनी समस्या बताएं, या किसी भी प्लेटफॉर्म फीचर के बारे में पूछें!"
   };
   return messages[lang as keyof typeof messages] || messages.en;
 }

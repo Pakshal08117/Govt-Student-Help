@@ -1,4 +1,4 @@
-// AI Service - Intelligent Problem Solving Engine
+// AI Service - Intelligent Problem Solving Engine with Comprehensive Website Data
 import { schemes } from '@/data/schemes';
 
 export interface AIResponse {
@@ -8,6 +8,267 @@ export interface AIResponse {
   category: string;
 }
 
+// Comprehensive website data and services with all 12 Indian languages
+const websiteServices = {
+  platformFeatures: {
+    en: [
+      "🎯 40+ Government Schemes & Scholarships",
+      "🌍 Support in 12 Indian Languages",
+      "📱 Mobile-Friendly Interface",
+      "🔒 Secure Application Process",
+      "📞 24x7 Helpline Support (1077)",
+      "🏛️ Government Verified Information",
+      "📊 Real-time Application Tracking",
+      "🤖 AI-Powered Scheme Recommendations",
+      "📄 Document Assistance & Guidance",
+      "💬 Multi-language Voice Support"
+    ],
+    hi: [
+      "🎯 40+ सरकारी योजनाएं और छात्रवृत्ति",
+      "🌍 12 भारतीय भाषाओं में सहायता",
+      "📱 मोबाइल-फ्रेंडली इंटरफेस",
+      "🔒 सुरक्षित आवेदन प्रक्रिया",
+      "📞 24x7 हेल्पलाइन सहायता (1077)",
+      "🏛️ सरकार सत्यापित जानकारी",
+      "📊 रियल-टाइम आवेदन ट्रैकिंग",
+      "🤖 AI-संचालित योजना सुझाव",
+      "📄 दस्तावेज़ सहायता और मार्गदर्शन",
+      "💬 बहुभाषी आवाज सहायता"
+    ],
+    mr: [
+      "🎯 40+ सरकारी योजना आणि शिष्यवृत्ती",
+      "🌍 12 भारतीय भाषांमध्ये सहाय्य",
+      "📱 मोबाइल-फ्रेंडली इंटरफेस",
+      "🔒 सुरक्षित अर्ज प्रक्रिया",
+      "📞 24x7 हेल्पलाइन सहाय्य (1077)",
+      "🏛️ सरकार सत्यापित माहिती",
+      "📊 रिअल-टाइम अर्ज ट्रॅकिंग",
+      "🤖 AI-संचालित योजना सुचवणे",
+      "📄 कागदपत्र सहाय्य आणि मार्गदर्शन",
+      "💬 बहुभाषी आवाज सहाय्य"
+    ],
+    bn: [
+      "🎯 40+ সরকারি প্রকল্প ও বৃত্তি",
+      "🌍 12টি ভারতীয় ভাষায় সহায়তা",
+      "📱 মোবাইল-বান্ধব ইন্টারফেস",
+      "🔒 নিরাপদ আবেদন প্রক্রিয়া",
+      "📞 24x7 হেল্পলাইন সহায়তা (1077)",
+      "🏛️ সরকার যাচাইকৃত তথ্য",
+      "📊 রিয়েল-টাইম আবেদন ট্র্যাকিং",
+      "🤖 AI-চালিত প্রকল্প সুপারিশ",
+      "📄 নথি সহায়তা ও নির্দেশনা",
+      "💬 বহুভাষিক ভয়েস সহায়তা"
+    ],
+    te: [
+      "🎯 40+ ప్రభుత్వ పథకాలు & స్కాలర్‌షిప్‌లు",
+      "🌍 12 భారతీయ భాషలలో మద్దతు",
+      "📱 మొబైల్-స్నేహపూర్వక ఇంటర్‌ఫేస్",
+      "🔒 సురక్షిత దరఖాస్తు ప్రక్రియ",
+      "📞 24x7 హెల్ప్‌లైన్ మద్దతు (1077)",
+      "🏛️ ప్రభుత్వం ధృవీకరించిన సమాచారం",
+      "📊 రియల్-టైమ్ దరఖాస్తు ట్రాకింగ్",
+      "🤖 AI-ఆధారిత పథకం సిఫార్సులు",
+      "📄 పత్రాల సహాయం & మార్గదర్శకత్వం",
+      "💬 బహుభాషా వాయిస్ మద్దతు"
+    ],
+    ta: [
+      "🎯 40+ அரசு திட்டங்கள் & உதவித்தொகைகள்",
+      "🌍 12 இந்திய மொழிகளில் ஆதரவு",
+      "📱 மொபைல்-நட்பு இடைமுகம்",
+      "🔒 பாதுகாப்பான விண்ணப்ப செயல்முறை",
+      "📞 24x7 உதவி எண் ஆதரவு (1077)",
+      "🏛️ அரசு சரிபார்க்கப்பட்ட தகவல்",
+      "📊 நிகழ்நேர விண்ணப்ப கண்காணிப்பு",
+      "🤖 AI-இயங்கும் திட்ட பரிந்துரைகள்",
+      "📄 ஆவண உதவி & வழிகாட்டுதல்",
+      "💬 பல்மொழி குரல் ஆதரவு"
+    ],
+    gu: [
+      "🎯 40+ સરકારી યોજનાઓ અને શિષ્યવૃત્તિઓ",
+      "🌍 12 ભારતીય ભાષાઓમાં સહાય",
+      "📱 મોબાઇલ-મૈત્રીપૂર્ણ ઇન્ટરફેસ",
+      "🔒 સુરક્ષિત અરજી પ્રક્રિયા",
+      "📞 24x7 હેલ્પલાઇન સહાય (1077)",
+      "🏛️ સરકાર ચકાસેલી માહિતી",
+      "📊 રિયલ-ટાઇમ અરજી ટ્રેકિંગ",
+      "🤖 AI-સંચાલિત યોજના ભલામણો",
+      "📄 દસ્તાવેજ સહાય અને માર્ગદર્શન",
+      "💬 બહુભાષી અવાજ સહાય"
+    ],
+    kn: [
+      "🎯 40+ ಸರ್ಕಾರಿ ಯೋಜನೆಗಳು ಮತ್ತು ವಿದ್ಯಾರ್ಥಿವೇತನಗಳು",
+      "🌍 12 ಭಾರತೀಯ ಭಾಷೆಗಳಲ್ಲಿ ಬೆಂಬಲ",
+      "📱 ಮೊಬೈಲ್-ಸ್ನೇಹಿ ಇಂಟರ್ಫೇಸ್",
+      "🔒 ಸುರಕ್ಷಿತ ಅರ್ಜಿ ಪ್ರಕ್ರಿಯೆ",
+      "📞 24x7 ಸಹಾಯವಾಣಿ ಬೆಂಬಲ (1077)",
+      "🏛️ ಸರ್ಕಾರ ಪರಿಶೀಲಿಸಿದ ಮಾಹಿತಿ",
+      "📊 ನೈಜ-ಸಮಯ ಅರ್ಜಿ ಟ್ರ್ಯಾಕಿಂಗ್",
+      "🤖 AI-ಚಾಲಿತ ಯೋಜನೆ ಶಿಫಾರಸುಗಳು",
+      "📄 ದಾಖಲೆ ಸಹಾಯ ಮತ್ತು ಮಾರ್ಗದರ್ಶನ",
+      "💬 ಬಹುಭಾಷಾ ಧ್ವನಿ ಬೆಂಬಲ"
+    ],
+    ml: [
+      "🎯 40+ സർക്കാർ പദ്ധതികളും സ്കോളർഷിപ്പുകളും",
+      "🌍 12 ഇന്ത്യൻ ഭാഷകളിൽ പിന്തുണ",
+      "📱 മൊബൈൽ-സൗഹൃദ ഇന്റർഫേസ്",
+      "🔒 സുരക്ഷിത അപേക്ഷാ പ്രക്രിയ",
+      "📞 24x7 ഹെൽപ്പ്‌ലൈൻ പിന്തുണ (1077)",
+      "🏛️ സർക്കാർ പരിശോധിച്ച വിവരങ്ങൾ",
+      "📊 തത്സമയ അപേക്ഷാ ട്രാക്കിംഗ്",
+      "🤖 AI-പവർഡ് സ്കീം ശുപാർശകൾ",
+      "📄 ഡോക്യുമെന്റ് സഹായവും മാർഗ്ഗനിർദ്ദേശവും",
+      "💬 ബഹുഭാഷാ വോയ്‌സ് പിന്തുണ"
+    ],
+    pa: [
+      "🎯 40+ ਸਰਕਾਰੀ ਸਕੀਮਾਂ ਅਤੇ ਸਕਾਲਰਸ਼ਿਪਾਂ",
+      "🌍 12 ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਸਹਾਇਤਾ",
+      "📱 ਮੋਬਾਈਲ-ਦੋਸਤ ਇੰਟਰਫੇਸ",
+      "🔒 ਸੁਰੱਖਿਅਤ ਅਰਜ਼ੀ ਪ੍ਰਕਿਰਿਆ",
+      "📞 24x7 ਹੈਲਪਲਾਈਨ ਸਹਾਇਤਾ (1077)",
+      "🏛️ ਸਰਕਾਰ ਦੁਆਰਾ ਪ੍ਰਮਾਣਿਤ ਜਾਣਕਾਰੀ",
+      "📊 ਰੀਅਲ-ਟਾਈਮ ਅਰਜ਼ੀ ਟਰੈਕਿੰਗ",
+      "🤖 AI-ਸੰਚਾਲਿਤ ਸਕੀਮ ਸਿਫਾਰਸ਼ਾਂ",
+      "📄 ਦਸਤਾਵੇਜ਼ ਸਹਾਇਤਾ ਅਤੇ ਮਾਰਗਦਰਸ਼ਨ",
+      "💬 ਬਹੁ-ਭਾਸ਼ਾਈ ਆਵਾਜ਼ ਸਹਾਇਤਾ"
+    ],
+    or: [
+      "🎯 40+ ସରକାରୀ ଯୋଜନା ଏବଂ ଛାତ୍ରବୃତ୍ତି",
+      "🌍 12ଟି ଭାରତୀୟ ଭାଷାରେ ସହାୟତା",
+      "📱 ମୋବାଇଲ୍-ବନ୍ଧୁ ଇଣ୍ଟରଫେସ୍",
+      "🔒 ସୁରକ୍ଷିତ ଆବେଦନ ପ୍ରକ୍ରିୟା",
+      "📞 24x7 ହେଲ୍ପଲାଇନ୍ ସହାୟତା (1077)",
+      "🏛️ ସରକାର ଯାଞ୍ଚିତ ସୂଚନା",
+      "📊 ରିଅଲ୍-ଟାଇମ୍ ଆବେଦନ ଟ୍ରାକିଂ",
+      "🤖 AI-ଚାଳିତ ଯୋଜନା ସୁପାରିଶ",
+      "📄 ଦଲିଲ ସହାୟତା ଏବଂ ମାର୍ଗଦର୍ଶନ",
+      "💬 ବହୁଭାଷୀ ସ୍ୱର ସହାୟତା"
+    ],
+    as: [
+      "🎯 40+ চৰকাৰী আঁচনি আৰু বৃত্তি",
+      "🌍 12টা ভাৰতীয় ভাষাত সহায়",
+      "📱 মোবাইল-বন্ধুত্বপূৰ্ণ ইণ্টাৰফেচ",
+      "🔒 সুৰক্ষিত আবেদন প্ৰক্ৰিয়া",
+      "📞 24x7 হেল্পলাইন সহায় (1077)",
+      "🏛️ চৰকাৰ সত্যাপিত তথ্য",
+      "📊 ৰিয়েল-টাইম আবেদন ট্ৰেকিং",
+      "🤖 AI-চালিত আঁচনি পৰামৰ্শ",
+      "📄 নথি সহায় আৰু নিৰ্দেশনা",
+      "💬 বহুভাষিক কণ্ঠস্বৰ সহায়"
+    ]
+  },
+
+  availablePages: {
+    en: [
+      "🏠 Homepage - Platform overview and quick access",
+      "📋 Schemes - Browse 40+ government schemes",
+      "🎓 Scholarships - Education funding opportunities",
+      "👤 User Dashboard - Profile and application management",
+      "🔍 Search - Find schemes by category or keyword",
+      "📞 Contact - Helplines and support information",
+      "ℹ️ About - Platform features and information",
+      "🔐 Admin Panel - Management interface (Admin only)",
+      "📊 Application Tracking - Real-time status updates"
+    ],
+    hi: [
+      "🏠 होमपेज - प्लेटफॉर्म अवलोकन और त्वरित पहुंच",
+      "📋 योजनाएं - 40+ सरकारी योजनाएं ब्राउज़ करें",
+      "🎓 छात्रवृत्ति - शिक्षा फंडिंग अवसर",
+      "👤 उपयोगकर्ता डैशबोर्ड - प्रोफ़ाइल और आवेदन प्रबंधन",
+      "🔍 खोज - श्रेणी या कीवर्ड द्वारा योजनाएं खोजें",
+      "📞 संपर्क - हेल्पलाइन और सहायता जानकारी",
+      "ℹ️ के बारे में - प्लेटफॉर्म सुविधाएं और जानकारी",
+      "🔐 एडमिन पैनल - प्रबंधन इंटरफेस (केवल एडमिन)",
+      "📊 आवेदन ट्रैकिंग - रियल-टाइम स्थिति अपडेट"
+    ],
+    mr: [
+      "🏠 होमपेज - प्लॅटफॉर्म अवलोकन आणि द्रुत प्रवेश",
+      "📋 योजना - 40+ सरकारी योजना ब्राउझ करा",
+      "🎓 शिष्यवृत्ती - शिक्षण निधी संधी",
+      "👤 वापरकर्ता डॅशबोर्ड - प्रोफाइल आणि अर्ज व्यवस्थापन",
+      "🔍 शोध - श्रेणी किंवा कीवर्डनुसार योजना शोधा",
+      "📞 संपर्क - हेल्पलाइन आणि सहाय्य माहिती",
+      "ℹ️ बद्दल - प्लॅटफॉर्म वैशिष्ट्ये आणि माहिती",
+      "🔐 प्रशासक पॅनेल - व्यवस्थापन इंटरफेस (फक्त प्रशासक)",
+      "📊 अर्ज ट्रॅकिंग - रिअल-टाइम स्थिती अपडेट"
+    ]
+  },
+
+  supportedLanguages: {
+    en: "English, Hindi, Marathi, Bengali, Telugu, Tamil, Gujarati, Kannada, Malayalam, Punjabi, Odia, Assamese",
+    hi: "अंग्रेजी, हिंदी, मराठी, बंगाली, तेलुगु, तमिल, गुजराती, कन्नड़, मलयालम, पंजाबी, ओड़िया, असमिया",
+    mr: "इंग्रजी, हिंदी, मराठी, बंगाली, तेलुगु, तमिळ, गुजराती, कन्नड, मल्याळम, पंजाबी, ओडिया, आसामी",
+    bn: "ইংরেজি, হিন্দি, মারাঠি, বাংলা, তেলুগু, তামিল, গুজরাটি, কন্নড়, মালয়ালাম, পাঞ্জাবি, ওড়িয়া, অসমিয়া",
+    te: "ఇంగ్లీష్, హిందీ, మరాఠీ, బెంగాలీ, తెలుగు, తమిళ్, గుజరాతీ, కన్నడ, మలయాళం, పంజాబీ, ఒడియా, అస్సామీస్",
+    ta: "ஆங்கிலம், இந்தி, மராத்தி, வங்காளம், தெலுங்கு, தமிழ், குஜராத்தி, கன்னடம், மலையாளம், பஞ்சாபி, ஒடியா, அசாமி",
+    gu: "અંગ્રેજી, હિન્દી, મરાઠી, બંગાળી, તેલુગુ, તમિલ, ગુજરાતી, કન્નડ, મલયાલમ, પંજાબી, ઓડિયા, આસામી",
+    kn: "ಇಂಗ್ಲಿಷ್, ಹಿಂದಿ, ಮರಾಠಿ, ಬಂಗಾಳಿ, ತೆಲುಗು, ತಮಿಳು, ಗುಜರಾತಿ, ಕನ್ನಡ, ಮಲಯಾಳಂ, ಪಂಜಾಬಿ, ಒಡಿಯಾ, ಅಸ್ಸಾಮೀಸ್",
+    ml: "ഇംഗ്ലീഷ്, ഹിന്ദി, മറാത്തി, ബംഗാളി, തെലുങ്ക്, തമിഴ്, ഗുജറാത്തി, കന്നഡ, മലയാളം, പഞ്ചാബി, ഒഡിയ, അസമിയ",
+    pa: "ਅੰਗਰੇਜ਼ੀ, ਹਿੰਦੀ, ਮਰਾਠੀ, ਬੰਗਾਲੀ, ਤੇਲਗੂ, ਤਮਿਲ, ਗੁਜਰਾਤੀ, ਕੰਨੜ, ਮਲਿਆਲਮ, ਪੰਜਾਬੀ, ਓੜੀਆ, ਅਸਾਮੀ",
+    or: "ଇଂରାଜୀ, ହିନ୍ଦୀ, ମରାଠୀ, ବଙ୍ଗାଳୀ, ତେଲୁଗୁ, ତାମିଲ୍, ଗୁଜରାଟୀ, କନ୍ନଡ଼, ମାଲାୟାଲମ୍, ପଞ୍ଜାବୀ, ଓଡ଼ିଆ, ଅସମୀୟା",
+    as: "ইংৰাজী, হিন্দী, মাৰাঠী, বাংলা, তেলুগু, তামিল, গুজৰাটী, কন্নড়, মালায়ালাম, পাঞ্জাবী, ওড়িয়া, অসমীয়া"
+  },
+
+  helplineNumbers: {
+    en: [
+      "📞 National Citizen Helpline: 1077 (24x7)",
+      "🏥 Ayushman Bharat: 14555",
+      "🌾 PM-KISAN: 155261",
+      "🎓 Scholarship Portal: 0120-6619540",
+      "🚨 Emergency: 100 (Police), 108 (Ambulance)",
+      "👩 Women Helpline: 181",
+      "👶 Child Helpline: 1098"
+    ],
+    hi: [
+      "📞 राष्ट्रीय नागरिक हेल्पलाइन: 1077 (24x7)",
+      "🏥 आयुष्मान भारत: 14555",
+      "🌾 पीएम-किसान: 155261",
+      "🎓 छात्रवृत्ति पोर्टल: 0120-6619540",
+      "🚨 आपातकाल: 100 (पुलिस), 108 (एम्बुलेंस)",
+      "👩 महिला हेल्पलाइन: 181",
+      "👶 बाल हेल्पलाइन: 1098"
+    ],
+    mr: [
+      "📞 राष्ट्रीय नागरिक हेल्पलाइन: 1077 (24x7)",
+      "🏥 आयुष्मान भारत: 14555",
+      "🌾 पीएम-किसान: 155261",
+      "🎓 शिष्यवृत्ती पोर्टल: 0120-6619540",
+      "🚨 आपत्काल: 100 (पोलीस), 108 (रुग्णवाहिका)",
+      "👩 महिला हेल्पलाइन: 181",
+      "👶 बाल हेल्पलाइन: 1098"
+    ]
+  },
+
+  governmentWebsites: {
+    en: [
+      "🏛️ india.gov.in - Official Government Portal",
+      "📊 data.gov.in - Open Government Data",
+      "🎓 scholarships.gov.in - National Scholarship Portal",
+      "🏥 pmjay.gov.in - Ayushman Bharat Portal",
+      "🌾 pmkisan.gov.in - PM-KISAN Portal",
+      "💼 nrega.nic.in - MGNREGA Portal",
+      "🏠 pmaymis.gov.in - PM Awas Yojana Portal"
+    ],
+    hi: [
+      "🏛️ india.gov.in - आधिकारिक सरकारी पोर्टल",
+      "📊 data.gov.in - खुला सरकारी डेटा",
+      "🎓 scholarships.gov.in - राष्ट्रीय छात्रवृत्ति पोर्टल",
+      "🏥 pmjay.gov.in - आयुष्मान भारत पोर्टल",
+      "🌾 pmkisan.gov.in - पीएम-किसान पोर्टल",
+      "💼 nrega.nic.in - मनरेगा पोर्टल",
+      "🏠 pmaymis.gov.in - पीएम आवास योजना पोर्टल"
+    ],
+    mr: [
+      "🏛️ india.gov.in - अधिकृत सरकारी पोर्टल",
+      "📊 data.gov.in - मुक्त सरकारी डेटा",
+      "🎓 scholarships.gov.in - राष्ट्रीय शिष्यवृत्ती पोर्टल",
+      "🏥 pmjay.gov.in - आयुष्मान भारत पोर्टल",
+      "🌾 pmkisan.gov.in - पीएम-किसान पोर्टल",
+      "💼 nrega.nic.in - मनरेगा पोर्टल",
+      "🏠 pmaymis.gov.in - पीएम आवास योजना पोर्टल"
+    ]
+  }
+};
+
 // Comprehensive keyword mapping for all problems
 const problemKeywords = {
   health: {
@@ -15,57 +276,95 @@ const problemKeywords = {
       'health', 'hospital', 'medical', 'treatment', 'doctor', 'surgery', 'illness', 'disease',
       'sick', 'medicine', 'operation', 'cancer', 'diabetes', 'heart', 'emergency', 'ambulance',
       'बीमार', 'आजार', 'उपचार', 'रुग्णालय', 'डॉक्टर', 'शस्त्रक्रिया', 'औषध',
-      'इलाज', 'बीमारी', 'चिकित्सा', 'अस्पताल', 'दवा', 'ऑपरेशन'
+      'इलाज', 'बीमारी', 'चिकित्सा', 'अस्पताल', 'दवा', 'ऑपरेशन', 'स्वास्थ्य'
     ],
-    schemes: ['mahatma-jyotiba-phule-jan-arogya-yojana']
+    schemes: ['ayushman-bharat', 'pmsby', 'pmjjby']
   },
   education: {
     keywords: [
       'education', 'school', 'college', 'study', 'scholarship', 'fees', 'student', 'exam',
       'university', 'admission', 'books', 'tuition', 'learning', 'class', 'degree',
       'शिक्षण', 'शाळा', 'महाविद्यालय', 'अभ्यास', 'शिष्यवृत्ती', 'फी', 'विद्यार्थी',
-      'शिक्षा', 'स्कूल', 'कॉलेज', 'छात्रवृत्ति', 'पढ़ाई', 'परीक्षा'
+      'शिक्षा', 'स्कूल', 'कॉलेज', 'छात्रवृत्ति', 'पढ़ाई', 'परीक्षा', 'फीस'
     ],
-    schemes: ['lek-ladki-yojana', 'rajarshi-shahu-scholarship']
+    schemes: ['nsp-post-matric-sc', 'nsp-post-matric-st', 'nsp-post-matric-obc', 'nsp-minority', 'inspire', 'nmms', 'pm-yasasvi', 'pragati-saksham']
   },
   girlChild: {
     keywords: [
-      'girl', 'daughter', 'female', 'woman', 'lady', 'sister',
-      'मुलगी', 'मुलीचे', 'बेटी', 'लड़की', 'महिला', 'बालिका'
+      'girl', 'daughter', 'female', 'woman', 'lady', 'sister', 'girl child',
+      'मुलगी', 'मुलीचे', 'बेटी', 'लड़की', 'महिला', 'बालिका', 'कन्या'
     ],
-    schemes: ['lek-ladki-yojana']
+    schemes: ['sukanya-samriddhi', 'maha-lek-ladki', 'up-kanya-sumangala', 'guj-vahli-dikri']
   },
   agriculture: {
     keywords: [
       'farm', 'agriculture', 'crop', 'irrigation', 'farmer', 'field', 'harvest', 'land',
-      'cultivation', 'seeds', 'fertilizer', 'tractor', 'farming',
+      'cultivation', 'seeds', 'fertilizer', 'tractor', 'farming', 'kisan',
       'खेती', 'शेती', 'शेतकरी', 'पीक', 'शेत', 'लागवड', 'बियाणे',
-      'किसान', 'कृषि', 'खेत', 'फसल', 'बीज'
+      'किसान', 'कृषि', 'खेत', 'फसल', 'बीज', 'खाद'
     ],
-    schemes: ['shetkari-sanman-nidhi', 'solar-pump-subsidy']
-  },
-  solarPump: {
-    keywords: [
-      'pump', 'electricity', 'solar', 'power', 'energy', 'electric', 'bijli',
-      'पंप', 'वीज', 'सौर', 'ऊर्जा', 'विजेचा', 'बिजली', 'सोलर'
-    ],
-    schemes: ['solar-pump-subsidy']
+    schemes: ['pm-kisan', 'pm-fasal-bima', 'kisan-credit-card', 'maha-sharad-pawar-gram-samruddhata']
   },
   financial: {
     keywords: [
       'money', 'financial', 'income', 'poor', 'poverty', 'help', 'assistance', 'loan',
-      'debt', 'payment', 'cash', 'fund', 'support', 'aid',
+      'debt', 'payment', 'cash', 'fund', 'support', 'aid', 'bank', 'credit',
       'पैसे', 'आर्थिक', 'उत्पन्न', 'गरीब', 'मदत', 'सहाय्य', 'कर्ज',
-      'आय', 'गरीबी', 'सहायता', 'रुपये', 'धन'
+      'आय', 'गरीबी', 'सहायता', 'रुपये', 'धन', 'पैसा', 'ऋण'
     ],
-    schemes: ['shetkari-sanman-nidhi', 'lek-ladki-yojana']
+    schemes: ['mudra', 'standup-india', 'pmegp', 'pm-vishwakarma', 'kar-gruha-lakshmi', 'tn-kalaignar-magalir', 'wb-lakshmir-bhandar']
   },
-  obc: {
+  employment: {
     keywords: [
-      'obc', 'backward', 'caste', 'reservation', 'quota',
-      'ओबीसी', 'मागासवर्ग', 'जात', 'आरक्षण', 'जाति'
+      'job', 'work', 'employment', 'unemployed', 'skill', 'training', 'business', 'rozgar',
+      'नोकरी', 'काम', 'रोजगार', 'बेरोजगार', 'कौशल्य', 'प्रशिक्षण', 'व्यवसाय',
+      'नौकरी', 'काम', 'बेरोज़गार', 'कौशल', 'ट्रेनिंग'
     ],
-    schemes: ['rajarshi-shahu-scholarship']
+    schemes: ['pmkvy', 'mudra', 'standup-india', 'startup-india', 'pmegp']
+  },
+  housing: {
+    keywords: [
+      'house', 'home', 'housing', 'shelter', 'construction', 'building', 'awas',
+      'घर', 'मकान', 'आवास', 'निर्माण', 'इमारत', 'घर', 'मकान'
+    ],
+    schemes: ['pmay-urban', 'pmay-gramin']
+  },
+  pension: {
+    keywords: [
+      'pension', 'old', 'elderly', 'senior', 'retirement', 'widow', 'disabled', 'वृद्ध',
+      'पेंशन', 'वृद्ध', 'बुजुर्ग', 'सेवानिवृत्त', 'विधवा', 'दिव्यांग', 'बुढ़ापा'
+    ],
+    schemes: ['apy', 'nsap-oap', 'nsap-widow', 'nsap-disability', 'raj-palanhar']
+  },
+  women: {
+    keywords: [
+      'woman', 'women', 'female', 'mother', 'wife', 'pregnant', 'pregnancy',
+      'महिला', 'स्त्री', 'माता', 'पत्नी', 'गर्भवती', 'गर्भावस्था', 'औरत'
+    ],
+    schemes: ['kar-gruha-lakshmi', 'tn-kalaignar-magalir', 'wb-lakshmir-bhandar', 'ujjwala']
+  },
+  children: {
+    keywords: [
+      'child', 'children', 'kids', 'baby', 'infant', 'orphan',
+      'मूल', 'बच्चे', 'बच्चा', 'शिशु', 'अनाथ', 'बालक'
+    ],
+    schemes: ['raj-palanhar', 'ap-amma-vodi', 'maha-lek-ladki', 'up-kanya-sumangala']
+  },
+  food: {
+    keywords: [
+      'food', 'ration', 'grain', 'rice', 'wheat', 'hungry', 'nutrition',
+      'अन्न', 'राशन', 'धान्य', 'तांदूळ', 'गहूं', 'भूख', 'पोषण', 'खाना'
+    ],
+    schemes: ['nfsa', 'ujjwala']
+  },
+  platform: {
+    keywords: [
+      'website', 'platform', 'features', 'services', 'help', 'support', 'how to use',
+      'what can you do', 'capabilities', 'functions', 'pages', 'navigation',
+      'वेबसाइट', 'प्लेटफॉर्म', 'सुविधाएं', 'सेवाएं', 'मदद', 'सहायता', 'कैसे उपयोग करें',
+      'आप क्या कर सकते हैं', 'क्षमताएं', 'कार्य', 'पृष्ठ', 'नेवीगेशन'
+    ],
+    schemes: []
   }
 };
 
@@ -100,7 +399,6 @@ export function getRelevantSchemes(categories: string[]): any[] {
   return schemes.filter(scheme => schemeIds.has(scheme.id));
 }
 
-
 // Generate comprehensive AI response with solutions
 export function generateIntelligentResponse(
   userInput: string,
@@ -109,11 +407,249 @@ export function generateIntelligentResponse(
   const categories = analyzeUserProblem(userInput);
   const relevantSchemes = getRelevantSchemes(categories);
 
+  // Check for platform/website related queries
+  if (categories.includes('platform') || 
+      userInput.toLowerCase().includes('website') ||
+      userInput.toLowerCase().includes('platform') ||
+      userInput.toLowerCase().includes('features') ||
+      userInput.toLowerCase().includes('services') ||
+      userInput.toLowerCase().includes('help') ||
+      userInput.toLowerCase().includes('what can you do') ||
+      userInput.toLowerCase().includes('वेबसाइट') ||
+      userInput.toLowerCase().includes('प्लेटफॉर्म') ||
+      userInput.toLowerCase().includes('सुविधाएं')) {
+    return generatePlatformInfoResponse(lang);
+  }
+
+  // If no specific schemes found, provide general guidance
   if (relevantSchemes.length === 0) {
-    return getDefaultResponse(lang);
+    return getGeneralGuidance(userInput, lang);
   }
 
   return generateSchemeResponse(relevantSchemes, lang, userInput);
+}
+
+// Generate comprehensive platform information response
+function generatePlatformInfoResponse(lang: string): string {
+  const responses = {
+    en: `🌟 **Welcome to Government & Student Help Platform!**
+
+🎯 **Our Platform Features:**
+${websiteServices.platformFeatures.en.join('\n')}
+
+📱 **Available Pages & Services:**
+${websiteServices.availablePages.en.join('\n')}
+
+🌍 **Supported Languages:**
+${websiteServices.supportedLanguages.en}
+
+📞 **Important Helplines:**
+${websiteServices.helplineNumbers.en.join('\n')}
+
+🏛️ **Official Government Websites:**
+${websiteServices.governmentWebsites.en.join('\n')}
+
+💡 **How to Use:**
+1. Browse schemes by category or state
+2. Use voice commands or type your queries
+3. Get personalized scheme recommendations
+4. Track your applications in real-time
+5. Access document guidance and support
+
+🤖 **AI Assistant Capabilities:**
+• Understand problems in 12 languages
+• Provide scheme recommendations
+• Voice interaction support
+• Real-time application guidance
+• Document assistance
+• Navigation help
+
+Need specific help? Just ask me about any scheme, service, or feature!`,
+
+    hi: `🌟 **सरकारी व छात्र सहायता प्लेटफॉर्म में आपका स्वागत है!**
+
+🎯 **हमारी प्लेटफॉर्म सुविधाएं:**
+${websiteServices.platformFeatures.hi.join('\n')}
+
+📱 **उपलब्ध पृष्ठ और सेवाएं:**
+${websiteServices.availablePages.hi.join('\n')}
+
+🌍 **समर्थित भाषाएं:**
+${websiteServices.supportedLanguages.hi}
+
+📞 **महत्वपूर्ण हेल्पलाइन:**
+${websiteServices.helplineNumbers.hi.join('\n')}
+
+🏛️ **आधिकारिक सरकारी वेबसाइट:**
+${websiteServices.governmentWebsites.hi.join('\n')}
+
+💡 **उपयोग कैसे करें:**
+1. श्रेणी या राज्य के अनुसार योजनाएं ब्राउज़ करें
+2. आवाज कमांड का उपयोग करें या अपने प्रश्न टाइप करें
+3. व्यक्तिगत योजना सुझाव प्राप्त करें
+4. अपने आवेदनों को रियल-टाइम में ट्रैक करें
+5. दस्तावेज़ मार्गदर्शन और सहायता प्राप्त करें
+
+🤖 **AI सहायक क्षमताएं:**
+• 12 भाषाओं में समस्याओं को समझना
+• योजना सुझाव प्रदान करना
+• आवाज इंटरैक्शन सहायता
+• रियल-टाइम आवेदन मार्गदर्शन
+• दस्तावेज़ सहायता
+• नेवीगेशन सहायता
+
+विशिष्ट सहायता चाहिए? किसी भी योजना, सेवा या सुविधा के बारे में मुझसे पूछें!`,
+
+    mr: `🌟 **सरकारी व विद्यार्थी मदत प्लॅटफॉर्मवर आपले स्वागत आहे!**
+
+🎯 **आमच्या प्लॅटफॉर्मची वैशिष्ट्ये:**
+${websiteServices.platformFeatures.mr.join('\n')}
+
+📱 **उपलब्ध पृष्ठे आणि सेवा:**
+${websiteServices.availablePages.mr.join('\n')}
+
+🌍 **समर्थित भाषा:**
+${websiteServices.supportedLanguages.mr}
+
+📞 **महत्वाच्या हेल्पलाइन:**
+${websiteServices.helplineNumbers.mr.join('\n')}
+
+🏛️ **अधिकृत सरकारी वेबसाइट:**
+${websiteServices.governmentWebsites.mr.join('\n')}
+
+💡 **वापर कसा करावा:**
+1. श्रेणी किंवा राज्यानुसार योजना ब्राउझ करा
+2. आवाज कमांड वापरा किंवा तुमचे प्रश्न टाइप करा
+3. वैयक्तिक योजना सुचवणे मिळवा
+4. तुमचे अर्ज रिअल-टाइममध्ये ट्रॅक करा
+5. कागदपत्र मार्गदर्शन आणि सहाय्य मिळवा
+
+🤖 **AI सहाय्यक क्षमता:**
+• 12 भाषांमध्ये समस्या समजून घेणे
+• योजना सुचवणे प्रदान करणे
+• आवाज संवाद सहाय्य
+• रिअल-टाइम अर्ज मार्गदर्शन
+• कागदपत्र सहाय्य
+• नेव्हिगेशन सहाय्य
+
+विशिष्ट मदत हवी आहे? कोणत्याही योजना, सेवा किंवा वैशिष्ट्याबद्दल मला विचारा!`
+  };
+
+  return responses[lang as keyof typeof responses] || responses.en;
+}
+
+// Enhanced conversation state management
+interface ConversationState {
+  lastInput: string;
+  lastResponse: string;
+  timestamp: number;
+  responseCount: number;
+  context: string[];
+}
+
+const conversationStates = new Map<string, ConversationState>();
+const CACHE_DURATION = 60000; // 1 minute
+const MAX_SAME_RESPONSE = 2; // Maximum times same response can be given
+
+// Generate contextual response with conversation memory
+export function generateCachedResponse(userInput: string, lang: string = 'en'): string {
+  const sessionId = 'default'; // In real app, use user session ID
+  const normalizedInput = userInput.toLowerCase().trim();
+  
+  // Get or create conversation state
+  let state = conversationStates.get(sessionId);
+  if (!state) {
+    state = {
+      lastInput: '',
+      lastResponse: '',
+      timestamp: 0,
+      responseCount: 0,
+      context: []
+    };
+  }
+
+  // Check if user is asking the same thing repeatedly
+  const isSimilarInput = state.lastInput && 
+    (normalizedInput === state.lastInput || 
+     normalizedInput.includes(state.lastInput) || 
+     state.lastInput.includes(normalizedInput));
+
+  if (isSimilarInput && state.responseCount >= MAX_SAME_RESPONSE) {
+    const clarificationMessages = {
+      en: "🤔 I notice you're asking about the same thing. Let me help differently!\n\n💡 **What would be most helpful?**\n• Should I explain the application process step-by-step?\n• Do you need help finding documents?\n• Would you like me to find the nearest office?\n• Do you want to speak to a human agent?\n\n📞 **Or call our helpline directly: 1077**\n\nJust tell me: 'I need help with documents' or 'Find nearest office' or 'Call agent'",
+      mr: "🤔 तुम्ही त्याच गोष्टीबद्दल विचारत आहात असे दिसते. मी वेगळ्या पद्धतीने मदत करतो!\n\n💡 **काय सर्वात उपयुक्त असेल?**\n• मी अर्ज प्रक्रिया चरण-दर-चरण समजावू का?\n• कागदपत्रे शोधण्यात मदत हवी आहे का?\n• जवळचे कार्यालय शोधू का?\n• तुम्हाला माणसाशी बोलायचे आहे का?\n\n📞 **किंवा थेट आमच्या हेल्पलाइनवर कॉल करा: 1077**\n\nफक्त सांगा: 'कागदपत्रांसाठी मदत हवी' किंवा 'जवळचे कार्यालय शोधा' किंवा 'एजंटला कॉल करा'",
+      hi: "🤔 लगता है आप वही चीज़ बार-बार पूछ रहे हैं। मैं अलग तरीके से मदद करता हूं!\n\n💡 **सबसे ज्यादा क्या मददगार होगा?**\n• क्या मैं आवेदन प्रक्रिया चरण-दर-चरण समझाऊं?\n• क्या दस्तावेज़ खोजने में मदद चाहिए?\n• क्या निकटतम कार्यालय खोजूं?\n• क्या आप किसी इंसान से बात करना चाहते हैं?\n\n📞 **या सीधे हमारी हेल्पलाइन पर कॉल करें: 1077**\n\nबस बताएं: 'दस्तावेज़ों में मदद चाहिए' या 'निकटतम कार्यालय खोजें' या 'एजेंट को कॉल करें'"
+    };
+    
+    // Reset state for fresh conversation
+    state.responseCount = 0;
+    state.context = [];
+    
+    return clarificationMessages[lang as keyof typeof clarificationMessages] || clarificationMessages.en;
+  }
+
+  // Generate new response with context
+  let response: string;
+  
+  // Check for specific follow-up queries
+  if (normalizedInput.includes('documents') || normalizedInput.includes('कागदपत्र') || normalizedInput.includes('दस्तावेज़')) {
+    response = handleSpecificQuery(userInput, lang) || generateIntelligentResponse(userInput, lang);
+  } else if (normalizedInput.includes('office') || normalizedInput.includes('कार्यालय')) {
+    response = getOfficeLocationHelp(lang);
+  } else if (normalizedInput.includes('agent') || normalizedInput.includes('human') || normalizedInput.includes('व्यक्ती') || normalizedInput.includes('इंसान')) {
+    response = getHumanAgentHelp(lang);
+  } else {
+    response = generateIntelligentResponse(userInput, lang);
+  }
+
+  // Update conversation state
+  if (isSimilarInput) {
+    state.responseCount++;
+  } else {
+    state.responseCount = 1;
+    state.context.push(normalizedInput);
+    if (state.context.length > 5) {
+      state.context = state.context.slice(-5); // Keep last 5 interactions
+    }
+  }
+
+  state.lastInput = normalizedInput;
+  state.lastResponse = response;
+  state.timestamp = Date.now();
+  
+  conversationStates.set(sessionId, state);
+
+  // Clean old conversation states
+  if (conversationStates.size > 100) {
+    const now = Date.now();
+    for (const [key, value] of conversationStates.entries()) {
+      if (now - value.timestamp > CACHE_DURATION * 10) { // 10 minutes
+        conversationStates.delete(key);
+      }
+    }
+  }
+
+  return response;
+}
+
+// Helper function for office location assistance
+function getOfficeLocationHelp(lang: string): string {
+  const messages = {
+    en: "📍 **Find Nearest Government Office:**\n\n🏛️ **Common Offices:**\n• **Tehsil Office** - For income/caste certificates\n• **Block Development Office** - For rural schemes\n• **District Collector Office** - For major schemes\n• **Anganwadi Center** - For women/child schemes\n• **Primary Health Center** - For health schemes\n\n🔍 **How to Find:**\n1. Visit: **locator.gov.in**\n2. Enter your PIN code\n3. Select office type\n4. Get address & phone number\n\n📞 **Or call 1077** and say 'Find nearest office for [scheme name]'\n\n💡 **Pro Tip:** Call the office before visiting to confirm timings and required documents!",
+    mr: "📍 **जवळचे सरकारी कार्यालय शोधा:**\n\n🏛️ **सामान्य कार्यालये:**\n• **तहसील कार्यालय** - उत्पन्न/जात प्रमाणपत्रांसाठी\n• **खंड विकास कार्यालय** - ग्रामीण योजनांसाठी\n• **जिल्हाधिकारी कार्यालय** - मोठ्या योजनांसाठी\n• **अंगणवाडी केंद्र** - महिला/बाल योजनांसाठी\n• **प्राथमिक आरोग्य केंद्र** - आरोग्य योजनांसाठी\n\n🔍 **कसे शोधावे:**\n1. भेट द्या: **locator.gov.in**\n2. तुमचा पिन कोड टाका\n3. कार्यालयाचा प्रकार निवडा\n4. पत्ता आणि फोन नंबर मिळवा\n\n📞 **किंवा 1077 वर कॉल करा** आणि म्हणा 'Find nearest office for [योजनेचे नाव]'\n\n💡 **प्रो टिप:** भेट देण्यापूर्वी कार्यालयात कॉल करून वेळ आणि आवश्यक कागदपत्रे पुष्टी करा!",
+    hi: "📍 **निकटतम सरकारी कार्यालय खोजें:**\n\n🏛️ **सामान्य कार्यालय:**\n• **तहसील कार्यालय** - आय/जाति प्रमाण पत्र के लिए\n• **खंड विकास कार्यालय** - ग्रामीण योजनाओं के लिए\n• **जिला कलेक्टर कार्यालय** - बड़ी योजनाओं के लिए\n• **आंगनवाड़ी केंद्र** - महिला/बाल योजनाओं के लिए\n• **प्राथमिक स्वास्थ्य केंद्र** - स्वास्थ्य योजनाओं के लिए\n\n🔍 **कैसे खोजें:**\n1. विजिट करें: **locator.gov.in**\n2. अपना पिन कोड डालें\n3. कार्यालय प्रकार चुनें\n4. पता और फोन नंबर पाएं\n\n📞 **या 1077 पर कॉल करें** और कहें 'Find nearest office for [योजना का नाम]'\n\n💡 **प्रो टिप:** जाने से पहले कार्यालय में कॉल करके समय और आवश्यक दस्तावेज़ों की पुष्टि करें!"
+  };
+  return messages[lang as keyof typeof messages] || messages.en;
+}
+
+// Helper function for human agent assistance
+function getHumanAgentHelp(lang: string): string {
+  const messages = {
+    en: "👨‍💼 **Talk to Human Agent:**\n\n📞 **Immediate Help:**\n• **Call 1077** - National Citizen Helpline (24x7)\n• **Call 155261** - PM-KISAN Helpline\n• **Call 14555** - Ayushman Bharat Helpline\n• **Call 0120-6619540** - Scholarship Helpline\n\n🏛️ **Visit Local Office:**\n• Tehsil Office (9 AM - 5 PM)\n• Block Development Office (10 AM - 4 PM)\n• District Collector Office (10 AM - 5 PM)\n\n💬 **What to Say:**\n'I need help with [scheme name] application'\n'I want to check my application status'\n'I need help with documents'\n\n⏰ **Best Time to Call:** 10 AM - 4 PM (Monday to Friday)\n\n🆔 **Keep Ready:** Your Aadhar number, mobile number, and application ID (if any)",
+    mr: "👨‍💼 **माणसाशी बोला:**\n\n📞 **तत्काळ मदत:**\n• **1077 वर कॉल करा** - राष्ट्रीय नागरिक हेल्पलाइन (24x7)\n• **155261 वर कॉल करा** - PM-KISAN हेल्पलाइन\n• **14555 वर कॉल करा** - आयुष्मान भारत हेल्पलाइन\n• **0120-6619540 वर कॉल करा** - शिष्यवृत्ती हेल्पलाइन\n\n🏛️ **स्थानिक कार्यालयाला भेट द्या:**\n• तहसील कार्यालय (सकाळी 9 - संध्याकाळी 5)\n• खंड विकास कार्यालय (सकाळी 10 - दुपारी 4)\n• जिल्हाधिकारी कार्यालय (सकाळी 10 - संध्याकाळी 5)\n\n💬 **काय म्हणावे:**\n'मला [योजनेचे नाव] अर्जासाठी मदत हवी'\n'मला माझ्या अर्जाची स्थिती तपासायची आहे'\n'मला कागदपत्रांसाठी मदत हवी'\n\n⏰ **कॉल करण्याची सर्वोत्तम वेळ:** सकाळी 10 - दुपारी 4 (सोमवार ते शुक्रवार)\n\n🆔 **तयार ठेवा:** तुमचा आधार नंबर, मोबाइल नंबर आणि अर्ज आयडी (असल्यास)",
+    hi: "👨‍💼 **इंसान से बात करें:**\n\n📞 **तत्काल मदद:**\n• **1077 पर कॉल करें** - राष्ट्रीय नागरिक हेल्पलाइन (24x7)\n• **155261 पर कॉल करें** - PM-KISAN हेल्पलाइन\n• **14555 पर कॉल करें** - आयुष्मान भारत हेल्पलाइन\n• **0120-6619540 पर कॉल करें** - छात्रवृत्ति हेल्पलाइन\n\n🏛️ **स्थानीय कार्यालय जाएं:**\n• तहसील कार्यालय (सुबह 9 - शाम 5)\n• खंड विकास कार्यालय (सुबह 10 - दोपहर 4)\n• जिला कलेक्टर कार्यालय (सुबह 10 - शाम 5)\n\n💬 **क्या कहें:**\n'मुझे [योजना का नाम] आवेदन में मदद चाहिए'\n'मैं अपने आवेदन की स्थिति जांचना चाहता हूं'\n'मुझे दस्तावेज़ों में मदद चाहिए'\n\n⏰ **कॉल करने का सबसे अच्छा समय:** सुबह 10 - दोपहर 4 (सोमवार से शुक्रवार)\n\n🆔 **तैयार रखें:** आपका आधार नंबर, मोबाइल नंबर और आवेदन आईडी (यदि कोई हो)"
+  };
+  return messages[lang as keyof typeof messages] || messages.en;
 }
 
 // Generate detailed scheme response with solutions
@@ -123,80 +659,73 @@ function generateSchemeResponse(
   userInput: string
 ): string {
   const header = {
-    en: "🎯 I understand your problem! Here are the solutions:\n\n",
-    mr: "🎯 मला तुमची समस्या समजली! येथे उपाय आहेत:\n\n",
-    hi: "🎯 मैं आपकी समस्या समझता हूं! यहां समाधान हैं:\n\n"
+    en: "🎯 I found the perfect solutions for you!\n\n",
+    mr: "🎯 मला तुमच्यासाठी योग्य उपाय सापडले!\n\n",
+    hi: "🎯 मुझे आपके लिए सही समाधान मिल गए!\n\n"
   };
 
   let response = header[lang as keyof typeof header] || header.en;
 
-  schemes.forEach((scheme, index) => {
+  schemes.slice(0, 3).forEach((scheme, index) => {
     const name = scheme[`name_${lang}`] || scheme.name_en;
     const description = scheme[`description_${lang}`] || scheme.description_en;
     const benefits = scheme[`benefits_${lang}`] || scheme.benefits_en;
 
-    response += `${index + 1}. 📋 ${name}\n`;
+    response += `${index + 1}. 📋 **${name}**\n`;
     response += `   ${description}\n\n`;
     
-    response += `   ✅ ${lang === 'mr' ? 'फायदे' : lang === 'hi' ? 'लाभ' : 'Benefits'}:\n`;
-    benefits.slice(0, 3).forEach((benefit: string) => {
+    response += `   ✅ ${lang === 'mr' ? 'मुख्य फायदे' : lang === 'hi' ? 'मुख्य लाभ' : 'Key Benefits'}:\n`;
+    benefits.slice(0, 2).forEach((benefit: string) => {
       response += `   • ${benefit}\n`;
     });
     response += '\n';
 
+    // Add eligibility info
+    if (scheme.eligibility.income) {
+      response += `   💰 ${lang === 'mr' ? 'उत्पन्न मर्यादा' : lang === 'hi' ? 'आय सीमा' : 'Income Limit'}: ${scheme.eligibility.income}\n`;
+    }
+    
     response += `   📞 ${lang === 'mr' ? 'हेल्पलाइन' : lang === 'hi' ? 'हेल्पलाइन' : 'Helpline'}: ${scheme.helpline}\n`;
     
     if (scheme.website) {
-      response += `   🌐 ${lang === 'mr' ? 'वेबसाइट' : lang === 'hi' ? 'वेबसाइट' : 'Website'}: ${scheme.website}\n`;
+      response += `   🌐 ${lang === 'mr' ? 'अधिकृत वेबसाइट' : lang === 'hi' ? 'आधिकारिक वेबसाइट' : 'Official Website'}: ${scheme.website}\n`;
     }
-    response += '\n';
-
-    // Add eligibility
-    response += `   📝 ${lang === 'mr' ? 'पात्रता' : lang === 'hi' ? 'पात्रता' : 'Eligibility'}:\n`;
-    if (scheme.eligibility.income) {
-      response += `   • ${lang === 'mr' ? 'उत्पन्न' : lang === 'hi' ? 'आय' : 'Income'}: ${scheme.eligibility.income}\n`;
-    }
-    response += `   • ${lang === 'mr' ? 'निवास' : lang === 'hi' ? 'निवास' : 'Residence'}: ${scheme.eligibility.residence}\n`;
-    
-    response += `   • ${lang === 'mr' ? 'आवश्यक कागदपत्रे' : lang === 'hi' ? 'आवश्यक दस्तावेज़' : 'Required Documents'}:\n`;
-    scheme.eligibility.documents.slice(0, 3).forEach((doc: string) => {
-      response += `     - ${doc}\n`;
-    });
     response += '\n';
   });
 
-  const footer = {
-    en: "📱 Next Steps:\n1. Visit 'Schemes' page to apply\n2. Prepare required documents\n3. Call helpline for guidance\n4. Track your application\n\n💬 Need more help? Ask me anything!",
-    mr: "📱 पुढील पायऱ्या:\n1. अर्ज करण्यासाठी 'योजना' पृष्ठाला भेट द्या\n2. आवश्यक कागदपत्रे तयार करा\n3. मार्गदर्शनासाठी हेल्पलाइनवर कॉल करा\n4. तुमचा अर्ज ट्रॅक करा\n\n💬 अधिक मदत हवी? मला काहीही विचारा!",
-    hi: "📱 अगले कदम:\n1. आवेदन के लिए 'योजनाएं' पृष्ठ पर जाएं\n2. आवश्यक दस्तावेज़ तैयार करें\n3. मार्गदर्शन के लिए हेल्पलाइन पर कॉल करें\n4. अपने आवेदन को ट्रैक करें\n\n💬 और मदद चाहिए? मुझसे कुछ भी पूछें!"
+  const actionSteps = {
+    en: "🚀 **Next Steps:**\n1. Click 'Schemes' page to see full details\n2. Prepare required documents\n3. Call helpline for guidance\n4. Apply online or visit office\n\n💬 Need help with documents or application? Just ask me!",
+    mr: "🚀 **पुढील पायऱ्या:**\n1. संपूर्ण तपशील पाहण्यासाठी 'योजना' पृष्ठावर क्लिक करा\n2. आवश्यक कागदपत्रे तयार करा\n3. मार्गदर्शनासाठी हेल्पलाइनवर कॉल करा\n4. ऑनलाइन अर्ज करा किंवा कार्यालयाला भेट द्या\n\n💬 कागदपत्रे किंवा अर्जात मदत हवी? मला विचारा!",
+    hi: "🚀 **अगले कदम:**\n1. पूरी जानकारी के लिए 'योजनाएं' पृष्ठ पर क्लिक करें\n2. आवश्यक दस्तावेज़ तैयार करें\n3. मार्गदर्शन के लिए हेल्पलाइन पर कॉल करें\n4. ऑनलाइन आवेदन करें या कार्यालय जाएं\n\n💬 दस्तावेज़ या आवेदन में मदद चाहिए? मुझसे पूछें!"
   };
 
-  response += footer[lang as keyof typeof footer] || footer.en;
-
-  // Add valuable advice and important notes
-  response += generateAdviceAndNotes(userInput, lang);
+  response += actionSteps[lang as keyof typeof actionSteps] || actionSteps.en;
 
   return response;
 }
 
-// Default response when no specific problem detected
-function getDefaultResponse(lang: string): string {
-  const responses = {
-    en: "👋 Hello! I'm here to help you with government schemes.\n\n🎤 Tell me your problem, for example:\n\n• 'I need medical treatment but don't have money'\n• 'My daughter needs help with school fees'\n• 'I am a farmer and need financial support'\n• 'I need help getting documents'\n\n💡 I can help with:\n✅ Health schemes\n✅ Education schemes\n✅ Agriculture schemes\n✅ Financial assistance\n✅ Document guidance\n\nJust tell me what you need!",
-    mr: "👋 नमस्कार! मी तुम्हाला सरकारी योजनांमध्ये मदत करण्यासाठी येथे आहे.\n\n🎤 मला तुमची समस्या सांगा, उदाहरणार्थ:\n\n• 'मला वैद्यकीय उपचार हवे पण पैसे नाहीत'\n• 'माझ्या मुलीला शाळेच्या फीसाठी मदत हवी आहे'\n• 'मी शेतकरी आहे आणि मला आर्थिक मदत हवी आहे'\n• 'मला कागदपत्रे मिळविण्यात मदत हवी आहे'\n\n💡 मी मदत करू शकतो:\n✅ आरोग्य योजना\n✅ शिक्षण योजना\n✅ कृषी योजना\n✅ आर्थिक सहाय्य\n✅ कागदपत्र मार्गदर्शन\n\nफक्त मला सांगा तुम्हाला काय हवे आहे!",
-    hi: "👋 नमस्ते! मैं सरकारी योजनाओं में आपकी मदद के लिए यहां हूं।\n\n🎤 मुझे अपनी समस्या बताएं, उदाहरण के लिए:\n\n• 'मुझे चिकित्सा उपचार चाहिए लेकिन पैसे नहीं हैं'\n• 'मेरी बेटी को स्कूल की फीस के लिए मदद चाहिए'\n• 'मैं किसान हूं और मुझे वित्तीय सहायता चाहिए'\n• 'मुझे दस्तावेज़ प्राप्त करने में मदद चाहिए'\n\n💡 मैं मदद कर सकता हूं:\n✅ स्वास्थ्य योजनाएं\n✅ शिक्षा योजनाएं\n✅ कृषि योजनाएं\n✅ वित्तीय सहायता\n✅ दस्तावेज़ मार्गदर्शन\n\nबस मुझे बताएं आपको क्या चाहिए!"
-  };
-
-  const defaultResponse = responses[lang as keyof typeof responses] || responses.en;
+// Provide general guidance when no specific schemes match
+function getGeneralGuidance(userInput: string, lang: string): string {
+  const lowerInput = userInput.toLowerCase();
   
-  // Add general advice
-  const generalAdvice = {
-    en: "\n\n💡 QUICK TIPS:\n• All government schemes are FREE\n• No agent or middleman needed\n• Apply online or at government offices\n• Keep documents ready\n• Save helpline: 1077 (24x7)",
-    mr: "\n\n💡 द्रुत टिप्स:\n• सर्व सरकारी योजना मोफत आहेत\n• कोणत्याही एजंट किंवा मध्यस्थाची गरज नाही\n• ऑनलाइन किंवा सरकारी कार्यालयात अर्ज करा\n• कागदपत्रे तयार ठेवा\n• हेल्पलाइन सेव्ह करा: 1077 (24x7)",
-    hi: "\n\n💡 त्वरित सुझाव:\n• सभी सरकारी योजनाएं मुफ्त हैं\n• किसी एजेंट या बिचौलिए की जरूरत नहीं\n• ऑनलाइन या सरकारी कार्यालयों में आवेदन करें\n• दस्तावेज़ तैयार रखें\n• हेल्पलाइन सेव करें: 1077 (24x7)"
+  // Check for common queries
+  if (lowerInput.match(/hello|hi|hey|नमस्ते|नमस्कार/i)) {
+    const greetings = {
+      en: "👋 Hello! I'm your Government Schemes Assistant.\n\n🎯 I can help you find:\n• Health insurance schemes\n• Education scholarships\n• Financial assistance\n• Employment programs\n• Housing schemes\n• Pension benefits\n\n💬 Tell me your problem, like:\n'I need medical treatment'\n'My daughter needs school fees'\n'I'm a farmer, need financial help'\n\nHow can I help you today?",
+      mr: "👋 नमस्कार! मी तुमचा सरकारी योजना सहाय्यक आहे.\n\n🎯 मी तुम्हाला शोधण्यात मदत करू शकतो:\n• आरोग्य विमा योजना\n• शिक्षण शिष्यवृत्ती\n• आर्थिक सहाय्य\n• रोजगार कार्यक्रम\n• गृहनिर्माण योजना\n• पेन्शन लाभ\n\n💬 मला तुमची समस्या सांगा, जसे:\n'मला वैद्यकीय उपचार हवे'\n'माझ्या मुलीला शाळेच्या फीसाठी मदत हवी'\n'मी शेतकरी आहे, आर्थिक मदत हवी'\n\nआज मी तुमची कशी मदत करू शकतो?",
+      hi: "👋 नमस्ते! मैं आपका सरकारी योजना सहायक हूं।\n\n🎯 मैं आपको खोजने में मदद कर सकता हूं:\n• स्वास्थ्य बीमा योजनाएं\n• शिक्षा छात्रवृत्ति\n• वित्तीय सहायता\n• रोजगार कार्यक्रम\n• आवास योजनाएं\n• पेंशन लाभ\n\n💬 मुझे अपनी समस्या बताएं, जैसे:\n'मुझे चिकित्सा उपचार चाहिए'\n'मेरी बेटी को स्कूल की फीस चाहिए'\n'मैं किसान हूं, वित्तीय मदद चाहिए'\n\nआज मैं आपकी कैसे मदद कर सकता हूं?"
+    };
+    return greetings[lang as keyof typeof greetings] || greetings.en;
+  }
+
+  // Default helpful response
+  const defaultResponses = {
+    en: "🤔 I understand you need help, but I need more specific information.\n\n💡 **Please tell me:**\n• What specific problem are you facing?\n• What kind of help do you need?\n\n📋 **I can help with:**\n✅ Health & Medical schemes\n✅ Education & Scholarships\n✅ Financial assistance\n✅ Employment & Skills\n✅ Housing & Shelter\n✅ Pension & Welfare\n\n💬 **Examples:**\n'I need money for my daughter's education'\n'I'm sick and need free treatment'\n'I lost my job and need financial help'\n'I want to start a small business'\n\nJust describe your situation in simple words!",
+    mr: "🤔 मला समजते की तुम्हाला मदत हवी आहे, पण मला अधिक विशिष्ट माहिती हवी आहे.\n\n💡 **कृपया मला सांगा:**\n• तुम्हाला नेमकी कोणती समस्या आहे?\n• तुम्हाला कोणत्या प्रकारची मदत हवी आहे?\n\n📋 **मी यामध्ये मदत करू शकतो:**\n✅ आरोग्य आणि वैद्यकीय योजना\n✅ शिक्षण आणि शिष्यवृत्ती\n✅ आर्थिक सहाय्य\n✅ रोजगार आणि कौशल्य\n✅ गृहनिर्माण आणि निवारा\n✅ पेन्शन आणि कल्याण\n\n💬 **उदाहरणे:**\n'माझ्या मुलीच्या शिक्षणासाठी पैसे हवेत'\n'मी आजारी आहे आणि मला मोफत उपचार हवेत'\n'माझी नोकरी गेली आहे आणि आर्थिक मदत हवी'\n'मला छोटा व्यवसाय सुरू करायचा आहे'\n\nफक्त तुमची परिस्थिती सोप्या शब्दांत सांगा!",
+    hi: "🤔 मैं समझता हूं कि आपको मदद चाहिए, लेकिन मुझे अधिक विशिष्ट जानकारी चाहिए।\n\n💡 **कृपया मुझे बताएं:**\n• आपको वास्तव में क्या समस्या है?\n• आपको किस प्रकार की मदद चाहिए?\n\n📋 **मैं इनमें मदद कर सकता हूं:**\n✅ स्वास्थ्य और चिकित्सा योजनाएं\n✅ शिक्षा और छात्रवृत्ति\n✅ वित्तीय सहायता\n✅ रोजगार और कौशल\n✅ आवास और आश्रय\n✅ पेंशन और कल्याण\n\n💬 **उदाहरण:**\n'मेरी बेटी की शिक्षा के लिए पैसे चाहिए'\n'मैं बीमार हूं और मुफ्त इलाज चाहिए'\n'मेरी नौकरी चली गई है और वित्तीय मदद चाहिए'\n'मैं छोटा व्यवसाय शुरू करना चाहता हूं'\n\nबस अपनी स्थिति सरल शब्दों में बताएं!"
   };
 
-  return defaultResponse + (generalAdvice[lang as keyof typeof generalAdvice] || generalAdvice.en);
+  return defaultResponses[lang as keyof typeof defaultResponses] || defaultResponses.en;
 }
 
 // Handle specific queries
@@ -206,9 +735,9 @@ export function handleSpecificQuery(query: string, lang: string): string | null 
   // Track application
   if (lowerQuery.match(/track|status|check|application|अर्ज|ट्रॅक|आवेदन|स्थिति/)) {
     const responses = {
-      en: "📍 To track your application:\n\n1. Go to 'Tracking' page\n2. Enter your Application ID or contact details\n3. View real-time status\n\nOr call helpline: 1077 (24x7)\n\nNeed help finding your application ID?",
-      mr: "📍 तुमचा अर्ज ट्रॅक करण्यासाठी:\n\n1. 'ट्रॅकिंग' पृष्ठावर जा\n2. तुमचा अर्ज आयडी किंवा संपर्क तपशील प्रविष्ट करा\n3. रिअल-टाइम स्थिती पहा\n\nकिंवा हेल्पलाइनवर कॉल करा: 1077 (24x7)\n\nतुमचा अर्ज आयडी शोधण्यात मदत हवी आहे का?",
-      hi: "📍 अपने आवेदन को ट्रैक करने के लिए:\n\n1. 'ट्रैकिंग' पृष्ठ पर जाएं\n2. अपना आवेदन आईडी या संपर्क विवरण दर्ज करें\n3. रीयल-टाइम स्थिति देखें\n\nया हेल्पलाइन पर कॉल करें: 1077 (24x7)\n\nअपना आवेदन आईडी खोजने में मदद चाहिए?"
+      en: "📍 **Track Your Application:**\n\n🔍 **Method 1: Online Tracking**\n1. Go to 'Tracking' page on our website\n2. Enter your Application ID\n3. View real-time status updates\n\n📞 **Method 2: Helpline**\n• Call: 1077 (24x7 Citizen Helpline)\n• Have your Application ID ready\n\n📧 **Method 3: SMS**\n• You'll get SMS updates automatically\n• Check your registered mobile number\n\n❓ **Don't have Application ID?**\nEnter your mobile number or email on tracking page.\n\nNeed help finding your application?",
+      mr: "📍 **तुमचा अर्ज ट्रॅक करा:**\n\n🔍 **पद्धत 1: ऑनलाइन ट्रॅकिंग**\n1. आमच्या वेबसाइटवर 'ट्रॅकिंग' पृष्ठावर जा\n2. तुमचा अर्ज आयडी प्रविष्ट करा\n3. रिअल-टाइम स्थिती अपडेट पहा\n\n📞 **पद्धत 2: हेल्पलाइन**\n• कॉल करा: 1077 (24x7 नागरिक हेल्पलाइन)\n• तुमचा अर्ज आयडी तयार ठेवा\n\n📧 **पद्धत 3: SMS**\n• तुम्हाला आपोआप SMS अपडेट मिळतील\n• तुमचा नोंदणीकृत मोबाइल नंबर तपासा\n\n❓ **अर्ज आयडी नाही?**\nट्रॅकिंग पृष्ठावर तुमचा मोबाइल नंबर किंवा ईमेल प्रविष्ट करा.\n\nतुमचा अर्ज शोधण्यात मदत हवी आहे का?",
+      hi: "📍 **अपने आवेदन को ट्रैक करें:**\n\n🔍 **तरीका 1: ऑनलाइन ट्रैकिंग**\n1. हमारी वेबसाइट पर 'ट्रैकिंग' पृष्ठ पर जाएं\n2. अपना आवेदन आईडी दर्ज करें\n3. रीयल-टाइम स्थिति अपडेट देखें\n\n📞 **तरीका 2: हेल्पलाइन**\n• कॉल करें: 1077 (24x7 नागरिक हेल्पलाइन)\n• अपना आवेदन आईडी तैयार रखें\n\n📧 **तरीका 3: SMS**\n• आपको स्वचालित रूप से SMS अपडेट मिलेंगे\n• अपना पंजीकृत मोबाइल नंबर जांचें\n\n❓ **आवेदन आईडी नहीं है?**\nट्रैकिंग पृष्ठ पर अपना मोबाइल नंबर या ईमेल दर्ज करें।\n\nअपना आवेदन खोजने में मदद चाहिए?"
     };
     return responses[lang as keyof typeof responses] || responses.en;
   }
@@ -216,9 +745,9 @@ export function handleSpecificQuery(query: string, lang: string): string | null 
   // Contact/helpline
   if (lowerQuery.match(/contact|helpline|phone|call|number|संपर्क|हेल्पलाइन|फोन|नंबर/)) {
     const responses = {
-      en: "📞 Important Helplines:\n\n🏛️ Maharashtra Citizen Helpline: 1077 (24x7)\n👩 Women Helpline: 1091\n👶 Child Helpline: 1098\n🚨 Police: 100\n🚑 Ambulance: 108\n🔥 Fire: 101\n\n📧 Email: support@mahahelp.in\n\nWhich helpline do you need?",
-      mr: "📞 महत्त्वाच्या हेल्पलाइन:\n\n🏛️ महाराष्ट्र नागरिक हेल्पलाइन: 1077 (24x7)\n👩 महिला हेल्पलाइन: 1091\n👶 बाल हेल्पलाइन: 1098\n🚨 पोलीस: 100\n🚑 रुग्णवाहिका: 108\n🔥 अग्निशामक: 101\n\n📧 ईमेल: support@mahahelp.in\n\nतुम्हाला कोणती हेल्पलाइन हवी आहे?",
-      hi: "📞 महत्वपूर्ण हेल्पलाइन:\n\n🏛️ महाराष्ट्र नागरिक हेल्पलाइन: 1077 (24x7)\n👩 महिला हेल्पलाइन: 1091\n👶 बाल हेल्पलाइन: 1098\n🚨 पुलिस: 100\n🚑 एम्बुलेंस: 108\n🔥 दमकल: 101\n\n📧 ईमेल: support@mahahelp.in\n\nआपको कौन सी हेल्पलाइन चाहिए?"
+      en: "📞 **Important Helplines & Contacts:**\n\n🏛️ **Government Helplines:**\n• National Citizen Helpline: 1077 (24x7)\n• PM-KISAN: 155261\n• Ayushman Bharat: 14555\n• Scholarship Portal: 0120-6619540\n\n🚨 **Emergency Services:**\n• Police: 100\n• Ambulance: 108\n• Fire: 101\n• Women Helpline: 181\n• Child Helpline: 1098\n\n📧 **Email Support:**\n• General: support@govhelp.in\n• Technical: tech@govhelp.in\n\n🕒 **Office Hours:**\n• Monday to Friday: 10:00 AM - 6:00 PM\n• Saturday: 10:00 AM - 2:00 PM\n\nWhich specific helpline do you need?",
+      mr: "📞 **महत्त्वाच्या हेल्पलाइन आणि संपर्क:**\n\n🏛️ **सरकारी हेल्पलाइन:**\n• राष्ट्रीय नागरिक हेल्पलाइन: 1077 (24x7)\n• पीएम-किसान: 155261\n• आयुष्मान भारत: 14555\n• शिष्यवृत्ती पोर्टल: 0120-6619540\n\n🚨 **आपत्कालीन सेवा:**\n• पोलीस: 100\n• रुग्णवाहिका: 108\n• अग्निशामक: 101\n• महिला हेल्पलाइन: 181\n• बाल हेल्पलाइन: 1098\n\n📧 **ईमेल सपोर्ट:**\n• सामान्य: support@govhelp.in\n• तांत्रिक: tech@govhelp.in\n\n🕒 **कार्यालयीन वेळ:**\n• सोमवार ते शुक्रवार: सकाळी 10:00 - संध्याकाळी 6:00\n• शनिवार: सकाळी 10:00 - दुपारी 2:00\n\nतुम्हाला कोणती विशिष्ट हेल्पलाइन हवी आहे?",
+      hi: "📞 **महत्वपूर्ण हेल्पलाइन और संपर्क:**\n\n🏛️ **सरकारी हेल्पलाइन:**\n• राष्ट्रीय नागरिक हेल्पलाइन: 1077 (24x7)\n• पीएम-किसान: 155261\n• आयुष्मान भारत: 14555\n• छात्रवृत्ति पोर्टल: 0120-6619540\n\n🚨 **आपातकालीन सेवाएं:**\n• पुलिस: 100\n• एम्बुलेंस: 108\n• दमकल: 101\n• महिला हेल्पलाइन: 181\n• बाल हेल्पलाइन: 1098\n\n📧 **ईमेल सपोर्ट:**\n• सामान्य: support@govhelp.in\n• तकनीकी: tech@govhelp.in\n\n🕒 **कार्यालय समय:**\n• सोमवार से शुक्रवार: सुबह 10:00 - शाम 6:00\n• शनिवार: सुबह 10:00 - दोपहर 2:00\n\nआपको कौन सी विशिष्ट हेल्पलाइन चाहिए?"
     };
     return responses[lang as keyof typeof responses] || responses.en;
   }
@@ -226,91 +755,12 @@ export function handleSpecificQuery(query: string, lang: string): string | null 
   // Documents help
   if (lowerQuery.match(/document|aadhar|ration|income|caste|certificate|कागदपत्र|आधार|प्रमाणपत्र|दस्तावेज़/)) {
     const responses = {
-      en: "📄 Document Assistance:\n\nI can help you with:\n• Aadhar Card\n• Ration Card\n• Income Certificate\n• Caste Certificate\n• Domicile Certificate\n\nWhich document do you need help with?\n\n💡 Tip: Visit 'Document Assistance' page for detailed guides!",
-      mr: "📄 कागदपत्र सहाय्य:\n\nमी तुम्हाला मदत करू शकतो:\n• आधार कार्ड\n• रेशन कार्ड\n• उत्पन्न प्रमाणपत्र\n• जात प्रमाणपत्र\n• अधिवास प्रमाणपत्र\n\nतुम्हाला कोणत्या कागदपत्रासाठी मदत हवी आहे?\n\n💡 टीप: तपशीलवार मार्गदर्शकांसाठी 'कागदपत्र सहाय्य' पृष्ठाला भेट द्या!",
-      hi: "📄 दस्तावेज़ सहायता:\n\nमैं आपकी मदद कर सकता हूं:\n• आधार कार्ड\n• राशन कार्ड\n• आय प्रमाण पत्र\n• जाति प्रमाण पत्र\n• अधिवास प्रमाण पत्र\n\nआपको किस दस्तावेज़ के लिए मदद चाहिए?\n\n💡 टिप: विस्तृत गाइड के लिए 'दस्तावेज़ सहायता' पृष्ठ पर जाएं!"
+      en: "📄 **Document Assistance Center:**\n\n🆔 **Essential Documents:**\n• Aadhar Card (Identity)\n• Ration Card (Address + Family)\n• Income Certificate\n• Caste Certificate\n• Domicile Certificate\n• Bank Account Details\n\n🏢 **Where to Get:**\n• Aadhar: Nearest Aadhar Center\n• Income/Caste: Tehsil Office\n• Ration Card: Food & Supply Office\n• Bank Account: Any Bank Branch\n\n💡 **Pro Tips:**\n• Keep 10 photocopies of each\n• Scan and save digital copies\n• Never give originals to anyone\n• Apply 30 days before needed\n\n🔗 **Online Services:**\n• Aadhar: uidai.gov.in\n• Income/Caste: State Portal\n\nWhich document do you need help with?",
+      mr: "📄 **कागदपत्र सहाय्य केंद्र:**\n\n🆔 **आवश्यक कागदपत्रे:**\n• आधार कार्ड (ओळख)\n• रेशन कार्ड (पत्ता + कुटुंब)\n• उत्पन्न प्रमाणपत्र\n• जात प्रमाणपत्र\n• अधिवास प्रमाणपत्र\n• बँक खाते तपशील\n\n🏢 **कुठे मिळेल:**\n• आधार: जवळचे आधार केंद्र\n• उत्पन्न/जात: तहसील कार्यालय\n• रेशन कार्ड: अन्न व पुरवठा कार्यालय\n• बँक खाते: कोणत्याही बँक शाखा\n\n💡 **उपयुक्त टिप्स:**\n• प्रत्येकाच्या 10 फोटोकॉपी ठेवा\n• स्कॅन करून डिजिटल प्रती सेव्ह करा\n• मूळ कागदपत्रे कोणालाही देऊ नका\n• गरज पडण्याच्या 30 दिवस आधी अर्ज करा\n\n🔗 **ऑनलाइन सेवा:**\n• आधार: uidai.gov.in\n• उत्पन्न/जात: राज्य पोर्टल\n\nतुम्हाला कोणत्या कागदपत्रासाठी मदत हवी आहे?",
+      hi: "📄 **दस्तावेज़ सहायता केंद्र:**\n\n🆔 **आवश्यक दस्तावेज़:**\n• आधार कार्ड (पहचान)\n• राशन कार्ड (पता + परिवार)\n• आय प्रमाण पत्र\n• जाति प्रमाण पत्र\n• अधिवास प्रमाण पत्र\n• बैंक खाता विवरण\n\n🏢 **कहां मिलेगा:**\n• आधार: निकटतम आधार केंद्र\n• आय/जाति: तहसील कार्यालय\n• राशन कार्ड: खाद्य एवं आपूर्ति कार्यालय\n• बैंक खाता: किसी भी बैंक शाखा\n\n💡 **उपयोगी टिप्स:**\n• प्रत्येक की 10 फोटोकॉपी रखें\n• स्कैन करके डिजिटल कॉपी सेव करें\n• मूल दस्तावेज़ किसी को न दें\n• जरूरत से 30 दिन पहले आवेदन करें\n\n🔗 **ऑनलाइन सेवाएं:**\n• आधार: uidai.gov.in\n• आय/जाति: राज्य पोर्टल\n\nआपको किस दस्तावेज़ के लिए मदद चाहिए?"
     };
     return responses[lang as keyof typeof responses] || responses.en;
   }
 
   return null;
-}
-
-
-// Generate valuable advice and important notes based on problem
-export function generateAdviceAndNotes(userInput: string, lang: string): string {
-  const lowerInput = userInput.toLowerCase();
-  let advice = '';
-
-  // Health-related advice
-  if (lowerInput.match(/health|hospital|medical|treatment|doctor|surgery|illness|disease|बीमार|आजार|उपचार|रुग्णालय|इलाज|बीमारी|चिकित्सा/i)) {
-    const healthAdvice = {
-      en: "\n\n⚠️ IMPORTANT HEALTH ADVICE:\n\n💡 Before Treatment:\n• Get health card made immediately (free)\n• Keep all medical reports safely\n• Take second opinion for major surgeries\n• Check if hospital is empaneled\n\n🚨 Emergency Numbers:\n• Ambulance: 108 (Free)\n• Health Helpline: 14444\n\n⏰ Don't Delay:\n• Early treatment is cheaper and more effective\n• Many diseases are 100% curable if caught early\n• Free health checkups available at government hospitals",
-      mr: "\n\n⚠️ महत्त्वाचा आरोग्य सल्ला:\n\n💡 उपचारापूर्वी:\n• आरोग्य कार्ड लगेच बनवा (मोफत)\n• सर्व वैद्यकीय अहवाल सुरक्षित ठेवा\n• मोठ्या शस्त्रक्रियेसाठी दुसरे मत घ्या\n• रुग्णालय सूचीबद्ध आहे का तपासा\n\n🚨 आपत्कालीन नंबर:\n• रुग्णवाहिका: 108 (मोफत)\n• आरोग्य हेल्पलाइन: 14444\n\n⏰ उशीर करू नका:\n• लवकर उपचार स्वस्त आणि अधिक प्रभावी\n• अनेक रोग लवकर ओळखले तर 100% बरे होतात\n• सरकारी रुग्णालयात मोफत तपासणी उपलब्ध",
-      hi: "\n\n⚠️ महत्वपूर्ण स्वास्थ्य सलाह:\n\n💡 उपचार से पहले:\n• स्वास्थ्य कार्ड तुरंत बनवाएं (मुफ्त)\n• सभी मेडिकल रिपोर्ट सुरक्षित रखें\n• बड़ी सर्जरी के लिए दूसरी राय लें\n• जांचें कि अस्पताल सूचीबद्ध है\n\n🚨 आपातकालीन नंबर:\n• एम्बुलेंस: 108 (मुफ्त)\n• स्वास्थ्य हेल्पलाइन: 14444\n\n⏰ देरी न करें:\n• जल्दी इलाज सस्ता और अधिक प्रभावी\n• कई बीमारियां जल्दी पकड़ी जाएं तो 100% ठीक होती हैं\n• सरकारी अस्पतालों में मुफ्त जांच उपलब्ध"
-    };
-    advice += healthAdvice[lang as keyof typeof healthAdvice] || healthAdvice.en;
-  }
-
-  // Education-related advice
-  if (lowerInput.match(/education|school|college|study|scholarship|fees|student|शिक्षण|शाळा|अभ्यास|शिष्यवृत्ती|शिक्षा|छात्रवृत्ति/i)) {
-    const educationAdvice = {
-      en: "\n\n⚠️ IMPORTANT EDUCATION ADVICE:\n\n💡 For Students:\n• Apply for scholarships BEFORE admission\n• Keep all mark sheets and certificates safe\n• Maintain 75% attendance minimum\n• Open bank account in student's name\n\n📚 Free Resources:\n• Government libraries (free books)\n• Online courses (SWAYAM platform)\n• Study materials at Anganwadi centers\n\n⏰ Application Deadlines:\n• Most scholarships: June-August\n• Don't miss deadlines - no extensions!\n• Apply early to avoid last-minute rush",
-      mr: "\n\n⚠️ महत्त्वाचा शिक्षण सल्ला:\n\n💡 विद्यार्थ्यांसाठी:\n• प्रवेशापूर्वी शिष्यवृत्तीसाठी अर्ज करा\n• सर्व गुणपत्रिका आणि प्रमाणपत्रे सुरक्षित ठेवा\n• किमान 75% उपस्थिती राखा\n• विद्यार्थ्याच्या नावावर बँक खाते उघडा\n\n📚 मोफत संसाधने:\n• सरकारी वाचनालये (मोफत पुस्तके)\n• ऑनलाइन अभ्यासक्रम (SWAYAM प्लॅटफॉर्म)\n• अंगणवाडी केंद्रांवर अभ्यास साहित्य\n\n⏰ अर्ज शेवटची तारीख:\n• बहुतेक शिष्यवृत्ती: जून-ऑगस्ट\n• शेवटची तारीख चुकवू नका - वाढ नाही!\n• गर्दी टाळण्यासाठी लवकर अर्ज करा",
-      hi: "\n\n⚠️ महत्वपूर्ण शिक्षा सलाह:\n\n💡 छात्रों के लिए:\n• प्रवेश से पहले छात्रवृत्ति के लिए आवेदन करें\n• सभी मार्कशीट और प्रमाण पत्र सुरक्षित रखें\n• न्यूनतम 75% उपस्थिति बनाए रखें\n• छात्र के नाम पर बैंक खाता खोलें\n\n📚 मुफ्त संसाधन:\n• सरकारी पुस्तकालय (मुफ्त किताबें)\n• ऑनलाइन कोर्स (SWAYAM प्लेटफॉर्म)\n• आंगनवाड़ी केंद्रों पर अध्ययन सामग्री\n\n⏰ आवेदन की अंतिम तिथि:\n• अधिकांश छात्रवृत्तियां: जून-अगस्त\n• अंतिम तिथि न चूकें - कोई विस्तार नहीं!\n• भीड़ से बचने के लिए जल्दी आवेदन करें"
-    };
-    advice += educationAdvice[lang as keyof typeof educationAdvice] || educationAdvice.en;
-  }
-
-  // Agriculture/Farming advice
-  if (lowerInput.match(/farm|agriculture|crop|irrigation|farmer|खेती|शेती|शेतकरी|किसान|कृषि/i)) {
-    const farmingAdvice = {
-      en: "\n\n⚠️ IMPORTANT FARMING ADVICE:\n\n💡 For Farmers:\n• Get soil tested before planting (free at Krishi Kendras)\n• Use drip irrigation to save 50% water\n• Buy crop insurance BEFORE sowing\n• Keep 7/12 and 8A extracts updated\n\n🌾 Government Support:\n• Free training at Krishi Vigyan Kendras\n• Subsidized seeds and fertilizers\n• Minimum Support Price (MSP) for crops\n• Weather forecasts via SMS (free)\n\n⚠️ Avoid:\n• Taking loans from private moneylenders (high interest)\n• Using excessive pesticides (harmful)\n• Selling crops immediately after harvest (prices low)\n\n📞 Farmer Helpline: 1800-233-4251",
-      mr: "\n\n⚠️ महत्त्वाचा शेती सल्ला:\n\n💡 शेतकऱ्यांसाठी:\n• लागवडीपूर्वी मातीची चाचणी करा (कृषी केंद्रात मोफत)\n• 50% पाणी वाचवण्यासाठी ठिबक सिंचन वापरा\n• पेरणीपूर्वी पीक विमा घ्या\n• 7/12 आणि 8A उतारे अद्ययावत ठेवा\n\n🌾 सरकारी मदत:\n• कृषी विज्ञान केंद्रांवर मोफत प्रशिक्षण\n• अनुदानित बियाणे आणि खते\n• पिकांसाठी किमान आधार मूल्य (MSP)\n• SMS द्वारे हवामान अंदाज (मोफत)\n\n⚠️ टाळा:\n• खाजगी सावकारांकडून कर्ज (जास्त व्याज)\n• जास्त कीटकनाशके (हानिकारक)\n• कापणीनंतर लगेच पीक विकणे (किंमत कमी)\n\n📞 शेतकरी हेल्पलाइन: 1800-233-4251",
-      hi: "\n\n⚠️ महत्वपूर्ण खेती सलाह:\n\n💡 किसानों के लिए:\n• बुवाई से पहले मिट्टी की जांच करें (कृषि केंद्रों पर मुफ्त)\n• 50% पानी बचाने के लिए ड्रिप सिंचाई का उपयोग करें\n• बुवाई से पहले फसल बीमा लें\n• 7/12 और 8A उद्धरण अपडेट रखें\n\n🌾 सरकारी सहायता:\n• कृषि विज्ञान केंद्रों पर मुफ्त प्रशिक्षण\n• सब्सिडी वाले बीज और उर्वरक\n• फसलों के लिए न्यूनतम समर्थन मूल्य (MSP)\n• SMS के माध्यम से मौसम पूर्वानुमान (मुफ्त)\n\n⚠️ बचें:\n• निजी साहूकारों से कर्ज (उच्च ब्याज)\n• अत्यधिक कीटनाशकों का उपयोग (हानिकारक)\n• कटाई के तुरंत बाद फसल बेचना (कीमतें कम)\n\n📞 किसान हेल्पलाइन: 1800-233-4251"
-    };
-    advice += farmingAdvice[lang as keyof typeof farmingAdvice] || farmingAdvice.en;
-  }
-
-  // Financial/Money advice
-  if (lowerInput.match(/money|financial|income|poor|poverty|loan|debt|पैसे|आर्थिक|उत्पन्न|गरीब|कर्ज|आय|गरीबी|ऋण/i)) {
-    const financialAdvice = {
-      en: "\n\n⚠️ IMPORTANT FINANCIAL ADVICE:\n\n💡 Money Management:\n• Never take loans from private moneylenders\n• Government loans have 0-4% interest only\n• Keep all income proofs updated\n• Open Jan Dhan bank account (free)\n\n🚨 Beware of Scams:\n• No government scheme asks for money upfront\n• Don't share OTP or bank details with anyone\n• Verify schemes on official websites only\n• Report fraud: 1930 (Cyber Crime Helpline)\n\n💰 Free Financial Help:\n• Financial literacy programs at banks\n• Free insurance schemes available\n• Pension schemes for elderly\n\n📞 Banking Helpline: 1800-425-3800",
-      mr: "\n\n⚠️ महत्त्वाचा आर्थिक सल्ला:\n\n💡 पैशांचे व्यवस्थापन:\n• खाजगी सावकारांकडून कधीही कर्ज घेऊ नका\n• सरकारी कर्जावर फक्त 0-4% व्याज\n• सर्व उत्पन्न पुरावे अद्ययावत ठेवा\n• जन धन बँक खाते उघडा (मोफत)\n\n🚨 फसवणुकीपासून सावध:\n• कोणतीही सरकारी योजना आगाऊ पैसे मागत नाही\n• OTP किंवा बँक तपशील कोणाशीही शेअर करू नका\n• अधिकृत वेबसाइटवरच योजना तपासा\n• फसवणूक नोंदवा: 1930 (सायबर क्राईम हेल्पलाइन)\n\n💰 मोफत आर्थिक मदत:\n• बँकांमध्ये आर्थिक साक्षरता कार्यक्रम\n• मोफत विमा योजना उपलब्ध\n• वृद्धांसाठी पेन्शन योजना\n\n📞 बँकिंग हेल्पलाइन: 1800-425-3800",
-      hi: "\n\n⚠️ महत्वपूर्ण वित्तीय सलाह:\n\n💡 धन प्रबंधन:\n• निजी साहूकारों से कभी कर्ज न लें\n• सरकारी कर्ज पर केवल 0-4% ब्याज\n• सभी आय प्रमाण अपडेट रखें\n• जन धन बैंक खाता खोलें (मुफ्त)\n\n🚨 घोटालों से सावधान:\n• कोई भी सरकारी योजना अग्रिम पैसे नहीं मांगती\n• OTP या बैंक विवरण किसी के साथ साझा न करें\n• केवल आधिकारिक वेबसाइटों पर योजनाओं की पुष्टि करें\n• धोखाधड़ी की रिपोर्ट करें: 1930 (साइबर क्राइम हेल्पलाइन)\n\n💰 मुफ्त वित्तीय सहायता:\n• बैंकों में वित्तीय साक्षरता कार्यक्रम\n• मुफ्त बीमा योजनाएं उपलब्ध\n• बुजुर्गों के लिए पेंशन योजनाएं\n\n📞 बैंकिंग हेल्पलाइन: 1800-425-3800"
-    };
-    advice += financialAdvice[lang as keyof typeof financialAdvice] || financialAdvice.en;
-  }
-
-  // Women/Girl child specific advice
-  if (lowerInput.match(/girl|daughter|woman|female|lady|मुलगी|बेटी|लड़की|महिला|बालिका/i)) {
-    const womenAdvice = {
-      en: "\n\n⚠️ IMPORTANT ADVICE FOR GIRLS/WOMEN:\n\n💡 Special Rights:\n• Free education up to graduation in government colleges\n• 33% reservation in government jobs\n• Special schemes for girl child\n• Women helpline: 1091 (24x7)\n\n🚨 Safety First:\n• Save emergency numbers in phone\n• Know your rights and laws\n• Report harassment immediately\n• Legal aid available for free\n\n💪 Empowerment:\n• Free skill training programs\n• Self-employment schemes\n• Women entrepreneurship support\n• Free legal counseling",
-      mr: "\n\n⚠️ मुली/महिलांसाठी महत्त्वाचा सल्ला:\n\n💡 विशेष हक्क:\n• सरकारी महाविद्यालयात पदवीपर्यंत मोफत शिक्षण\n• सरकारी नोकऱ्यांमध्ये 33% आरक्षण\n• मुलींसाठी विशेष योजना\n• महिला हेल्पलाइन: 1091 (24x7)\n\n🚨 सुरक्षा प्रथम:\n• फोनमध्ये आपत्कालीन नंबर सेव्ह करा\n• तुमचे हक्क आणि कायदे जाणून घ्या\n• छळवणूक लगेच नोंदवा\n• मोफत कायदेशीर मदत उपलब्ध\n\n💪 सशक्तीकरण:\n• मोफत कौशल्य प्रशिक्षण कार्यक्रम\n• स्वयंरोजगार योजना\n• महिला उद्योजकता समर्थन\n• मोफत कायदेशीर सल्ला",
-      hi: "\n\n⚠️ लड़कियों/महिलाओं के लिए महत्वपूर्ण सलाह:\n\n💡 विशेष अधिकार:\n• सरकारी कॉलेजों में स्नातक तक मुफ्त शिक्षा\n• सरकारी नौकरियों में 33% आरक्षण\n• बालिकाओं के लिए विशेष योजनाएं\n• महिला हेल्पलाइन: 1091 (24x7)\n\n🚨 सुरक्षा पहले:\n• फोन में आपातकालीन नंबर सेव करें\n• अपने अधिकार और कानून जानें\n• उत्पीड़न की तुरंत रिपोर्ट करें\n• मुफ्त कानूनी सहायता उपलब्ध\n\n💪 सशक्तिकरण:\n• मुफ्त कौशल प्रशिक्षण कार्यक्रम\n• स्वरोजगार योजनाएं\n• महिला उद्यमिता समर्थन\n• मुफ्त कानूनी परामर्श"
-    };
-    advice += womenAdvice[lang as keyof typeof womenAdvice] || womenAdvice.en;
-  }
-
-  // Document-related advice
-  if (lowerInput.match(/document|aadhar|ration|income|caste|certificate|कागदपत्र|आधार|प्रमाणपत्र|दस्तावेज़/i)) {
-    const documentAdvice = {
-      en: "\n\n⚠️ IMPORTANT DOCUMENT ADVICE:\n\n💡 Document Safety:\n• Keep original documents in bank locker\n• Make 10 photocopies of each document\n• Scan and save digital copies\n• Never give originals to anyone\n\n🚨 Beware:\n• No agent needed for government documents\n• All services available online/at offices\n• Don't pay bribes - report corruption: 1064\n• Verify document authenticity online\n\n⏰ Processing Time:\n• Aadhar: 90 days\n• Income Certificate: 30 days\n• Caste Certificate: 30 days\n• Apply early to avoid delays",
-      mr: "\n\n⚠️ महत्त्वाचा कागदपत्र सल्ला:\n\n💡 कागदपत्र सुरक्षा:\n• मूळ कागदपत्रे बँक लॉकरमध्ये ठेवा\n• प्रत्येक कागदपत्राच्या 10 फोटोकॉपी काढा\n• स्कॅन करून डिजिटल प्रती सेव्ह करा\n• मूळ कागदपत्रे कोणालाही देऊ नका\n\n🚨 सावध रहा:\n• सरकारी कागदपत्रांसाठी एजंटची गरज नाही\n• सर्व सेवा ऑनलाइन/कार्यालयात उपलब्ध\n• लाच देऊ नका - भ्रष्टाचार नोंदवा: 1064\n• कागदपत्र सत्यता ऑनलाइन तपासा\n\n⏰ प्रक्रिया वेळ:\n• आधार: 90 दिवस\n• उत्पन्न प्रमाणपत्र: 30 दिवस\n• जात प्रमाणपत्र: 30 दिवस\n• विलंब टाळण्यासाठी लवकर अर्ज करा",
-      hi: "\n\n⚠️ महत्वपूर्ण दस्तावेज़ सलाह:\n\n💡 दस्तावेज़ सुरक्षा:\n• मूल दस्तावेज़ बैंक लॉकर में रखें\n• प्रत्येक दस्तावेज़ की 10 फोटोकॉपी बनाएं\n• स्कैन करके डिजिटल कॉपी सेव करें\n• मूल दस्तावेज़ किसी को न दें\n\n🚨 सावधान:\n• सरकारी दस्तावेज़ों के लिए एजेंट की जरूरत नहीं\n• सभी सेवाएं ऑनलाइन/कार्यालयों में उपलब्ध\n• रिश्वत न दें - भ्रष्टाचार की रिपोर्ट करें: 1064\n• दस्तावेज़ की प्रामाणिकता ऑनलाइन सत्यापित करें\n\n⏰ प्रसंस्करण समय:\n• आधार: 90 दिन\n• आय प्रमाण पत्र: 30 दिन\n• जाति प्रमाण पत्र: 30 दिन\n• देरी से बचने के लिए जल्दी आवेदन करें"
-    };
-    advice += documentAdvice[lang as keyof typeof documentAdvice] || documentAdvice.en;
-  }
-
-  // General advice for any problem
-  if (!advice) {
-    const generalAdvice = {
-      en: "\n\n💡 GENERAL ADVICE:\n\n✅ Always:\n• Keep all documents safe and updated\n• Apply for schemes before deadlines\n• Verify information on official websites\n• Save helpline numbers in your phone\n• Ask for receipt for any payment\n\n❌ Never:\n• Pay money to agents or middlemen\n• Share OTP or passwords with anyone\n• Sign blank papers\n• Trust unofficial WhatsApp messages\n\n📞 Report Issues:\n• Corruption: 1064\n• Cyber Crime: 1930\n• General Helpline: 1077",
-      mr: "\n\n💡 सामान्य सल्ला:\n\n✅ नेहमी:\n• सर्व कागदपत्रे सुरक्षित आणि अद्ययावत ठेवा\n• शेवटच्या तारखेपूर्वी योजनांसाठी अर्ज करा\n• अधिकृत वेबसाइटवर माहिती तपासा\n• हेल्पलाइन नंबर फोनमध्ये सेव्ह करा\n• कोणत्याही पेमेंटसाठी पावती घ्या\n\n❌ कधीही नाही:\n• एजंट किंवा मध्यस्थांना पैसे देऊ नका\n• OTP किंवा पासवर्ड कोणाशीही शेअर करू नका\n• रिकाम्या कागदांवर सही करू नका\n• अनधिकृत WhatsApp संदेशांवर विश्वास ठेवू नका\n\n📞 समस्या नोंदवा:\n• भ्रष्टाचार: 1064\n• सायबर क्राईम: 1930\n• सामान्य हेल्पलाइन: 1077",
-      hi: "\n\n💡 सामान्य सलाह:\n\n✅ हमेशा:\n• सभी दस्तावेज़ सुरक्षित और अपडेट रखें\n• अंतिम तिथि से पहले योजनाओं के लिए आवेदन करें\n• आधिकारिक वेबसाइटों पर जानकारी सत्यापित करें\n• हेल्पलाइन नंबर अपने फोन में सेव करें\n• किसी भी भुगतान के लिए रसीद लें\n\n❌ कभी नहीं:\n• एजेंटों या बिचौलियों को पैसे न दें\n• OTP या पासवर्ड किसी के साथ साझा न करें\n• खाली कागजों पर हस्ताक्षर न करें\n• अनौपचारिक WhatsApp संदेशों पर भरोसा न करें\n\n📞 समस्याओं की रिपोर्ट करें:\n• भ्रष्टाचार: 1064\n• साइबर क्राइम: 1930\n• सामान्य हेल्पलाइन: 1077"
-    };
-    advice += generalAdvice[lang as keyof typeof generalAdvice] || generalAdvice.en;
-  }
-
-  return advice;
 }

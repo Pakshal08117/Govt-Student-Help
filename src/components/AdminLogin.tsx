@@ -19,15 +19,20 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
     e.preventDefault();
     setLoading(true);
 
-    // Admin credentials
-    const ADMIN_USERNAME = "pakshal";
-    const ADMIN_PASSWORD = "admin";
+    // Admin credentials - India/1234
+    const ADMIN_USERNAME = "India";
+    const ADMIN_PASSWORD = "1234";
 
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
       // Store admin session
       sessionStorage.setItem("admin_authenticated", "true");
       sessionStorage.setItem("admin_username", username);
       toast.success("Admin login successful!");
+      
+      // Trigger storage event for other components
+      window.dispatchEvent(new Event('storage'));
+      
+      // Call onLogin callback
       onLogin();
     } else {
       toast.error("Invalid credentials. Please try again.");

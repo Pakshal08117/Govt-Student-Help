@@ -1,266 +1,591 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLang } from "@/contexts/LanguageContext";
-import { useRealtime } from "@/contexts/RealtimeContext";
-import { schemes as staticSchemes, helplines } from "@/data/schemes";
-import { districts } from "@/data/locations";
-import { Phone, ExternalLink, Search, MapPin, Wifi, RefreshCw } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { setupAutoUpdate } from "@/lib/openDataAPIs";
-import { supabase } from "@/integrations/supabase/client";
+import { schemes, helplines, getSchemesByFilters, getSchemesByState, searchSchemes, indianStates } from "@/data/schemes";
+import { Phone, ExternalLink, Search, Filter, MapPin, GraduationCap, Users, Building2, Heart, Banknote, Home as HomeIcon, Briefcase, Star, TrendingUp, Eye } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function Schemes() {
   const { t, lang } = useLang();
-  const navigate = useNavigate();
-  const { schemes: realtimeSchemes, isConnected, lastUpdate } = useRealtime();
+  const [searchParams] = useSearchParams();
+  
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedDistrict, setSelectedDistrict] = useState("All");
-  const [userLocation, setUserLocation] = useState<{lat: number, lng: number} | null>(null);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [selectedState, setSelectedState] = useState("All India");
+  const [selectedAudience, setSelectedAudience] = useState(searchParams.get("userType") || "All");
+  const [selectedType, setSelectedType] = useState("All");
 
-  // Combine static and realtime schemes
-  const allSchemes = [...staticSchemes, ...realtimeSchemes];
+  // Filter schemes based on selections
+  const filteredSchemes = (() => {
+    let results = schemes;
 
-  useEffect(() => {
-    // Get user location
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          });
-        },
-        (error) => {
-          console.log("Location access denied:", error);
-        }
-      );
+    // Search filter
+    if (searchTerm) {
+      results = searchSchemes(searchTerm, selectedState === "All India" ? undefined : selectedState);
+    } else {
+      // Apply other filters
+      results = getSchemesByFilters({
+        audience: selectedAudience !== "All" ? selectedAudience as any : undefined,
+        type: selectedType !== "All" ? selectedType as any : undefined,
+        state: selectedState !== "All India" ? selectedState : undefined,
+        category: selectedCategory !== "All" ? selectedCategory : undefined,
+      });
     }
 
-    // Set up auto-update every 30 minutes
-    const cleanup = setupAutoUpdate(async () => {
-      await refreshData();
-    }, 30);
+    return results;
+  })();
 
-    return cleanup;
-  }, []);
+  // Get unique categories from schemes
+  const uniqueCategories = [...new Set(schemes.map(s => s.category))];
 
-  const refreshData = async () => {
-    setIsRefreshing(true);
-    try {
-      // Fetch latest schemes from Supabase
-      const { data } = await supabase
-        .from('schemes')
-        .select('*')
-        .eq('is_active', true);
-      
-      console.log('Data refreshed:', data?.length || 0, 'schemes');
-    } catch (error) {
-      console.error('Error refreshing data:', error);
-    } finally {
-      setIsRefreshing(false);
-    }
+  // Audience options with icons
+  const audienceOptions = [
+    { value: "All", label: lang === "hi" ? "सभी" : "All", icon: "🌟" },
+    { value: "student", label: lang === "hi" ? "छात्र" : "Students", icon: "🎓" },
+    { value: "citizen", label: lang === "hi" ? "नागरिक" : "Citizens", icon: "🧑‍💼" },
+    { value: "scheme_applicant", label: lang === "hi" ? "योजना आवेदक" : "Scheme Seekers", icon: "📋" },
+  ];
+
+  // Scheme type options
+  const typeOptions = [
+    { value: "All", label: lang === "hi" ? "सभी प्रकार" : "All Types" },
+    { value: "government", label: lang === "hi" ? "सरकारी योजना" : "Government Schemes" },
+    { value: "scholarship", label: lang === "hi" ? "छात्रवृत्ति" : "Scholarships" },
+    { value: "welfare", label: lang === "hi" ? "कल्याण योजना" : "Welfare Schemes" },
+    { value: "employment", label: lang === "hi" ? "रोजगार योजना" : "Employment Schemes" },
+  ];
+
+  // Category icons mapping
+  const getCategoryIcon = (category: string) => {
+    const icons: Record<string, string> = {
+      "Health": "🏥",
+      "Education": "🎓", 
+      "Agriculture": "🌾",
+      "Revenue": "💰",
+      "Employment": "💼",
+      "Welfare": "🤝",
+      "Housing": "🏠"
+    };
+    return icons[category] || "📋";
   };
 
-  const filteredSchemes = allSchemes.filter(scheme => {
-    const matchesSearch = 
-      scheme[`name_${lang}` as keyof typeof scheme].toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      scheme[`description_${lang}` as keyof typeof scheme].toString().toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesCategory = selectedCategory === "All" || scheme.category === selectedCategory;
-    const matchesDistrict = selectedDistrict === "All" || scheme.districts.includes("All") || scheme.districts.includes(selectedDistrict);
-    
-    return matchesSearch && matchesCategory && matchesDistrict;
-  });
+  // Get scheme benefits in current language
+  const getBenefits = (scheme: any): string[] => {
+    return lang === "hi" ? scheme.benefits_hi : scheme.benefits_en;
+  };
 
-  const categories = ["All", "Health", "Education", "Agriculture", "Revenue", "Social Welfare"];
+  // Get scheme name in current language
+  const getSchemeName = (scheme: any): string => {
+    return lang === "hi" ? scheme.name_hi : scheme.name_en;
+  };
+
+  // Get scheme description in current language
+  const getSchemeDescription = (scheme: any): string => {
+    return lang === "hi" ? scheme.description_hi : scheme.description_en;
+  };
+
+  // Clear all filters
+  const clearFilters = () => {
+    setSearchTerm("");
+    setSelectedCategory("All");
+    setSelectedState("All India");
+    setSelectedAudience("All");
+    setSelectedType("All");
+    toast.success(lang === "hi" ? "फ़िल्टर साफ़ किए गए" : "Filters cleared");
+  };
 
   return (
     <>
       <Helmet>
-        <title>{t("schemes")} | MahaHelp Desk</title>
-        <meta name="description" content="Browse all Maharashtra government schemes and yojanas" />
+        <title>{lang === "hi" ? "सरकारी योजनाएं" : "Government Schemes"} | Government & Student Help Platform</title>
+        <meta name="description" content="Browse comprehensive government schemes and scholarships for all Indian states and union territories" />
       </Helmet>
 
-      <section className="container mx-auto px-4 py-10">
-        <div className="mb-8 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold mb-2">{t("governmentSchemes")}</h1>
-            <p className="text-muted-foreground">{t("browseSchemes")}</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              {isConnected ? (
-                <>
-                  <Wifi className="h-5 w-5 text-green-600" />
-                  <span className="text-sm text-green-600">Live</span>
-                </>
-              ) : (
-                <span className="text-sm text-muted-foreground">Offline</span>
-              )}
+      <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <span className="bg-gradient-to-r from-blue-700 via-green-600 to-orange-500 bg-clip-text text-transparent">
+              {lang === "hi" ? "सरकारी योजनाएं और छात्रवृत्ति" : "Government Schemes & Scholarships"}
+            </span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            {lang === "hi" 
+              ? "भारत के सभी राज्यों और केंद्र शासित प्रदेशों के लिए व्यापक सरकारी योजनाएं, छात्रवृत्ति और सेवाएं खोजें"
+              : "Discover comprehensive government schemes, scholarships, and services for all Indian states and union territories"}
+          </p>
+          
+          {/* Quick Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 max-w-4xl mx-auto">
+            <div className="bg-blue-50 rounded-lg p-4">
+              <div className="text-2xl font-bold text-blue-700">{schemes.length}+</div>
+              <div className="text-sm text-blue-600">{lang === "hi" ? "योजनाएं" : "Schemes"}</div>
             </div>
-            {lastUpdate && (
-              <span className="text-xs text-muted-foreground">
-                Updated: {lastUpdate.toLocaleTimeString()}
-              </span>
-            )}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={refreshData}
-              disabled={isRefreshing}
-            >
-              <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
-              Refresh
-            </Button>
+            <div className="bg-green-50 rounded-lg p-4">
+              <div className="text-2xl font-bold text-green-700">{indianStates.length}</div>
+              <div className="text-sm text-green-600">{lang === "hi" ? "राज्य/केंद्र शासित प्रदेश" : "States/UTs"}</div>
+            </div>
+            <div className="bg-orange-50 rounded-lg p-4">
+              <div className="text-2xl font-bold text-orange-700">24x7</div>
+              <div className="text-sm text-orange-600">{lang === "hi" ? "सहायता" : "Support"}</div>
+            </div>
+            <div className="bg-purple-50 rounded-lg p-4">
+              <div className="text-2xl font-bold text-purple-700">100%</div>
+              <div className="text-sm text-purple-600">{lang === "hi" ? "मुफ्त" : "Free"}</div>
+            </div>
           </div>
         </div>
 
-        {/* Filters */}
-        <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <div className="md:col-span-2">
-            <div className="relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder={t("searchSchemes")}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-          </div>
-          <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-            <SelectTrigger>
-              <SelectValue placeholder={t("category")} />
-            </SelectTrigger>
-            <SelectContent>
-              {categories.map(cat => (
-                <SelectItem key={cat} value={cat}>{cat}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select value={selectedDistrict} onValueChange={setSelectedDistrict}>
-            <SelectTrigger className="text-black [&>span]:text-black">
-              <SelectValue placeholder={t("selectDistrict")} className="text-black" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="All" className="text-black">All Districts</SelectItem>
-              {districts.map(d => (
-                <SelectItem key={d.name} value={d.name} className="text-black">{d.name}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Location Info */}
-        {userLocation && (
-          <div className="mb-6 p-4 bg-primary/10 rounded-lg flex items-center gap-2">
-            <MapPin className="h-5 w-5 text-primary" />
-            <span className="text-sm">{t("showingNearbySchemes")}</span>
-          </div>
-        )}
-
-        {/* Helplines */}
-        <Card className="mb-8">
-          <CardHeader>
+        {/* Advanced Filters */}
+        <Card className="mb-8 border-2 border-gray-100">
+          <CardHeader className="bg-gradient-to-r from-blue-50 to-green-50">
             <CardTitle className="flex items-center gap-2">
-              <Phone className="h-5 w-5" />
-              {t("emergencyHelplines")}
+              <Filter className="h-5 w-5" />
+              {lang === "hi" ? "उन्नत खोज और फ़िल्टर" : "Advanced Search & Filters"}
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-3 gap-4">
-              {helplines.map((helpline, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3 border rounded-lg">
-                  <div>
-                    <p className="font-medium">{helpline[`name_${lang}` as keyof typeof helpline]}</p>
-                    <p className="text-sm text-muted-foreground">{helpline[`description_${lang}` as keyof typeof helpline]}</p>
-                  </div>
-                  <a href={`tel:${helpline.number}`} className="text-primary font-bold text-lg">
-                    {helpline.number}
-                  </a>
+          <CardContent className="pt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+              {/* Search */}
+              <div className="xl:col-span-2">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Input
+                    placeholder={lang === "hi" ? "योजना खोजें (नाम, लाभ, विवरण)..." : "Search schemes (name, benefits, description)..."}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10"
+                  />
                 </div>
-              ))}
+              </div>
+
+              {/* User Type Filter */}
+              <Select value={selectedAudience} onValueChange={setSelectedAudience}>
+                <SelectTrigger>
+                  <SelectValue placeholder={lang === "hi" ? "आप कौन हैं?" : "Who are you?"} />
+                </SelectTrigger>
+                <SelectContent>
+                  {audienceOptions.map(opt => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      <span className="flex items-center gap-2">
+                        <span>{opt.icon}</span>
+                        <span>{opt.label}</span>
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* State Filter */}
+              <Select value={selectedState} onValueChange={setSelectedState}>
+                <SelectTrigger>
+                  <SelectValue placeholder={lang === "hi" ? "राज्य चुनें" : "Select State"} />
+                </SelectTrigger>
+                <SelectContent>
+                  {indianStates.map(state => (
+                    <SelectItem key={state} value={state}>
+                      <span className="flex items-center gap-2">
+                        <MapPin className="h-3 w-3" />
+                        <span>{state}</span>
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Category Filter */}
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger>
+                  <SelectValue placeholder={lang === "hi" ? "श्रेणी" : "Category"} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="All">{lang === "hi" ? "सभी श्रेणियां" : "All Categories"}</SelectItem>
+                  {uniqueCategories.map(cat => (
+                    <SelectItem key={cat} value={cat}>
+                      <span className="flex items-center gap-2">
+                        <span>{getCategoryIcon(cat)}</span>
+                        <span>{cat}</span>
+                      </span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Scheme Type Filter */}
+              <Select value={selectedType} onValueChange={setSelectedType}>
+                <SelectTrigger>
+                  <SelectValue placeholder={lang === "hi" ? "योजना प्रकार" : "Scheme Type"} />
+                </SelectTrigger>
+                <SelectContent>
+                  {typeOptions.map(opt => (
+                    <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Quick Action Buttons */}
+            <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t">
+              <Button
+                variant={selectedAudience === "student" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedAudience("student")}
+              >
+                <GraduationCap className="h-4 w-4 mr-2" />
+                {lang === "hi" ? "छात्र योजनाएं" : "Student Schemes"}
+              </Button>
+              <Button
+                variant={selectedAudience === "citizen" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedAudience("citizen")}
+              >
+                <Users className="h-4 w-4 mr-2" />
+                {lang === "hi" ? "नागरिक योजनाएं" : "Citizen Schemes"}
+              </Button>
+              <Button
+                variant={selectedType === "welfare" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedType("welfare")}
+              >
+                <Heart className="h-4 w-4 mr-2" />
+                {lang === "hi" ? "कल्याण योजनाएं" : "Welfare Schemes"}
+              </Button>
+              <Button
+                variant={selectedType === "scholarship" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedType("scholarship")}
+              >
+                <Star className="h-4 w-4 mr-2" />
+                {lang === "hi" ? "छात्रवृत्ति" : "Scholarships"}
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearFilters}
+                className="text-red-600 hover:text-red-700"
+              >
+                {lang === "hi" ? "सभी फ़िल्टर साफ़ करें" : "Clear All Filters"}
+              </Button>
             </div>
           </CardContent>
         </Card>
 
-        {/* Schemes List */}
-        <div className="grid gap-6">
-          {filteredSchemes.map(scheme => (
-            <Card key={scheme.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <CardTitle className="text-xl mb-2">
-                      {scheme[`name_${lang}` as keyof typeof scheme]}
-                    </CardTitle>
-                    <Badge variant="secondary">{scheme.category}</Badge>
+        {/* Results Summary */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <p className="text-lg font-semibold text-gray-900">
+              {lang === "hi" 
+                ? `${filteredSchemes.length} योजनाएं मिलीं` 
+                : `Found ${filteredSchemes.length} schemes`}
+            </p>
+            <p className="text-sm text-gray-600">
+              {selectedState !== "All India" && (
+                <span className="inline-flex items-center gap-1">
+                  <MapPin className="h-3 w-3" />
+                  {selectedState}
+                  {selectedAudience !== "All" && ` • ${audienceOptions.find(a => a.value === selectedAudience)?.label}`}
+                </span>
+              )}
+            </p>
+          </div>
+          
+          {filteredSchemes.length > 0 && (
+            <div className="text-sm text-gray-500">
+              {lang === "hi" ? "सबसे लोकप्रिय पहले" : "Most popular first"}
+            </div>
+          )}
+        </div>
+
+        {/* Enhanced Schemes Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {filteredSchemes.map((scheme) => (
+            <Card key={scheme.id} className="group hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border-l-4 border-l-blue-500">
+              <CardHeader className="pb-3">
+                <div className="flex items-start justify-between gap-2">
+                  <CardTitle className="text-lg leading-tight group-hover:text-blue-700 transition-colors">
+                    {getSchemeName(scheme)}
+                  </CardTitle>
+                  <div className="flex flex-col gap-1">
+                    <Badge variant="secondary" className="shrink-0">
+                      <span className="mr-1">{getCategoryIcon(scheme.category)}</span>
+                      {scheme.category}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs">
+                      {scheme.schemeType}
+                    </Badge>
                   </div>
-                  <Button onClick={() => navigate(`/apply?scheme=${scheme.id}`)}>
-                    {t("apply")}
-                  </Button>
                 </div>
+                {scheme.ministry && (
+                  <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                    <Building2 className="h-3 w-3" />
+                    {scheme.ministry}
+                  </p>
+                )}
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  {scheme[`description_${lang}` as keyof typeof scheme]}
+              
+              <CardContent className="space-y-4">
+                {/* Description */}
+                <p className="text-sm text-gray-600 line-clamp-3">
+                  {getSchemeDescription(scheme)}
                 </p>
 
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                {/* Key Benefits */}
+                {getBenefits(scheme).length > 0 && (
                   <div>
-                    <h4 className="font-semibold mb-2">{t("eligibility")}</h4>
-                    <ul className="text-sm space-y-1">
-                      {scheme.eligibility.age && <li>• {scheme.eligibility.age}</li>}
-                      {scheme.eligibility.income && <li>• {scheme.eligibility.income}</li>}
-                      <li>• {scheme.eligibility.residence}</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">{t("benefits")}</h4>
-                    <ul className="text-sm space-y-1">
-                      {scheme[`benefits_${lang}` as keyof typeof scheme].slice(0, 3).map((benefit: string, idx: number) => (
-                        <li key={idx}>• {benefit}</li>
+                    <p className="text-xs font-semibold text-green-700 mb-2 flex items-center gap-1">
+                      <Star className="h-3 w-3" />
+                      {lang === "hi" ? "मुख्य लाभ:" : "Key Benefits:"}
+                    </p>
+                    <ul className="text-xs text-gray-600 space-y-1">
+                      {getBenefits(scheme).slice(0, 3).map((benefit, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="text-green-500 mt-0.5">✓</span>
+                          <span className="flex-1">{benefit}</span>
+                        </li>
                       ))}
+                      {getBenefits(scheme).length > 3 && (
+                        <li className="text-blue-600 text-xs font-medium">
+                          +{getBenefits(scheme).length - 3} {lang === "hi" ? "और लाभ" : "more benefits"}
+                        </li>
+                      )}
                     </ul>
                   </div>
-                </div>
+                )}
 
-                <div className="flex items-center gap-4 pt-4 border-t">
-                  <a href={`tel:${scheme.helpline}`} className="flex items-center gap-2 text-primary hover:underline">
-                    <Phone className="h-4 w-4" />
-                    {scheme.helpline}
-                  </a>
-                  {scheme.website && (
-                    <a href={scheme.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary hover:underline">
-                      <ExternalLink className="h-4 w-4" />
-                      {t("visitWebsite")}
-                    </a>
+                {/* Eligibility Highlights */}
+                {scheme.eligibility && (
+                  <div className="bg-blue-50 rounded-lg p-3">
+                    <p className="text-xs font-semibold text-blue-700 mb-1">
+                      {lang === "hi" ? "पात्रता:" : "Eligibility:"}
+                    </p>
+                    <div className="text-xs text-blue-600 space-y-1">
+                      {scheme.eligibility.residence && (
+                        <div className="flex items-center gap-1">
+                          <MapPin className="h-3 w-3" />
+                          <span>{scheme.eligibility.residence}</span>
+                        </div>
+                      )}
+                      {scheme.eligibility.age && (
+                        <div className="flex items-center gap-1">
+                          <Users className="h-3 w-3" />
+                          <span>{lang === "hi" ? "आयु: " : "Age: "}{scheme.eligibility.age}</span>
+                        </div>
+                      )}
+                      {scheme.eligibility.income && (
+                        <div className="flex items-center gap-1">
+                          <Banknote className="h-3 w-3" />
+                          <span>{lang === "hi" ? "आय: " : "Income: "}{scheme.eligibility.income}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Target Audience & States */}
+                <div className="flex flex-wrap gap-1">
+                  {scheme.targetAudience?.map((audience) => (
+                    <Badge key={audience} variant="outline" className="text-xs">
+                      {audience === "student" ? "🎓" : audience === "citizen" ? "🧑‍💼" : "📋"} {audience}
+                    </Badge>
+                  ))}
+                  {scheme.states?.includes("All India") ? (
+                    <Badge variant="secondary" className="text-xs">
+                      🇮🇳 All India
+                    </Badge>
+                  ) : (
+                    scheme.states?.slice(0, 2).map(state => (
+                      <Badge key={state} variant="outline" className="text-xs">
+                        📍 {state}
+                      </Badge>
+                    ))
                   )}
                 </div>
 
-                <div className="mt-4">
-                  <Button variant="outline" onClick={() => navigate("/document-helper")} className="w-full">
-                    {t("needHelpWithDocuments")}
+                {/* Action Buttons */}
+                <div className="flex flex-wrap gap-2 pt-2 border-t">
+                  <Button variant="outline" size="sm" asChild className="flex-1">
+                    <Link to={`/schemes/${scheme.id}`} className="flex items-center justify-center gap-1">
+                      <Eye className="h-3 w-3" />
+                      {lang === "hi" ? "विवरण देखें" : "View Details"}
+                    </Link>
                   </Button>
+                  {scheme.helpline && (
+                    <Button variant="outline" size="sm" asChild className="flex-1">
+                      <a href={`tel:${scheme.helpline}`} className="flex items-center justify-center gap-1">
+                        <Phone className="h-3 w-3" />
+                        <span className="hidden sm:inline">{scheme.helpline}</span>
+                        <span className="sm:hidden">{lang === "hi" ? "कॉल" : "Call"}</span>
+                      </a>
+                    </Button>
+                  )}
+                  {scheme.website && (
+                    <Button size="sm" asChild className="flex-1 bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700">
+                      <a href={scheme.website} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-1">
+                        <ExternalLink className="h-3 w-3" />
+                        {lang === "hi" ? "आवेदन करें" : "Apply Now"}
+                      </a>
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
+        {/* No Results State */}
         {filteredSchemes.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">{t("noSchemesFound")}</p>
-          </div>
+          <Card className="p-12 text-center">
+            <div className="max-w-md mx-auto">
+              <div className="text-6xl mb-4">🔍</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                {lang === "hi" ? "कोई योजना नहीं मिली" : "No Schemes Found"}
+              </h3>
+              <p className="text-gray-600 mb-6">
+                {lang === "hi" 
+                  ? "कृपया अपने फ़िल्टर बदलें या अलग खोज शब्द का उपयोग करें।" 
+                  : "Please adjust your filters or try different search terms."}
+              </p>
+              <Button onClick={clearFilters} variant="outline">
+                {lang === "hi" ? "सभी फ़िल्टर साफ़ करें" : "Clear All Filters"}
+              </Button>
+            </div>
+          </Card>
         )}
-      </section>
+
+        {/* Popular Schemes Section */}
+        {filteredSchemes.length > 0 && (
+          <Card className="mb-8 bg-gradient-to-r from-blue-50 to-green-50">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-blue-600" />
+                {lang === "hi" ? "सबसे लोकप्रिय योजनाएं" : "Most Popular Schemes"}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {filteredSchemes.slice(0, 4).map((scheme) => (
+                  <div key={scheme.id} className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-2xl">{getCategoryIcon(scheme.category)}</span>
+                      <div>
+                        <h4 className="font-semibold text-sm">{getSchemeName(scheme)}</h4>
+                        <p className="text-xs text-gray-500">{scheme.category}</p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-600 mb-3 line-clamp-2">
+                      {getSchemeDescription(scheme)}
+                    </p>
+                    <div className="flex gap-1">
+                      {scheme.helpline && (
+                        <Button variant="outline" size="sm" asChild className="flex-1">
+                          <a href={`tel:${scheme.helpline}`}>
+                            <Phone className="h-3 w-3" />
+                          </a>
+                        </Button>
+                      )}
+                      {scheme.website && (
+                        <Button size="sm" asChild className="flex-1">
+                          <a href={scheme.website} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Emergency Helplines */}
+        <Card className="bg-red-50 border-red-200">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-red-700">
+              <Phone className="h-5 w-5" />
+              {lang === "hi" ? "आपातकालीन हेल्पलाइन" : "Emergency Helplines"}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {helplines.slice(0, 8).map((helpline, index) => (
+                <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
+                  <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
+                    <Phone className="h-5 w-5 text-red-600" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-sm text-gray-900">
+                      {lang === "hi" ? helpline.name_hi : helpline.name_en}
+                    </p>
+                    <a href={`tel:${helpline.number}`} className="text-red-600 font-bold hover:text-red-700">
+                      {helpline.number}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Footer Information */}
+        <div className="mt-8 text-center space-y-4">
+          <div className="bg-gradient-to-r from-blue-700 via-green-600 to-orange-500 rounded-lg p-6 text-white">
+            <h3 className="text-xl font-bold mb-2">
+              {lang === "hi" ? "सरकारी सत्यापित जानकारी" : "Government Verified Information"}
+            </h3>
+            <p className="text-sm opacity-90">
+              {lang === "hi" 
+                ? "सभी योजनाओं की जानकारी आधिकारिक सरकारी स्रोतों से नियमित रूप से अपडेट की जाती है।" 
+                : "All scheme information is regularly updated from official government sources."}
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-4 text-sm">
+              <a 
+                href="https://data.gov.in" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white hover:text-blue-200 transition-colors hover:underline cursor-pointer"
+              >
+                <span>📊 data.gov.in</span>
+              </a>
+              <a 
+                href="https://india.gov.in" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white hover:text-blue-200 transition-colors hover:underline cursor-pointer"
+              >
+                <span>🏛️ india.gov.in</span>
+              </a>
+              <a 
+                href="https://scholarships.gov.in" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white hover:text-blue-200 transition-colors hover:underline cursor-pointer"
+              >
+                <span>🎓 scholarships.gov.in</span>
+              </a>
+              <a 
+                href="tel:1077" 
+                className="text-white hover:text-blue-200 transition-colors hover:underline cursor-pointer"
+              >
+                <span>📞 1077 Helpline</span>
+              </a>
+            </div>
+          </div>
+          
+          <p className="text-sm text-gray-500">
+            {lang === "hi" 
+              ? "यह प्लेटफॉर्म भारत सरकार की डिजिटल इंडिया पहल का हिस्सा है।" 
+              : "This platform is part of the Government of India's Digital India initiative."}
+          </p>
+        </div>
+      </div>
     </>
   );
 }

@@ -1,113 +1,75 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Services from "./pages/Services";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import { HelmetProvider } from "react-helmet-async";
-import SiteHeader from "./components/SiteHeader";
-import SiteFooter from "./components/SiteFooter";
-import { LanguageProvider } from "./contexts/LanguageContext";
-import { AuthProvider } from "./contexts/AuthContext";
-import { ProtectedRoute } from "./components/ProtectedRoute";
-import Auth from "./pages/Auth";
-import Apply from "./pages/Apply";
-import Tracking from "./pages/Tracking";
-import Schemes from "./pages/Schemes";
-import AdminPanel from "./pages/AdminPanel";
-import DocumentHelper from "./pages/DocumentHelper";
-import { ThemeProvider } from "./components/ThemeProvider";
-import { RealtimeProvider } from "./contexts/RealtimeContext";
-import RealtimeIndicator from "./components/RealtimeIndicator";
-import AIAssistant from "./components/AIAssistant";
-import { dataSyncService } from "./services/dataSyncService";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { Toaster } from 'sonner';
+import { LanguageProvider } from '@/contexts/LanguageContext';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
+import AIAssistant from '@/components/AIAssistant';
 
-const queryClient = new QueryClient();
+// Pages
+import Index from '@/pages/Index';
+import Schemes from '@/pages/Schemes';
+import SchemeDetail from '@/pages/SchemeDetail';
+import Services from '@/pages/Services';
+import About from '@/pages/About';
+import Contact from '@/pages/Contact';
+import Auth from '@/pages/Auth';
+import Apply from '@/pages/Apply';
+import Tracking from '@/pages/Tracking';
+import UserDashboard from '@/pages/UserDashboard';
+import AdminPanel from '@/pages/AdminPanel';
+import DocumentHelper from '@/pages/DocumentHelper';
+import NotFound from '@/pages/NotFound';
 
-// Initialize data sync service
-dataSyncService.start(30); // Auto-update every 30 minutes
-
-const App = () => (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="system" storageKey="maha-help-theme">
-        <AuthProvider>
-          <RealtimeProvider>
-            <LanguageProvider>
-              <TooltipProvider>
-                <Toaster />
-                <Sonner />
-                <BrowserRouter>
-              <div className="min-h-screen flex flex-col">
+function App() {
+  return (
+    <HelmetProvider>
+      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+        <LanguageProvider>
+          <AuthProvider>
+            <Router>
+              <div className="min-h-screen bg-background font-sans antialiased">
                 <SiteHeader />
                 <main className="flex-1">
                   <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/schemes" element={<Schemes />} />
+                    <Route path="/schemes/:id" element={<SchemeDetail />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
                     <Route path="/auth" element={<Auth />} />
-                    <Route path="/" element={
-                      <ProtectedRoute>
-                        <Index />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/services" element={
-                      <ProtectedRoute>
-                        <Services />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/about" element={
-                      <ProtectedRoute>
-                        <About />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/contact" element={
-                      <ProtectedRoute>
-                        <Contact />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/apply" element={
-                      <ProtectedRoute>
-                        <Apply />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/tracking" element={
-                      <ProtectedRoute>
-                        <Tracking />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/schemes" element={
-                      <ProtectedRoute>
-                        <Schemes />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/admin" element={
-                      <ProtectedRoute>
-                        <AdminPanel />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/document-helper" element={
-                      <ProtectedRoute>
-                        <DocumentHelper />
-                      </ProtectedRoute>
-                    } />
-                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                    <Route path="/apply" element={<Apply />} />
+                    <Route path="/tracking" element={<Tracking />} />
+                    <Route path="/dashboard" element={<UserDashboard />} />
+                    <Route path="/admin" element={<AdminPanel />} />
+                    <Route path="/document-helper" element={<DocumentHelper />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>
                 <SiteFooter />
-                <RealtimeIndicator />
                 <AIAssistant />
+                <Toaster 
+                  position="top-right" 
+                  richColors 
+                  closeButton
+                  toastOptions={{
+                    style: {
+                      background: 'white',
+                      border: '1px solid #e5e7eb',
+                      color: '#374151',
+                    },
+                  }}
+                />
               </div>
-            </BrowserRouter>
-          </TooltipProvider>
+            </Router>
+          </AuthProvider>
         </LanguageProvider>
-          </RealtimeProvider>
-      </AuthProvider>
       </ThemeProvider>
-    </QueryClientProvider>
-  </HelmetProvider>
-);
+    </HelmetProvider>
+  );
+}
 
 export default App;

@@ -22,8 +22,8 @@ export default function Contact() {
   return (
     <>
       <Helmet>
-        <title>MahaHelp Desk | Contact</title>
-        <meta name="description" content="Contact MahaHelp Desk team for support or questions. Phone and email available." />
+        <title>Government & Student Help Platform | Contact</title>
+        <meta name="description" content="Contact us for support or questions about government schemes and services across India." />
         <link rel="canonical" href={canonicalHref} />
       </Helmet>
 
@@ -55,80 +55,72 @@ export default function Contact() {
           <div className="space-y-2">
             <div className="flex items-center">
               <Phone className="w-4 h-4 mr-2 text-muted-foreground" />
-              <a href="tel:+912212345678" className="text-sm text-primary hover:underline">
-                022-1234-5678
+              <a href="tel:1800111555" className="text-sm text-primary hover:underline">
+                1800-111-555 (Toll Free)
               </a>
             </div>
             <div className="flex items-center">
               <Mail className="w-4 h-4 mr-2 text-muted-foreground" />
-              <a href="mailto:support@mahahelp.in" className="text-sm text-primary hover:underline">
-                support@mahahelp.in
+              <a href="mailto:support@govhelpindia.in" className="text-sm text-primary hover:underline">
+                support@govhelpindia.in
               </a>
             </div>
           </div>
         </aside>
       </section>
 
-      {/* Maharashtra Government Contacts Section */}
+      {/* Government Contacts Section */}
       <section className="container mx-auto px-4 py-10">
         <h2 className="text-3xl font-bold mb-8 text-center">{t("govContacts")}</h2>
         
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {/* Chief Minister's Office */}
+          {/* Central Government Portal */}
           <div className="bg-card border rounded-lg p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center mb-4">
               <Building2 className="w-6 h-6 mr-3 text-primary" />
-              <h3 className="text-lg font-semibold">{t("cmOffice")}</h3>
+              <h3 className="text-lg font-semibold">India.gov.in</h3>
             </div>
             <div className="space-y-2">
               <div className="flex items-center text-sm">
-                <Phone className="w-4 h-4 mr-2 text-muted-foreground" />
-                <a href="tel:+912222024200" className="text-primary hover:underline">
-                  022-2202-4200
+                <Globe className="w-4 h-4 mr-2 text-muted-foreground" />
+                <a href="https://india.gov.in" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                  india.gov.in
                 </a>
               </div>
               <div className="flex items-center text-sm">
                 <Mail className="w-4 h-4 mr-2 text-muted-foreground" />
-                <a href="mailto:cm@maharashtra.gov.in" className="text-primary hover:underline">
-                  cm@maharashtra.gov.in
+                <a href="mailto:webmaster@nic.in" className="text-primary hover:underline">
+                  webmaster@nic.in
                 </a>
               </div>
-              <div className="flex items-center text-sm">
-                <MapPin className="w-4 h-4 mr-2 text-muted-foreground" />
-                <a 
-                  href="https://www.google.com/maps/search/?api=1&query=Mantralaya+Mumbai+400032" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-primary hover:underline"
-                >
-                  Mantralaya, Mumbai - 400032
-                </a>
-              </div>
+              <p className="text-sm text-muted-foreground mt-2">
+                National Portal of India - One-stop access to government services
+              </p>
             </div>
           </div>
 
-          {/* District Collectorate */}
+          {/* National Scholarship Portal */}
           <div className="bg-card border rounded-lg p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center mb-4">
               <UserCheck className="w-6 h-6 mr-3 text-primary" />
-              <h3 className="text-lg font-semibold">{t("collectorate")}</h3>
+              <h3 className="text-lg font-semibold">NSP Helpdesk</h3>
             </div>
             <div className="space-y-2">
               <div className="flex items-center text-sm">
                 <Phone className="w-4 h-4 mr-2 text-muted-foreground" />
-                <a href="tel:+912222660707" className="text-primary hover:underline">
-                  022-2266-0707
+                <a href="tel:01204200200" className="text-primary hover:underline">
+                  0120-4200200
                 </a>
               </div>
               <div className="flex items-center text-sm">
                 <Mail className="w-4 h-4 mr-2 text-muted-foreground" />
-                <a href="mailto:collector@maharashtra.gov.in" className="text-primary hover:underline">
-                  collector@maharashtra.gov.in
+                <a href="mailto:helpdesk@nsp.gov.in" className="text-primary hover:underline">
+                  helpdesk@nsp.gov.in
                 </a>
               </div>
               <div className="flex items-center text-sm">
                 <Clock className="w-4 h-4 mr-2 text-muted-foreground" />
-                <span>Mon-Fri: 10:30 AM - 6:00 PM</span>
+                <span>Mon-Sat: 9:30 AM - 6:00 PM</span>
               </div>
             </div>
           </div>
@@ -137,18 +129,18 @@ export default function Contact() {
           <div className="bg-card border rounded-lg p-6 hover:shadow-md transition-shadow">
             <div className="flex items-center mb-4">
               <Phone className="w-6 h-6 mr-3 text-primary" />
-              <h3 className="text-lg font-semibold">{t("helpline1077")}</h3>
+              <h3 className="text-lg font-semibold">Citizen Helpline</h3>
             </div>
             <div className="space-y-2">
               <div className="flex items-center text-sm">
                 <AlertTriangle className="w-4 h-4 mr-2 text-muted-foreground" />
-                <a href="tel:1077" className="text-primary hover:underline font-semibold">
-                  1077 (Toll Free)
+                <a href="tel:1800111555" className="text-primary hover:underline font-semibold">
+                  1800-111-555 (Toll Free)
                 </a>
               </div>
               <div className="flex items-center text-sm">
                 <Clock className="w-4 h-4 mr-2 text-muted-foreground" />
-                <span>{t("helpline1077Desc")}</span>
+                <span>24x7 Citizen Services Helpline</span>
               </div>
             </div>
           </div>
@@ -182,7 +174,7 @@ export default function Contact() {
           <h3 className="text-2xl font-semibold mb-6">{t("onlineServices")}</h3>
           <div className="grid gap-6 md:grid-cols-2">
             <a 
-              href="https://aaplesarkar.maharashtra.gov.in" 
+              href="https://india.gov.in" 
               target="_blank" 
               rel="noopener noreferrer"
               className="bg-card border rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer block"
@@ -190,16 +182,16 @@ export default function Contact() {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">
                   <Globe className="w-6 h-6 mr-3 text-primary" />
-                  <h4 className="text-lg font-semibold">{t("aaplePortal")}</h4>
+                  <h4 className="text-lg font-semibold">National Portal of India</h4>
                 </div>
                 <ExternalLink className="w-4 h-4 text-muted-foreground" />
               </div>
-              <p className="text-sm text-muted-foreground mb-3">{t("aaplePortalDesc")}</p>
-              <p className="text-sm font-mono text-primary hover:underline">aaplesarkar.maharashtra.gov.in</p>
+              <p className="text-sm text-muted-foreground mb-3">One-stop access to government services and information</p>
+              <p className="text-sm font-mono text-primary hover:underline">india.gov.in</p>
             </a>
             
             <a 
-              href="https://msrtc.maharashtra.gov.in" 
+              href="https://scholarships.gov.in" 
               target="_blank" 
               rel="noopener noreferrer"
               className="bg-card border rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer block"
@@ -207,12 +199,12 @@ export default function Contact() {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">
                   <Globe className="w-6 h-6 mr-3 text-primary" />
-                  <h4 className="text-lg font-semibold">{t("rtcPortal")}</h4>
+                  <h4 className="text-lg font-semibold">National Scholarship Portal</h4>
                 </div>
                 <ExternalLink className="w-4 h-4 text-muted-foreground" />
               </div>
-              <p className="text-sm text-muted-foreground mb-3">{t("rtcPortalDesc")}</p>
-              <p className="text-sm font-mono text-primary hover:underline">msrtc.maharashtra.gov.in</p>
+              <p className="text-sm text-muted-foreground mb-3">Apply for scholarships from central and state governments</p>
+              <p className="text-sm font-mono text-primary hover:underline">scholarships.gov.in</p>
             </a>
           </div>
         </div>

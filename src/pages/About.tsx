@@ -1,239 +1,226 @@
 import { Helmet } from "react-helmet-async";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { useLang } from "@/contexts/LanguageContext";
+import { 
+  Shield, 
+  Users, 
+  Globe, 
+  Award, 
+  CheckCircle, 
+  Heart,
+  Building2,
+  Phone,
+  Mail,
+  MapPin
+} from "lucide-react";
 
 export default function About() {
   const { t, lang } = useLang();
-  const canonicalHref = typeof window !== "undefined" ? window.location.href : "";
-  
+
+  const features = [
+    {
+      icon: Shield,
+      title: lang === 'hi' ? 'सरकार सत्यापित' : lang === 'mr' ? 'सरकार सत्यापित' : 'Government Verified',
+      description: lang === 'hi' ? 'सभी जानकारी आधिकारिक स्रोतों से' : lang === 'mr' ? 'सर्व माहिती अधिकृत स्रोतांकडून' : 'All information from official sources'
+    },
+    {
+      icon: Users,
+      title: lang === 'hi' ? '1M+ नागरिकों की सेवा' : lang === 'mr' ? '1M+ नागरिकांची सेवा' : '1M+ Citizens Served',
+      description: lang === 'hi' ? 'भारत भर के लाखों लोगों की मदद' : lang === 'mr' ? 'भारतभरातील लाखो लोकांची मदत' : 'Helping millions across India'
+    },
+    {
+      icon: Globe,
+      title: lang === 'hi' ? '12 भाषाओं में' : lang === 'mr' ? '12 भाषांमध्ये' : '12 Languages',
+      description: lang === 'hi' ? 'सभी भारतीय भाषाओं में सहायता' : lang === 'mr' ? 'सर्व भारतीय भाषांमध्ये सहाय्य' : 'Support in all Indian languages'
+    },
+    {
+      icon: Award,
+      title: lang === 'hi' ? '24x7 सहायता' : lang === 'mr' ? '24x7 सहाय्य' : '24x7 Support',
+      description: lang === 'hi' ? 'हमेशा उपलब्ध सहायता सेवा' : lang === 'mr' ? 'नेहमी उपलब्ध सहाय्य सेवा' : 'Always available assistance'
+    }
+  ];
+
+  const stats = [
+    { number: '40+', label: lang === 'hi' ? 'सरकारी योजनाएं' : lang === 'mr' ? 'सरकारी योजना' : 'Government Schemes' },
+    { number: '28', label: lang === 'hi' ? 'राज्य और केंद्र शासित प्रदेश' : lang === 'mr' ? 'राज्य आणि केंद्रशासित प्रदेश' : 'States & UTs' },
+    { number: '100%', label: lang === 'hi' ? 'मुफ्त सेवा' : lang === 'mr' ? 'मोफत सेवा' : 'Free Service' },
+    { number: '50K+', label: lang === 'hi' ? 'सफल आवेदन' : lang === 'mr' ? 'यशस्वी अर्ज' : 'Successful Applications' }
+  ];
+
   return (
     <>
       <Helmet>
-        <title>MahaHelp Desk | About</title>
-        <meta name="description" content="Purpose, benefits, and how MahaHelp Desk helps citizens find local government services." />
-        <link rel="canonical" href={canonicalHref} />
+        <title>{lang === 'hi' ? 'हमारे बारे में' : lang === 'mr' ? 'आमच्याबद्दल' : 'About Us'} | Government & Student Help Platform</title>
+        <meta name="description" content="Learn about our mission to help Indian citizens and students access government schemes and services" />
       </Helmet>
-      
-      <section className="container mx-auto px-4 py-10">
+
+      <div className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4 text-primary">
-            {lang === "en" ? "About MahaHelp Desk" : "महा हेल्प डेस्क बद्दल"}
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-100 to-green-100 px-4 py-2 rounded-full mb-6">
+            <span className="text-2xl">🇮🇳</span>
+            <span className="text-sm font-semibold text-gray-700">
+              {lang === 'hi' ? 'भारत सरकार की पहल' : lang === 'mr' ? 'भारत सरकारचा उपक्रम' : 'Government of India Initiative'}
+            </span>
+          </div>
+
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <span className="bg-gradient-to-r from-blue-700 via-green-600 to-orange-500 bg-clip-text text-transparent">
+              {lang === 'hi' ? 'सरकारी व छात्र सहायता प्लेटफॉर्म के बारे में' : 
+               lang === 'mr' ? 'सरकारी व विद्यार्थी मदत प्लॅटफॉर्म बद्दल' : 
+               'About Government & Student Help Platform'}
+            </span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-2">
-            {lang === "en" 
-              ? "Your trusted companion for accessing government services across Maharashtra"
-              : "महाराष्ट्रातील सरकारी सेवांसाठी तुमचा विश्वसनीय साथी"}
+
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            {lang === 'hi' 
+              ? 'यह प्लेटफॉर्म भारत भर के छात्रों और नागरिकों को सरकारी योजनाओं, छात्रवृत्ति और सेवाओं तक पहुंचने में मदद करता है। हमारा मिशन है डिजिटल इंडिया के माध्यम से सभी को सशक्त बनाना।'
+              : lang === 'mr' 
+              ? 'हे प्लॅटफॉर्म भारतभरातील विद्यार्थी आणि नागरिकांना सरकारी योजना, शिष्यवृत्ती आणि सेवांपर्यंत पोहोचण्यात मदत करते. आमचे ध्येय डिजिटल इंडियाच्या माध्यमातून सर्वांना सशक्त बनवणे आहे.'
+              : 'This platform helps students and citizens across India access government schemes, scholarships, and services. Our mission is to empower everyone through Digital India.'}
           </p>
-          <p className="text-lg font-medium text-primary max-w-3xl mx-auto">
-            {t("tagline")}
-          </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 mb-12">
-          {/* What is MahaHelp Desk */}
-          <div className="bg-card p-6 rounded-lg border">
-            <h2 className="text-2xl font-semibold mb-4 text-primary">
-              {lang === "en" ? "What is MahaHelp Desk?" : "महा हेल्प डेस्क काय आहे?"}
-            </h2>
-            <p className="text-base leading-relaxed mb-4">
-              {lang === "en" 
-                ? "MahaHelp Desk is a comprehensive digital platform designed to help citizens of Maharashtra easily find and access local government offices and services. Whether you need health services, education support, agricultural assistance, or any other government service, we help you locate the right office in your area."
-                : "महा हेल्प डेस्क हे महाराष्ट्रातील नागरिकांना स्थानिक सरकारी कार्यालये आणि सेवा सहजपणे शोधण्यात आणि त्यांचा वापर करण्यात मदत करण्यासाठी डिझाइन केलेले एक व्यापक डिजिटल प्लॅटफॉर्म आहे. तुम्हाला आरोग्य सेवा, शिक्षण सहाय्य, कृषी सहाय्य किंवा इतर कोणत्याही सरकारी सेवेची गरज असेल तर आम्ही तुम्हाला तुमच्या परिसरातील योग्य कार्यालय शोधण्यात मदत करतो."}
-            </p>
-          </div>
-
-          {/* Why MahaHelp Desk */}
-          <div className="bg-card p-6 rounded-lg border">
-            <h2 className="text-2xl font-semibold mb-4 text-primary">
-              {lang === "en" ? "Why MahaHelp Desk?" : "महा हेल्प डेस्क का?"}
-            </h2>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-2">
-                <span className="text-primary">✓</span>
-                <span>{lang === "en" ? "Save time by finding exact office locations" : "अचूक कार्यालयाचे स्थान शोधून वेळ वाचवा"}</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary">✓</span>
-                <span>{lang === "en" ? "No need to visit multiple offices" : "अनेक कार्यालयांना भेट देण्याची गरज नाही"}</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary">✓</span>
-                <span>{lang === "en" ? "Get phone numbers and email contacts" : "फोन नंबर आणि ईमेल संपर्क मिळवा"}</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary">✓</span>
-                <span>{lang === "en" ? "Know working hours before visiting" : "भेट देण्यापूर्वी कामकाजाचे तास जाणून घ्या"}</span>
-              </li>
-            </ul>
-          </div>
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          {stats.map((stat, index) => (
+            <Card key={index} className="text-center border-2 hover:shadow-lg transition-shadow duration-200">
+              <CardContent className="pt-6">
+                <div className="text-3xl font-bold text-blue-700 mb-2">{stat.number}</div>
+                <div className="text-sm text-gray-600">{stat.label}</div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
-        {/* Available Services */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            {lang === "en" ? "Available Services" : "उपलब्ध सेवा"}
+        {/* Features Section */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            {lang === 'hi' ? 'हमारी विशेषताएं' : lang === 'mr' ? 'आमची वैशिष्ट्ये' : 'Our Features'}
           </h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200">
-              <div className="text-blue-600 mb-3">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{lang === "en" ? "Health Services" : "आरोग्य सेवा"}</h3>
-              <p className="text-sm text-gray-600">
-                {lang === "en" 
-                  ? "Primary Health Centers, Government Hospitals, Community Health Centers"
-                  : "प्राथमिक आरोग्य केंद्रे, सरकारी रुग्णालये, सामुदायिक आरोग्य केंद्रे"}
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border border-green-200">
-              <div className="text-green-600 mb-3">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{lang === "en" ? "Education Services" : "शिक्षण सेवा"}</h3>
-              <p className="text-sm text-gray-600">
-                {lang === "en" 
-                  ? "Zilla Parishad Schools, District Education Offices, Sarva Shiksha Abhiyan"
-                  : "जिल्हा परिषद शाळा, जिल्हा शिक्षण कार्यालये, सर्व शिक्षा अभियान"}
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-lg border border-yellow-200">
-              <div className="text-yellow-600 mb-3">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{lang === "en" ? "Agriculture Services" : "कृषी सेवा"}</h3>
-              <p className="text-sm text-gray-600">
-                {lang === "en" 
-                  ? "Krishi Sevak Offices, Agriculture Departments, Soil Testing Labs"
-                  : "कृषी सेवक कार्यालये, कृषी विभाग, मृदा चाचणी प्रयोगशाळा"}
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border border-purple-200">
-              <div className="text-purple-600 mb-3">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{lang === "en" ? "Revenue Services" : "महसूल सेवा"}</h3>
-              <p className="text-sm text-gray-600">
-                {lang === "en" 
-                  ? "Tahsildar Offices, Sub Registrar, Circle Officers"
-                  : "तहसीलदार कार्यालये, उप निबंधक, वर्तुळ अधिकारी"}
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg border border-red-200">
-              <div className="text-red-600 mb-3">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h2M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{lang === "en" ? "Public Works" : "सार्वजनिक बांधकाम"}</h3>
-              <p className="text-sm text-gray-600">
-                {lang === "en" 
-                  ? "PWD Offices, Water Supply, Municipal Corporations"
-                  : "पीडब्ल्यूडी कार्यालये, पाणीपुरवठा, नगर निगम"}
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-lg border border-gray-200">
-              <div className="text-gray-600 mb-3">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{lang === "en" ? "Other Services" : "इतर सेवा"}</h3>
-              <p className="text-sm text-gray-600">
-                {lang === "en" 
-                  ? "Ration Cards, Passport Services, Employment, RTO, Electricity Board"
-                  : "रेशन कार्ड, पासपोर्ट सेवा, रोजगार, आरटीओ, वीज मंडळ"}
-              </p>
-            </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-200">
+                  <CardContent className="pt-6">
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-500 to-green-500 rounded-lg mb-4">
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                    <p className="text-gray-600 text-sm">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
 
-        {/* How to Use */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            {lang === "en" ? "How to Use MahaHelp Desk" : "महा हेल्प डेस्क कसे वापरावे"}
-          </h2>
-          <div className="grid gap-6 md:grid-cols-3">
+        {/* Mission Section */}
+        <Card className="mb-16 bg-gradient-to-r from-blue-50 to-green-50">
+          <CardContent className="p-8">
             <div className="text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-primary text-2xl font-bold">1</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">
-                {lang === "en" ? "Select Your District" : "तुमचा जिल्हा निवडा"}
-              </h3>
-              <p className="text-sm text-gray-600">
-                {lang === "en" 
-                  ? "Choose your district from the dropdown menu"
-                  : "ड्रॉपडाउन मेनूमधून तुमचा जिल्हा निवडा"}
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                {lang === 'hi' ? 'हमारा मिशन' : lang === 'mr' ? 'आमचे ध्येय' : 'Our Mission'}
+              </h2>
+              <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
+                {lang === 'hi' 
+                  ? 'हमारा लक्ष्य है भारत के हर नागरिक और छात्र को सरकारी योजनाओं और सेवाओं की जानकारी आसानी से उपलब्ध कराना। हम डिजिटल इंडिया के सपने को साकार करने में योगदान देते हैं और सुनिश्चित करते हैं कि कोई भी व्यक्ति सरकारी लाभों से वंचित न रहे।'
+                  : lang === 'mr' 
+                  ? 'आमचे ध्येय भारताच्या प्रत्येक नागरिक आणि विद्यार्थ्याला सरकारी योजना आणि सेवांची माहिती सहजपणे उपलब्ध करून देणे आहे. आम्ही डिजिटल इंडियाच्या स्वप्नाला साकार करण्यात योगदान देतो आणि खात्री करतो की कोणताही व्यक्ती सरकारी फायद्यांपासून वंचित राहू नये.'
+                  : 'Our goal is to make government schemes and services easily accessible to every citizen and student in India. We contribute to realizing the Digital India dream and ensure that no one is left behind in accessing government benefits.'}
               </p>
             </div>
-            <div className="text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-primary text-2xl font-bold">2</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">
-                {lang === "en" ? "Choose Your Taluka" : "तुमचा तालुका निवडा"}
-              </h3>
-              <p className="text-sm text-gray-600">
-                {lang === "en" 
-                  ? "Select the specific taluka within your district"
-                  : "तुमच्या जिल्ह्यातील विशिष्ट तालुका निवडा"}
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-primary text-2xl font-bold">3</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">
-                {lang === "en" ? "Find Services" : "सेवा शोधा"}
-              </h3>
-              <p className="text-sm text-gray-600">
-                {lang === "en" 
-                  ? "Browse available government services in your area"
-                  : "तुमच्या परिसरात उपलब्ध सरकारी सेवांचा आढावा घ्या"}
-              </p>
-            </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Contact Information */}
-        <div className="bg-gradient-to-r from-primary/5 to-primary/10 p-8 rounded-lg text-center">
-          <h2 className="text-2xl font-bold mb-4">
-            {lang === "en" ? "Need Help?" : "मदत हवी आहे?"}
-          </h2>
-          <p className="text-gray-600 mb-6">
-            {lang === "en" 
-              ? "If you can't find what you're looking for or need assistance, feel free to contact us."
-              : "जर तुम्हाला तुम्ही जे शोधत आहात ते सापडत नसेल किंवा मदतीची गरज असेल तर, कृपया आमच्याशी संपर्क साधा."}
-          </p>
-          <div className="flex justify-center space-x-4">
-            <a 
-              href="tel:+912212345678" 
-              className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors"
-            >
-              📞 {lang === "en" ? "Call Us" : "आम्हाला कॉल करा"}
-            </a>
-            <a 
-              href="mailto:support@mahahelp.in" 
-              className="bg-white border border-primary text-primary px-6 py-2 rounded-lg hover:bg-primary/5 transition-colors"
-            >
-              ✉️ {lang === "en" ? "Email Us" : "आम्हाला ईमेल करा"}
-            </a>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-center text-2xl">
+              {lang === 'hi' ? 'संपर्क जानकारी' : lang === 'mr' ? 'संपर्क माहिती' : 'Contact Information'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-3 gap-6 text-center">
+              <div className="flex flex-col items-center space-y-2">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <Phone className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="font-semibold">
+                  {lang === 'hi' ? 'हेल्पलाइन' : lang === 'mr' ? 'हेल्पलाइन' : 'Helpline'}
+                </h3>
+                <p className="text-gray-600">1077 (24x7 Free)</p>
+              </div>
+              
+              <div className="flex flex-col items-center space-y-2">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-green-600" />
+                </div>
+                <h3 className="font-semibold">
+                  {lang === 'hi' ? 'ईमेल' : lang === 'mr' ? 'ईमेल' : 'Email'}
+                </h3>
+                <p className="text-gray-600">support@govhelp.in</p>
+              </div>
+              
+              <div className="flex flex-col items-center space-y-2">
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                  <Building2 className="w-6 h-6 text-orange-600" />
+                </div>
+                <h3 className="font-semibold">
+                  {lang === 'hi' ? 'कार्यालय' : lang === 'mr' ? 'कार्यालय' : 'Office'}
+                </h3>
+                <p className="text-gray-600">
+                  {lang === 'hi' ? 'सभी जिला कार्यालय' : lang === 'mr' ? 'सर्व जिल्हा कार्यालये' : 'All District Offices'}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Trust Indicators */}
+        <div className="mt-12 text-center">
+          <div className="bg-gradient-to-r from-blue-700 via-green-600 to-orange-500 rounded-lg p-6 text-white">
+            <h3 className="text-xl font-bold mb-4">
+              {lang === 'hi' ? 'सरकारी सत्यापित जानकारी' : lang === 'mr' ? 'सरकारी सत्यापित माहिती' : 'Government Verified Information'}
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4 text-sm">
+              <a 
+                href="https://data.gov.in" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white hover:text-blue-200 transition-colors hover:underline cursor-pointer"
+              >
+                <span>📊 data.gov.in</span>
+              </a>
+              <a 
+                href="https://india.gov.in" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white hover:text-blue-200 transition-colors hover:underline cursor-pointer"
+              >
+                <span>🏛️ india.gov.in</span>
+              </a>
+              <a 
+                href="https://scholarships.gov.in" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-white hover:text-blue-200 transition-colors hover:underline cursor-pointer"
+              >
+                <span>🎓 scholarships.gov.in</span>
+              </a>
+              <a 
+                href="tel:1077" 
+                className="text-white hover:text-blue-200 transition-colors hover:underline cursor-pointer"
+              >
+                <span>📞 1077 Helpline</span>
+              </a>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 }

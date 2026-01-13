@@ -1,157 +1,178 @@
+// Government & Student Help Platform - Pan-India Locations Data
+
 export type Category = "Health" | "Education" | "Agriculture" | "Revenue" | "Public Works" | "Other";
 
-export const categories: { id: Category; en: string; mr: string; hi: string }[] = [
-  { id: "Health", en: "Health", mr: "आरोग्य", hi: "स्वास्थ्य" },
-  { id: "Education", en: "Education", mr: "शिक्षण", hi: "शिक्षा" },
-  { id: "Agriculture", en: "Agriculture", mr: "कृषी", hi: "कृषि" },
-  { id: "Revenue", en: "Revenue", mr: "महसूल", hi: "राजस्व" },
-  { id: "Public Works", en: "Public Works", mr: "सार्वजनिक बांधकाम", hi: "लोक निर्माण" },
-  { id: "Other", en: "More", mr: "इतर", hi: "और" },
+export const categories: { id: Category; en: string; hi: string }[] = [
+  { id: "Health", en: "Health & Welfare", hi: "स्वास्थ्य और कल्याण" },
+  { id: "Education", en: "Education & Scholarships", hi: "शिक्षा और छात्रवृत्ति" },
+  { id: "Agriculture", en: "Agriculture & Farmers", hi: "कृषि और किसान" },
+  { id: "Revenue", en: "Employment & Business", hi: "रोजगार और व्यापार" },
+  { id: "Public Works", en: "Housing & Infrastructure", hi: "आवास और बुनियादी ढांचा" },
+  { id: "Other", en: "Other Schemes", hi: "अन्य योजनाएं" },
 ];
 
-export const districts = [
+// All Indian States and Union Territories
+export const states = [
   {
-    name: "Ahmednagar",
-    talukas: ["Ahmednagar", "Akole", "Jamkhed", "Karjat", "Kopargaon", "Nagar", "Nevasa", "Parner", "Pathardi", "Rahata", "Rahuri", "Sangamner", "Shevgaon", "Shrirampur"]
+    name: "Andhra Pradesh",
+    districts: ["Anantapur", "Chittoor", "East Godavari", "Guntur", "Krishna", "Kurnool", "Nellore", "Prakasam", "Srikakulam", "Visakhapatnam", "Vizianagaram", "West Godavari", "YSR Kadapa"]
   },
   {
-    name: "Akola",
-    talukas: ["Akola", "Akot", "Balapur", "Barshi Takli", "Murtijapur", "Patur", "Telhara"]
+    name: "Arunachal Pradesh",
+    districts: ["Anjaw", "Changlang", "East Kameng", "East Siang", "Itanagar Capital Complex", "Kamle", "Kra Daadi", "Kurung Kumey", "Lepa Rada", "Lohit", "Longding", "Lower Dibang Valley", "Lower Siang", "Lower Subansiri", "Namsai", "Pakke Kessang", "Papum Pare", "Shi Yomi", "Siang", "Tawang", "Tirap", "Upper Dibang Valley", "Upper Siang", "Upper Subansiri", "West Kameng", "West Siang"]
   },
   {
-    name: "Amravati",
-    talukas: ["Amravati", "Anjangaon Surji", "Bhatkuli", "Chandur Bazar", "Chandur Railway", "Chikhaldara", "Churni", "Daryapur", "Dasarkhed", "Dharni", "Dhamangaon Railway", "Morshi", "Nandgaon Khandeshwar", "Teosa", "Warud"]
+    name: "Assam",
+    districts: ["Baksa", "Barpeta", "Biswanath", "Bongaigaon", "Cachar", "Charaideo", "Chirang", "Darrang", "Dhemaji", "Dhubri", "Dibrugarh", "Dima Hasao", "Goalpara", "Golaghat", "Hailakandi", "Hojai", "Jorhat", "Kamrup", "Kamrup Metropolitan", "Karbi Anglong", "Karimganj", "Kokrajhar", "Lakhimpur", "Majuli", "Morigaon", "Nagaon", "Nalbari", "Sivasagar", "Sonitpur", "South Salmara-Mankachar", "Tinsukia", "Udalguri", "West Karbi Anglong"]
   },
   {
-    name: "Aurangabad",
-    talukas: ["Aurangabad", "Gangapur", "Kannad", "Khultabad", "Paithan", "Phulambri", "Sillod", "Soegaon", "Vaijapur"]
+    name: "Bihar",
+    districts: ["Araria", "Arwal", "Aurangabad", "Banka", "Begusarai", "Bhagalpur", "Bhojpur", "Buxar", "Darbhanga", "East Champaran", "Gaya", "Gopalganj", "Jamui", "Jehanabad", "Kaimur", "Katihar", "Khagaria", "Kishanganj", "Lakhisarai", "Madhepura", "Madhubani", "Munger", "Muzaffarpur", "Nalanda", "Nawada", "Patna", "Purnia", "Rohtas", "Saharsa", "Samastipur", "Saran", "Sheikhpura", "Sheohar", "Sitamarhi", "Siwan", "Supaul", "Vaishali", "West Champaran"]
   },
   {
-    name: "Beed",
-    talukas: ["Beed", "Ambejogai", "Ashti", "Georai", "Kaij", "Majalgaon", "Parli", "Patoda", "Shirur", "Wadvani", "Wadwani"]
+    name: "Chhattisgarh",
+    districts: ["Balod", "Baloda Bazar", "Balrampur", "Bastar", "Bemetara", "Bijapur", "Bilaspur", "Dantewada", "Dhamtari", "Durg", "Gariaband", "Gaurela-Pendra-Marwahi", "Janjgir-Champa", "Jashpur", "Kabirdham", "Kanker", "Kondagaon", "Korba", "Koriya", "Mahasamund", "Mungeli", "Narayanpur", "Raigarh", "Raipur", "Rajnandgaon", "Sukma", "Surajpur", "Surguja"]
   },
   {
-    name: "Bhandara",
-    talukas: ["Bhandara", "Lakhandur", "Lakhni", "Mohadi", "Pauni", "Sakoli", "Tumsar"]
+    name: "Goa",
+    districts: ["North Goa", "South Goa"]
   },
   {
-    name: "Buldhana",
-    talukas: ["Buldhana", "Chikhli", "Deolgaon Raja", "Jalgaon Jamod", "Khamgaon", "Lonar", "Malkapur", "Mehkar", "Motala", "Nandura", "Sangrampur", "Shegaon", "Sindkhed Raja"]
+    name: "Gujarat",
+    districts: ["Ahmedabad", "Amreli", "Anand", "Aravalli", "Banaskantha", "Bharuch", "Bhavnagar", "Botad", "Chhota Udaipur", "Dahod", "Dang", "Devbhoomi Dwarka", "Gandhinagar", "Gir Somnath", "Jamnagar", "Junagadh", "Kheda", "Kutch", "Mahisagar", "Mehsana", "Morbi", "Narmada", "Navsari", "Panchmahal", "Patan", "Porbandar", "Rajkot", "Sabarkantha", "Surat", "Surendranagar", "Tapi", "Vadodara", "Valsad"]
   },
   {
-    name: "Chandrapur",
-    talukas: ["Chandrapur", "Bhadravati", "Ballarpur", "Bramhapuri", "Chimur", "Corporal", "Gadchiroli", "Gondpipri", "Jivati", "Mul", "Nagbhir", "Pombhurna", "Rajura", "Saoli", "Sindewahi", "Warora"]
+    name: "Haryana",
+    districts: ["Ambala", "Bhiwani", "Charkhi Dadri", "Faridabad", "Fatehabad", "Gurugram", "Hisar", "Jhajjar", "Jind", "Kaithal", "Karnal", "Kurukshetra", "Mahendragarh", "Nuh", "Palwal", "Panchkula", "Panipat", "Rewari", "Rohtak", "Sirsa", "Sonipat", "Yamunanagar"]
   },
   {
-    name: "Dhule",
-    talukas: ["Dhule", "Sakri", "Shirpur", "Sindkhede"]
+    name: "Himachal Pradesh",
+    districts: ["Bilaspur", "Chamba", "Hamirpur", "Kangra", "Kinnaur", "Kullu", "Lahaul and Spiti", "Mandi", "Shimla", "Sirmaur", "Solan", "Una"]
   },
   {
-    name: "Gadchiroli",
-    talukas: ["Gadchiroli", "Aheri", "Armori", "Bhamragad", "Chamorshi", "Desaiganj (Vadasa)", "Dhanora", "Etapalli", "Korchi", "Kurkheda", "Mulchera", "Sironcha"]
+    name: "Jharkhand",
+    districts: ["Bokaro", "Chatra", "Deoghar", "Dhanbad", "Dumka", "East Singhbhum", "Garhwa", "Giridih", "Godda", "Gumla", "Hazaribagh", "Jamtara", "Khunti", "Koderma", "Latehar", "Lohardaga", "Pakur", "Palamu", "Ramgarh", "Ranchi", "Sahebganj", "Seraikela Kharsawan", "Simdega", "West Singhbhum"]
   },
   {
-    name: "Gondia",
-    talukas: ["Gondia", "Amgaon", "Arjuni Morgaon", "Deori", "Goregaon", "Sadak Arjuni", "Salekasa", "Tirora"]
+    name: "Karnataka",
+    districts: ["Bagalkot", "Ballari", "Belagavi", "Bengaluru Rural", "Bengaluru Urban", "Bidar", "Chamarajanagar", "Chikkaballapur", "Chikkamagaluru", "Chitradurga", "Dakshina Kannada", "Davanagere", "Dharwad", "Gadag", "Hassan", "Haveri", "Kalaburagi", "Kodagu", "Kolar", "Koppal", "Mandya", "Mysuru", "Raichur", "Ramanagara", "Shivamogga", "Tumakuru", "Udupi", "Uttara Kannada", "Vijayapura", "Yadgir"]
   },
   {
-    name: "Hingoli",
-    talukas: ["Hingoli", "Aundha (Nagnath)", "Basmat", "Kalamnuri", "Sengaon"]
+    name: "Kerala",
+    districts: ["Alappuzha", "Ernakulam", "Idukki", "Kannur", "Kasaragod", "Kollam", "Kottayam", "Kozhikode", "Malappuram", "Palakkad", "Pathanamthitta", "Thiruvananthapuram", "Thrissur", "Wayanad"]
   },
   {
-    name: "Jalgaon",
-    talukas: ["Jalgaon", "Amalner", "Bhadgaon", "Bhusawal", "Chalisgaon", "Chopda", "Dharangaon", "Erandol", "Faizpur", "Jamner", "Muktainagar", "Pachora", "Parola", "Raver", "Yawal"]
+    name: "Madhya Pradesh",
+    districts: ["Agar Malwa", "Alirajpur", "Anuppur", "Ashoknagar", "Balaghat", "Barwani", "Betul", "Bhind", "Bhopal", "Burhanpur", "Chhatarpur", "Chhindwara", "Damoh", "Datia", "Dewas", "Dhar", "Dindori", "Guna", "Gwalior", "Harda", "Hoshangabad", "Indore", "Jabalpur", "Jhabua", "Katni", "Khandwa", "Khargone", "Mandla", "Mandsaur", "Morena", "Narsinghpur", "Neemuch", "Panna", "Raisen", "Rajgarh", "Ratlam", "Rewa", "Sagar", "Satna", "Sehore", "Seoni", "Shahdol", "Shajapur", "Sheopur", "Shivpuri", "Sidhi", "Singrauli", "Tikamgarh", "Ujjain", "Umaria", "Vidisha"]
   },
   {
-    name: "Jalna",
-    talukas: ["Jalna", "Ambad", "Bhokardan", "Ghansawangi", "Jafrabad", "Mantha", "Partur"]
+    name: "Maharashtra",
+    districts: ["Ahmednagar", "Akola", "Amravati", "Aurangabad", "Beed", "Bhandara", "Buldhana", "Chandrapur", "Dhule", "Gadchiroli", "Gondia", "Hingoli", "Jalgaon", "Jalna", "Kolhapur", "Latur", "Mumbai City", "Mumbai Suburban", "Nagpur", "Nanded", "Nandurbar", "Nashik", "Osmanabad", "Palghar", "Parbhani", "Pune", "Raigad", "Ratnagiri", "Sangli", "Satara", "Sindhudurg", "Solapur", "Thane", "Wardha", "Washim", "Yavatmal"]
   },
   {
-    name: "Kolhapur",
-    talukas: ["Kolhapur", "Ajra", "Bhudargad", "Chandgad", "Gaganbawda", "Hatkanangle", "Kagal", "Karvir", "Panhala", "Radhanagari", "Shahuwadi", "Shirol"]
+    name: "Manipur",
+    districts: ["Bishnupur", "Chandel", "Churachandpur", "Imphal East", "Imphal West", "Jiribam", "Kakching", "Kamjong", "Kangpokpi", "Noney", "Pherzawl", "Senapati", "Tamenglong", "Tengnoupal", "Thoubal", "Ukhrul"]
   },
   {
-    name: "Latur",
-    talukas: ["Latur", "Ahmadpur", "Ausa", "Chakur", "Deoni", "Jalkot", "Nilanga", "Renapur", "Shirur Anantpal", "Udgir"]
+    name: "Meghalaya",
+    districts: ["East Garo Hills", "East Jaintia Hills", "East Khasi Hills", "North Garo Hills", "Ri Bhoi", "South Garo Hills", "South West Garo Hills", "South West Khasi Hills", "West Garo Hills", "West Jaintia Hills", "West Khasi Hills"]
   },
   {
-    name: "Mumbai City",
-    talukas: ["Mumbai City"]
+    name: "Mizoram",
+    districts: ["Aizawl", "Champhai", "Hnahthial", "Khawzawl", "Kolasib", "Lawngtlai", "Lunglei", "Mamit", "Saiha", "Saitual", "Serchhip"]
   },
   {
-    name: "Mumbai Suburban",
-    talukas: ["Andheri", "Borivali", "Kurla"]
+    name: "Nagaland",
+    districts: ["Chümoukedima", "Dimapur", "Kiphire", "Kohima", "Longleng", "Mokokchung", "Mon", "Niuland", "Noklak", "Peren", "Phek", "Shamator", "Tseminyü", "Tuensang", "Wokha", "Zünheboto"]
   },
   {
-    name: "Nagpur",
-    talukas: ["Nagpur Urban", "Nagpur Rural", "Bhiwapur", "Hingna", "Kamptee", "Katol", "Kuhi", "Mauda", "Narkhed", "Parseoni", "Ramtek", "Saoner", "Umred"]
+    name: "Odisha",
+    districts: ["Angul", "Balangir", "Balasore", "Bargarh", "Bhadrak", "Boudh", "Cuttack", "Deogarh", "Dhenkanal", "Gajapati", "Ganjam", "Jagatsinghpur", "Jajpur", "Jharsuguda", "Kalahandi", "Kandhamal", "Kendrapara", "Kendujhar", "Khordha", "Koraput", "Malkangiri", "Mayurbhanj", "Nabarangpur", "Nayagarh", "Nuapada", "Puri", "Rayagada", "Sambalpur", "Subarnapur", "Sundargarh"]
   },
   {
-    name: "Nanded",
-    talukas: ["Nanded", "Ardhapur", "Bhokar", "Biloli", "Degloor", "Dharmabad", "Hadgaon", "Himayatnagar", "Kandhar", "Kinwat", "Loha", "Mahoor", "Mudkhed", "Mukhed", "Naigaon (Khairgaon)", "Umri"]
+    name: "Punjab",
+    districts: ["Amritsar", "Barnala", "Bathinda", "Faridkot", "Fatehgarh Sahib", "Fazilka", "Ferozepur", "Gurdaspur", "Hoshiarpur", "Jalandhar", "Kapurthala", "Ludhiana", "Malerkotla", "Mansa", "Moga", "Mohali", "Muktsar", "Pathankot", "Patiala", "Rupnagar", "Sangrur", "Shaheed Bhagat Singh Nagar", "Tarn Taran"]
   },
   {
-    name: "Nandurbar",
-    talukas: ["Nandurbar", "Akkalkuwa", "Akrani", "Dhadgaon", "Nawapur", "Shahada", "Taloda"]
+    name: "Rajasthan",
+    districts: ["Ajmer", "Alwar", "Banswara", "Baran", "Barmer", "Bharatpur", "Bhilwara", "Bikaner", "Bundi", "Chittorgarh", "Churu", "Dausa", "Dholpur", "Dungarpur", "Hanumangarh", "Jaipur", "Jaisalmer", "Jalore", "Jhalawar", "Jhunjhunu", "Jodhpur", "Karauli", "Kota", "Nagaur", "Pali", "Pratapgarh", "Rajsamand", "Sawai Madhopur", "Sikar", "Sirohi", "Sri Ganganagar", "Tonk", "Udaipur"]
   },
   {
-    name: "Nashik",
-    talukas: ["Nashik", "Baglan", "Chandvad", "Deola", "Dindori", "Igatpuri", "Kalwan", "Malegaon", "Nandgaon", "Niphad", "Peint", "Sinnar", "Surgana", "Trimbakeshwar", "Yeola"]
+    name: "Sikkim",
+    districts: ["East Sikkim", "North Sikkim", "South Sikkim", "West Sikkim"]
   },
   {
-    name: "Osmanabad",
-    talukas: ["Osmanabad", "Bhoom", "Kalamb", "Lohara", "Omerga", "Paranda", "Tuljapur", "Washi"]
+    name: "Tamil Nadu",
+    districts: ["Ariyalur", "Chengalpattu", "Chennai", "Coimbatore", "Cuddalore", "Dharmapuri", "Dindigul", "Erode", "Kallakurichi", "Kanchipuram", "Kanyakumari", "Karur", "Krishnagiri", "Madurai", "Mayiladuthurai", "Nagapattinam", "Namakkal", "Nilgiris", "Perambalur", "Pudukkottai", "Ramanathapuram", "Ranipet", "Salem", "Sivaganga", "Tenkasi", "Thanjavur", "Theni", "Thoothukudi", "Tiruchirappalli", "Tirunelveli", "Tirupathur", "Tiruppur", "Tiruvallur", "Tiruvannamalai", "Tiruvarur", "Vellore", "Viluppuram", "Virudhunagar"]
   },
   {
-    name: "Palghar",
-    talukas: ["Palghar", "Dahanu", "Jawhar", "Mokhada", "Talasari", "Vasai", "Vikramgad", "Wada"]
+    name: "Telangana",
+    districts: ["Adilabad", "Bhadradri Kothagudem", "Hyderabad", "Jagtial", "Jangaon", "Jayashankar Bhupalpally", "Jogulamba Gadwal", "Kamareddy", "Karimnagar", "Khammam", "Komaram Bheem", "Mahabubabad", "Mahabubnagar", "Mancherial", "Medak", "Medchal–Malkajgiri", "Mulugu", "Nagarkurnool", "Nalgonda", "Narayanpet", "Nirmal", "Nizamabad", "Peddapalli", "Rajanna Sircilla", "Rangareddy", "Sangareddy", "Siddipet", "Suryapet", "Vikarabad", "Wanaparthy", "Warangal Rural", "Warangal Urban", "Yadadri Bhuvanagiri"]
   },
   {
-    name: "Parbhani",
-    talukas: ["Parbhani", "Gangakhed", "Jintur", "Manwath", "Palam", "Pathri", "Purna", "Sailu", "Sonpeth"]
+    name: "Tripura",
+    districts: ["Dhalai", "Gomati", "Khowai", "North Tripura", "Sepahijala", "South Tripura", "Unakoti", "West Tripura"]
   },
   {
-    name: "Pune",
-    talukas: ["Pune City", "Ambegaon", "Baramati", "Bhor", "Daund", "Haveli", "Indapur", "Junnar", "Khed", "Mawal", "Mulshi", "Purandar", "Shirur", "Velhe"]
+    name: "Uttar Pradesh",
+    districts: ["Agra", "Aligarh", "Ambedkar Nagar", "Amethi", "Amroha", "Auraiya", "Ayodhya", "Azamgarh", "Baghpat", "Bahraich", "Ballia", "Balrampur", "Banda", "Barabanki", "Bareilly", "Basti", "Bhadohi", "Bijnor", "Budaun", "Bulandshahr", "Chandauli", "Chitrakoot", "Deoria", "Etah", "Etawah", "Farrukhabad", "Fatehpur", "Firozabad", "Gautam Buddha Nagar", "Ghaziabad", "Ghazipur", "Gonda", "Gorakhpur", "Hamirpur", "Hapur", "Hardoi", "Hathras", "Jalaun", "Jaunpur", "Jhansi", "Kannauj", "Kanpur Dehat", "Kanpur Nagar", "Kasganj", "Kaushambi", "Kushinagar", "Lakhimpur Kheri", "Lalitpur", "Lucknow", "Maharajganj", "Mahoba", "Mainpuri", "Mathura", "Mau", "Meerut", "Mirzapur", "Moradabad", "Muzaffarnagar", "Pilibhit", "Pratapgarh", "Prayagraj", "Rae Bareli", "Rampur", "Saharanpur", "Sambhal", "Sant Kabir Nagar", "Shahjahanpur", "Shamli", "Shravasti", "Siddharthnagar", "Sitapur", "Sonbhadra", "Sultanpur", "Unnao", "Varanasi"]
   },
   {
-    name: "Raigad",
-    talukas: ["Alibag", "Karjat", "Khalapur", "Mahad", "Mangaon", "Mhasla", "Murud", "Panvel", "Pen", "Poladpur", "Roha", "Shrivardhan", "Sudhagad", "Tala", "Uran"]
+    name: "Uttarakhand",
+    districts: ["Almora", "Bageshwar", "Chamoli", "Champawat", "Dehradun", "Haridwar", "Nainital", "Pauri Garhwal", "Pithoragarh", "Rudraprayag", "Tehri Garhwal", "Udham Singh Nagar", "Uttarkashi"]
   },
   {
-    name: "Ratnagiri",
-    talukas: ["Ratnagiri", "Chiplun", "Dapoli", "Guhagar", "Khed", "Lanja", "Mandangad", "Rajapur", "Sangameshwar"]
+    name: "West Bengal",
+    districts: ["Alipurduar", "Bankura", "Birbhum", "Cooch Behar", "Dakshin Dinajpur", "Darjeeling", "Hooghly", "Howrah", "Jalpaiguri", "Jhargram", "Kalimpong", "Kolkata", "Malda", "Murshidabad", "Nadia", "North 24 Parganas", "Paschim Bardhaman", "Paschim Medinipur", "Purba Bardhaman", "Purba Medinipur", "Purulia", "South 24 Parganas", "Uttar Dinajpur"]
+  },
+  // Union Territories
+  {
+    name: "Andaman and Nicobar Islands",
+    districts: ["Nicobar", "North and Middle Andaman", "South Andaman"]
   },
   {
-    name: "Sangli",
-    talukas: ["Sangli", "Atpadi", "Jath", "Kadegaon", "Khanapur", "Miraj", "Palus", "Shirala", "Tasgaon", "Walwa"]
+    name: "Chandigarh",
+    districts: ["Chandigarh"]
   },
   {
-    name: "Satara",
-    talukas: ["Satara", "Jaoli", "Khandala", "Khatav", "Koregaon", "Man", "Mahabaleshwar", "Patan", "Phaltan", "Wai"]
+    name: "Dadra and Nagar Haveli and Daman and Diu",
+    districts: ["Dadra and Nagar Haveli", "Daman", "Diu"]
   },
   {
-    name: "Sindhudurg",
-    talukas: ["Kudal", "Devgad", "Dodamarg", "Kankavli", "Malvan", "Sawantwadi", "Vengurla", "Vaibhavwadi"]
+    name: "Delhi",
+    districts: ["Central Delhi", "East Delhi", "New Delhi", "North Delhi", "North East Delhi", "North West Delhi", "Shahdara", "South Delhi", "South East Delhi", "South West Delhi", "West Delhi"]
   },
   {
-    name: "Solapur",
-    talukas: ["Solapur North", "Solapur South", "Akkalkot", "Barshi", "Karmala", "Madha", "Malshiras", "Mangalvedhe", "Mohol", "North Solapur", "Pandharpur", "Sangole", "South Solapur"]
+    name: "Jammu and Kashmir",
+    districts: ["Anantnag", "Bandipora", "Baramulla", "Budgam", "Doda", "Ganderbal", "Jammu", "Kathua", "Kishtwar", "Kulgam", "Kupwara", "Poonch", "Pulwama", "Rajouri", "Ramban", "Reasi", "Samba", "Shopian", "Srinagar", "Udhampur"]
   },
   {
-    name: "Thane",
-    talukas: ["Thane", "Ambernath", "Bhiwandi", "Kalyan", "Murbad", "Shahapur", "Ulhasnagar"]
+    name: "Ladakh",
+    districts: ["Kargil", "Leh"]
   },
   {
-    name: "Wardha",
-    talukas: ["Wardha", "Arvi", "Ashti", "Deoli", "Hinganghat", "Karanja", "Samudrapur", "Seloo"]
+    name: "Lakshadweep",
+    districts: ["Lakshadweep"]
   },
   {
-    name: "Washim",
-    talukas: ["Washim", "Karanja", "Malegaon", "Mangrulpir", "Manora", "Risod"]
-  },
-  {
-    name: "Yavatmal",
-    talukas: ["Yavatmal", "Arni", "Babhulgaon", "Darwha", "Digras", "Ghatanji", "Kalamb", "Kelapur", "Mahagaon", "Maregaon", "Ner", "Pandharkawada", "Pusad", "Ralegaon", "Umarkhed", "Wani", "Zari-Jamani"]
+    name: "Puducherry",
+    districts: ["Karaikal", "Mahe", "Puducherry", "Yanam"]
   }
 ];
+
+// For backward compatibility - Maharashtra districts (legacy)
+export const districts = states.find(s => s.name === "Maharashtra")?.districts.map(d => ({
+  name: d,
+  talukas: [d] // Simplified - just use district name as taluka
+})) || [];
+
+// Get districts for a state
+export function getDistrictsForState(stateName: string): string[] {
+  const state = states.find(s => s.name === stateName);
+  return state?.districts || [];
+}
+
+// Get all state names
+export function getAllStates(): string[] {
+  return states.map(s => s.name);
+}

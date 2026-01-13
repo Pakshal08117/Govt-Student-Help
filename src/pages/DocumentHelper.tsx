@@ -182,9 +182,9 @@ const documentGuides: DocumentGuide[] = [
     name_en: "Domicile Certificate",
     name_mr: "अधिवास प्रमाणपत्र",
     name_hi: "अधिवास प्रमाण पत्र",
-    description_en: "Certificate proving residence in Maharashtra",
-    description_mr: "महाराष्ट्रात राहत असल्याचे सिद्ध करणारे प्रमाणपत्र",
-    description_hi: "महाराष्ट्र में निवास साबित करने वाला प्रमाण पत्र",
+    description_en: "Certificate proving residence in your state",
+    description_mr: "तुमच्या राज्यात राहत असल्याचे सिद्ध करणारे प्रमाणपत्र",
+    description_hi: "आपके राज्य में निवास साबित करने वाला प्रमाण पत्र",
     steps: [
       {
         step_en: "Visit Tehsil office or apply online",
@@ -197,9 +197,9 @@ const documentGuides: DocumentGuide[] = [
         step_hi: "अधिवास प्रमाण पत्र आवेदन पत्र भरें"
       },
       {
-        step_en: "Provide proof of 15 years residence in Maharashtra",
-        step_mr: "महाराष्ट्रात 15 वर्षांच्या निवासाचा पुरावा प्रदान करा",
-        step_hi: "महाराष्ट्र में 15 वर्ष के निवास का प्रमाण प्रदान करें"
+        step_en: "Provide proof of residence in your state (duration varies by state)",
+        step_mr: "तुमच्या राज्यातील निवासाचा पुरावा प्रदान करा",
+        step_hi: "अपने राज्य में निवास का प्रमाण प्रदान करें"
       },
       {
         step_en: "Submit school certificates, ration card, property documents",
@@ -236,8 +236,8 @@ export default function DocumentHelper() {
   return (
     <>
       <Helmet>
-        <title>{t("documentHelper")} | MahaHelp Desk</title>
-        <meta name="description" content="Step-by-step guide to obtain government documents" />
+        <title>{t("documentHelper")} | Government & Student Help Platform</title>
+        <meta name="description" content="Step-by-step guide to obtain government documents across India" />
       </Helmet>
 
       <section className="container mx-auto px-4 py-10">

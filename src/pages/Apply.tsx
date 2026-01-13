@@ -53,8 +53,10 @@ export default function Apply() {
     district: "",
     taluka: "",
     
-    // Service Details
-    serviceType: service?.category || "",
+    // Service/Scheme Details
+    serviceType: service?.category || scheme?.category || "",
+    schemeId: schemeId || "",
+    serviceId: serviceId || "",
     medicalIssue: "",
     urgencyLevel: "",
     preferredDate: "",
@@ -188,15 +190,17 @@ export default function Apply() {
   }
 
   const currentItem = scheme || service;
-  const itemName = scheme ? scheme[`name_${lang}` as keyof typeof scheme] : service?.name_en;
+  const itemName = scheme ? 
+    (lang === 'hi' ? scheme.name_hi : scheme.name_en) : 
+    (service ? service.name_en : "");
   const isHospitalService = (service?.category === "Health" || scheme?.category === "Health") || 
                           (service?.name_en.toLowerCase().includes("hospital") || false);
 
   return (
     <>
       <Helmet>
-        <title>MahaHelp Desk | {t("applyService")}</title>
-        <meta name="description" content="Apply for government services online through MahaHelp Desk." />
+        <title>Government & Student Help Platform | {t("applyService")}</title>
+        <meta name="description" content="Apply for government services and schemes online." />
       </Helmet>
 
       <section className="container mx-auto px-4 py-10">

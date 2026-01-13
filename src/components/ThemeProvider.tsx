@@ -20,7 +20,7 @@ const ThemeProviderContext = createContext<ThemeProviderState | undefined>(
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "light",
   storageKey = "maha-help-theme",
   ...props
 }: ThemeProviderProps) {

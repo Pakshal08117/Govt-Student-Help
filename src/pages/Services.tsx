@@ -45,8 +45,8 @@ export default function Services() {
   return (
     <>
       <Helmet>
-        <title>MahaHelp Desk | Services</title>
-        <meta name="description" content="Browse local government services by district, taluka, and category in Maharashtra." />
+        <title>Government & Student Help Platform | Services</title>
+        <meta name="description" content="Browse local government services by state, district, and category across India." />
         <link rel="canonical" href={canonicalHref} />
       </Helmet>
 
