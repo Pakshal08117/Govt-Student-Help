@@ -41,6 +41,81 @@ export type Database = {
         }
         Relationships: []
       }
+      applications: {
+        Row: {
+          id: string
+          user_id: string
+          scheme_id: string
+          scheme_name: string
+          status: string
+          district: string | null
+          taluka: string | null
+          state: string | null
+          application_data: Json | null
+          documents: Json | null
+          admin_notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          scheme_id: string
+          scheme_name: string
+          status?: string
+          district?: string | null
+          taluka?: string | null
+          state?: string | null
+          application_data?: Json | null
+          documents?: Json | null
+          admin_notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          scheme_id?: string
+          scheme_name?: string
+          status?: string
+          district?: string | null
+          taluka?: string | null
+          state?: string | null
+          application_data?: Json | null
+          documents?: Json | null
+          admin_notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      application_journey: {
+        Row: {
+          id: string
+          application_id: string
+          status: string
+          notes: string | null
+          updated_by: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          application_id: string
+          status: string
+          notes?: string | null
+          updated_by?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          application_id?: string
+          status?: string
+          notes?: string | null
+          updated_by?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
       scholarship_queries: {
         Row: {
           id: string

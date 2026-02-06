@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLang } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { useLowBandwidth } from "@/contexts/LowBandwidthContext";
+import { useEssentialMode } from "@/contexts/EssentialModeContext";
 import { ThemeToggle } from "./ThemeToggle";
 import { 
   Menu, 
@@ -22,16 +22,14 @@ import {
   Users,
   BookOpen,
   HelpCircle,
-  Globe,
-  Wifi,
-  WifiOff
+  Globe
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function SiteHeader() {
   const { t, lang, setLang, getLanguageName, getAllLanguages } = useLang();
   const { user, signOut } = useAuth();
-  const { isLowBandwidth, toggleLowBandwidth } = useLowBandwidth();
+  const { isEssentialMode, toggleEssentialMode } = useEssentialMode();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -96,36 +94,21 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo & Brand */}
-          <Link to="/" className="flex items-center space-x-3 group">
+        <div className="flex h-16 items-center justify-between gap-4">
+          {/* Logo Only - No Text */}
+          <Link to="/" className="flex items-center group">
             <div className="relative">
-              {/* Enhanced Logo Design */}
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-700 via-green-600 to-orange-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
-                  <Building2 className="w-6 h-6 text-white drop-shadow-sm" />
-                </div>
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-700 via-green-600 to-orange-500 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                <Building2 className="w-5 h-5 text-white" />
               </div>
-              {/* Indian Flag Indicator */}
-              <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-orange-500 via-white to-green-500 rounded-full flex items-center justify-center border-2 border-white shadow-sm">
-                <span className="text-xs font-bold text-blue-700">🇮🇳</span>
+              <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center border border-white shadow-sm">
+                <span className="text-[10px]">🇮🇳</span>
               </div>
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="text-xl font-bold text-gray-900 group-hover:text-blue-700 transition-colors duration-200 leading-tight whitespace-nowrap">
-                Govt & Student Help
-              </h1>
-              <p className="text-xs text-gray-600 -mt-1 font-medium">
-                {lang === 'en' ? 'All India Platform' : 
-                 lang === 'hi' ? 'अखिल भारत प्लेटफॉर्म' : 
-                 lang === 'mr' ? 'अखिल भारत प्लॅटफॉर्म' :
-                 'All India Platform'}
-              </p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
             {navigation.map((item) => {
               const Icon = item.icon;
               const isActive = isActivePath(item.href);
@@ -135,9 +118,9 @@ export default function SiteHeader() {
                   key={item.name}
                   to={item.href}
                   className={cn(
-                    "flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200",
+                    "flex items-center space-x-1.5 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200",
                     isActive
-                      ? "bg-blue-50 text-blue-700 shadow-sm"
+                      ? "bg-blue-50 text-blue-700"
                       : "text-gray-700 hover:text-blue-700 hover:bg-gray-50"
                   )}
                 >
@@ -148,55 +131,42 @@ export default function SiteHeader() {
             })}
           </nav>
 
-          {/* User Actions */}
-          <div className="flex items-center space-x-3">
+          {/* Right Side Actions */}
+          <div className="flex items-center space-x-2">
             {/* Language Selector */}
             <Select value={lang} onValueChange={handleLanguageChange}>
-              <SelectTrigger className="w-auto min-w-[100px] h-9 border-gray-300 hover:border-blue-500">
-                <div className="flex items-center space-x-2">
-                  <Globe className="w-4 h-4" />
+              <SelectTrigger className="w-[90px] h-9 border-gray-300 hover:border-blue-500">
+                <div className="flex items-center space-x-1.5">
+                  <Globe className="w-3.5 h-3.5" />
                   <SelectValue />
                 </div>
               </SelectTrigger>
               <SelectContent>
                 {getAllLanguages().map((language) => (
                   <SelectItem key={language.code} value={language.code}>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm font-medium">{language.nativeName}</span>
-                      <span className="text-xs text-gray-500">({language.name})</span>
-                    </div>
+                    <span className="text-sm">{language.nativeName}</span>
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
 
-            {/* Theme Toggle */}
-            <ThemeToggle />
-
-            {/* Low Bandwidth Toggle */}
+            {/* Essential Mode Toggle */}
             <Button
               variant="outline"
               size="sm"
-              onClick={toggleLowBandwidth}
-              className={cn(
-                "hidden sm:flex items-center space-x-1",
-                isLowBandwidth && "border-green-500 bg-green-50 text-green-700"
-              )}
-              title={isLowBandwidth ? "Disable Low Bandwidth Mode" : "Enable Low Bandwidth Mode"}
+              onClick={toggleEssentialMode}
+              className="hidden sm:flex items-center space-x-2 border-gray-300 hover:border-blue-500"
+              aria-label={isEssentialMode ? "Disable Essential Mode" : "Enable Essential Mode"}
             >
-              {isLowBandwidth ? (
-                <>
-                  <WifiOff className="w-4 h-4" />
-                  <span className="text-xs">Low BW</span>
-                </>
-              ) : (
-                <>
-                  <Wifi className="w-4 h-4" />
-                </>
-              )}
+              <span className="text-xs font-medium">
+                {isEssentialMode ? "Essential Mode" : "Essential Mode"}
+              </span>
             </Button>
 
-            {/* User Menu */}
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
+            {/* User Menu */}            {/* User Menu */}
             {user ? (
               <div className="flex items-center space-x-2">
                 <Badge variant="secondary" className="hidden sm:flex items-center space-x-1">

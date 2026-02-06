@@ -3,12 +3,11 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'sonner';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { AuthProvider } from '@/contexts/AuthContext';
-import { LowBandwidthProvider } from '@/contexts/LowBandwidthContext';
+import { EssentialModeProvider } from '@/contexts/EssentialModeContext';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import AIAssistant from '@/components/AIAssistant';
-import { LowBandwidthIndicator } from '@/components/LowBandwidthToggle';
 
 // Pages
 import Index from '@/pages/Index';
@@ -29,7 +28,7 @@ function App() {
   return (
     <HelmetProvider>
       <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-        <LowBandwidthProvider>
+        <EssentialModeProvider>
           <LanguageProvider>
             <AuthProvider>
               <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
@@ -54,7 +53,6 @@ function App() {
                   </main>
                   <SiteFooter />
                   <AIAssistant />
-                  <LowBandwidthIndicator />
                   <Toaster 
                     position="top-right" 
                     richColors 
@@ -71,7 +69,7 @@ function App() {
               </Router>
             </AuthProvider>
           </LanguageProvider>
-        </LowBandwidthProvider>
+        </EssentialModeProvider>
       </ThemeProvider>
     </HelmetProvider>
   );

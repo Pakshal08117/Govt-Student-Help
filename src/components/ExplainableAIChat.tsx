@@ -11,9 +11,11 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useLang } from '@/contexts/LanguageContext';
-import { useLowBandwidth } from '@/contexts/LowBandwidthContext';
+import { useEssentialMode } from '@/contexts/EssentialModeContext';
 import { useScholarshipGuidance } from '@/hooks/useScholarshipGuidance';
 import { useProfile } from '@/hooks/useProfile';
+import { AIDisclaimer } from '@/components/AIDisclaimer';
+import { ImpactMetrics } from '@/components/ImpactMetrics';
 import { type UserProfile } from '@/services/explainableAI';
 import { 
   MessageCircle, 
@@ -28,13 +30,14 @@ import {
   MicOff,
   Loader2,
   AlertCircle,
-  History
+  History,
+  AlertTriangle
 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function ExplainableAIChat() {
   const { lang, t } = useLang();
-  const { isLowBandwidth } = useLowBandwidth();
+  const { isEssentialMode } = useEssentialMode();
   const [query, setQuery] = useState('');
   const { profile: dbProfile } = useProfile();
   
@@ -118,10 +121,10 @@ export default function ExplainableAIChat() {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       {/* Header */}
-      <Card className={isLowBandwidth ? "border border-gray-300" : "bg-gradient-to-r from-blue-50 to-green-50 border-2 border-blue-200"}>
+      <Card className={isEssentialMode ? "border border-gray-300 bg-white" : "bg-gradient-to-r from-blue-50 to-green-50 border-2 border-blue-200"}>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-2xl">
-            {!isLowBandwidth && <Sparkles className="w-6 h-6 text-blue-600" />}
+            {!isEssentialMode && <Sparkles className="w-6 h-6 text-blue-600" />}
             {lang === "hi" ? "व्याख्यात्मक AI सहायक" : lang === "mr" ? "स्पष्टीकरणात्मक AI सहाय्यक" : "Explainable AI Assistant"}
           </CardTitle>
           <p className="text-gray-600 mt-2">
@@ -133,6 +136,19 @@ export default function ExplainableAIChat() {
           </p>
         </CardHeader>
       </Card>
+
+      {/* AI Disclaimer */}
+      <AIDisclaimer />
+
+      {/* Impact Metrics */}
+      {!response && (
+        <div>
+          <h3 className="text-sm font-semibold text-gray-700 mb-3">
+            {lang === "hi" ? "प्रभाव मेट्रिक्स" : lang === "mr" ? "प्रभाव मेट्रिक्स" : "Impact Metrics"}
+          </h3>
+          <ImpactMetrics variant="compact" />
+        </div>
+      )}
 
       {/* Error Alert */}
       {error && (
@@ -343,53 +359,87 @@ export default function ExplainableAIChat() {
             </Card>
           )}
 
-          {/* Not Eligible Schemes */}
+          {/* Not Eligible Schemes - Enhanced */}
           {response.notEligibleSchemes.length > 0 && (
-            <Card className="border-l-4 border-l-red-500">
+            <Card className="border-l-4 border-l-orange-500">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-red-700">
-                  <XCircle className="w-5 h-5" />
+                <CardTitle className="flex items-center gap-2 text-orange-700">
+                  <AlertTriangle className="w-5 h-5" />
                   {lang === "hi" 
                     ? `अपात्र योजनाएं (${response.notEligibleSchemes.length})`
                     : lang === "mr"
                     ? `अपात्र योजना (${response.notEligibleSchemes.length})`
-                    : `Not Eligible Schemes (${response.notEligibleSchemes.length})`}
+                    : `Not Eligible - Here's Why (${response.notEligibleSchemes.length})`}
                 </CardTitle>
+                <p className="text-sm text-orange-600 font-normal mt-1">
+                  {lang === "hi" 
+                    ? "समझें कि आप इन योजनाओं के लिए पात्र क्यों नहीं हैं और क्या करना होगा"
+                    : lang === "mr"
+                    ? "तुम्ही या योजनांसाठी पात्र का नाही आणि काय करावे लागेल हे समजून घ्या"
+                    : "Understand why you don't qualify and what would need to change"}
+                </p>
               </CardHeader>
               <CardContent className="space-y-4">
                 {response.notEligibleSchemes.map((result, idx) => (
-                  <div key={idx} className="bg-red-50 p-4 rounded-lg">
-                    <div className="flex justify-between items-start mb-2">
+                  <div key={idx} className="bg-orange-50 border-2 border-orange-200 p-4 rounded-lg">
+                    <div className="flex justify-between items-start mb-3">
                       <div>
-                        <h4 className="font-semibold">{result.scheme.name}</h4>
+                        <h4 className="font-semibold text-gray-900">{result.scheme.name}</h4>
                         <p className="text-sm text-gray-600">{result.scheme.nameHi}</p>
                       </div>
+                      <Badge variant="outline" className="bg-orange-100 text-orange-700 border-orange-300">
+                        {lang === "hi" ? "अपात्र" : lang === "mr" ? "अपात्र" : "Not Eligible"}
+                      </Badge>
                     </div>
                     
-                    <div className="space-y-2">
-                      <p className="text-sm font-semibold">
-                        {lang === "hi" ? "आप पात्र क्यों नहीं हैं:" : lang === "mr" ? "तुम्ही पात्र का नाही:" : "Why you're not eligible:"}
-                      </p>
-                      {result.reasons.filter(r => r.startsWith('✗')).map((reason, i) => (
-                        <div key={i} className="flex items-start gap-2 text-sm">
-                          <XCircle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
-                          <span>{reason.substring(2)}</span>
-                        </div>
-                      ))}
-                      
-                      {result.missingInfo.length > 0 && (
-                        <div className="mt-2">
-                          <p className="text-sm font-semibold text-orange-700">
-                            {lang === "hi" ? "गुम जानकारी:" : lang === "mr" ? "गहाळ माहिती:" : "Missing Information:"}
-                          </p>
-                          {result.missingInfo.map((info, i) => (
-                            <div key={i} className="flex items-start gap-2 text-sm text-orange-600">
-                              <HelpCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                              <span>{info}</span>
-                            </div>
+                    {/* Why Not Eligible - Clear Explanation */}
+                    <div className="space-y-3">
+                      <div className="bg-white p-3 rounded border border-orange-200">
+                        <p className="text-sm font-semibold text-orange-900 mb-2 flex items-center gap-2">
+                          <XCircle className="w-4 h-4" />
+                          {lang === "hi" ? "आप पात्र क्यों नहीं हैं:" : lang === "mr" ? "तुम्ही पात्र का नाही:" : "Why You're Not Eligible:"}
+                        </p>
+                        <ul className="space-y-2">
+                          {result.reasons.filter(r => r.startsWith('✗')).map((reason, i) => (
+                            <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                              <span className="text-red-500 font-bold mt-0.5">✗</span>
+                              <span className="flex-1">{reason.substring(2)}</span>
+                            </li>
                           ))}
+                        </ul>
+                      </div>
+                      
+                      {/* Missing Information */}
+                      {result.missingInfo.length > 0 && (
+                        <div className="bg-yellow-50 p-3 rounded border border-yellow-200">
+                          <p className="text-sm font-semibold text-yellow-900 mb-2 flex items-center gap-2">
+                            <HelpCircle className="w-4 h-4" />
+                            {lang === "hi" ? "अधिक जानकारी चाहिए:" : lang === "mr" ? "अधिक माहिती आवश्यक:" : "Need More Information:"}
+                          </p>
+                          <ul className="space-y-1">
+                            {result.missingInfo.map((info, i) => (
+                              <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                                <span className="text-yellow-600 mt-0.5">•</span>
+                                <span className="flex-1">{info}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       )}
+
+                      {/* What You Can Do */}
+                      <div className="bg-blue-50 p-3 rounded border border-blue-200">
+                        <p className="text-sm font-semibold text-blue-900 mb-1">
+                          {lang === "hi" ? "आप क्या कर सकते हैं:" : lang === "mr" ? "तुम्ही काय करू शकता:" : "What You Can Do:"}
+                        </p>
+                        <p className="text-xs text-blue-700">
+                          {lang === "hi" 
+                            ? "यदि आपकी परिस्थितियां बदलती हैं (जैसे आय, शिक्षा, या दस्तावेज़), तो फिर से जांचें। आधिकारिक वेबसाइट पर अपवाद या विशेष मामलों की जांच करें।"
+                            : lang === "mr"
+                            ? "जर तुमची परिस्थिती बदलते (जसे की उत्पन्न, शिक्षण, किंवा कागदपत्रे), तर पुन्हा तपासा. अधिकृत वेबसाइटवर अपवाद किंवा विशेष प्रकरणे तपासा."
+                            : "If your circumstances change (income, education, documents), check again. Visit the official website for exceptions or special cases."}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}

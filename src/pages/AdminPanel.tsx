@@ -122,59 +122,45 @@ export default function AdminPanel() {
         setUsers(usersData || []);
       }
 
-      // For now, use mock applications data since applications table doesn't exist
-      const mockApplications: Application[] = [
-        {
-          id: "1",
-          user_id: "user1",
-          scheme_id: "PM-KISAN Samman Nidhi",
-          status: "pending",
-          district: "Mumbai",
-          taluka: "Andheri",
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-          application_data: {},
-          documents: {},
-          user_email: "farmer@example.com"
-        },
-        {
-          id: "2", 
-          user_id: "user2",
-          scheme_id: "Ayushman Bharat",
-          status: "approved",
-          district: "Pune",
-          taluka: "Hadapsar",
-          created_at: new Date(Date.now() - 86400000).toISOString(),
-          updated_at: new Date(Date.now() - 86400000).toISOString(),
-          application_data: {},
-          documents: {},
-          user_email: "citizen@example.com"
-        },
-        {
-          id: "3",
-          user_id: "user3", 
-          scheme_id: "Pradhan Mantri Awas Yojana",
-          status: "under_review",
-          district: "Delhi",
-          taluka: "Central Delhi",
-          created_at: new Date(Date.now() - 172800000).toISOString(),
-          updated_at: new Date(Date.now() - 172800000).toISOString(),
-          application_data: {},
-          documents: {},
-          user_email: "resident@example.com"
-        }
-      ];
+      // Fetch real applications from Supabase
+      const { data: applicationsData, error: applicationsError } = await supabase
+        .from('applications')
+        .select(`
+          *,
+          profiles!applications_user_id_fkey(email)
+        `)
+        .order('created_at', { ascending: false });
 
-      setApplications(mockApplications);
+      if (applicationsError) {
+        console.error('Applications fetch error:', applicationsError);
+        toast.error(lang === "hi" ? "आवेदन लोड करने में त्रुटि" : "Error loading applications");
+      } else {
+        // Transform data to match Application interface
+        const transformedApps: Application[] = (applicationsData || []).map(app => ({
+          id: app.id,
+          user_id: app.user_id,
+          scheme_id: app.scheme_id,
+          status: app.status,
+          district: app.district || '',
+          taluka: app.taluka || '',
+          created_at: app.created_at,
+          updated_at: app.updated_at,
+          application_data: app.application_data || {},
+          documents: app.documents || {},
+          user_email: (app.profiles as any)?.email || 'N/A'
+        }));
+        
+        setApplications(transformedApps);
+      }
 
       // Calculate real-time stats
       const totalUsers = usersData?.length || 0;
-      const totalApplications = mockApplications.length;
+      const totalApplications = applicationsData?.length || 0;
       const today = new Date().toISOString().split('T')[0];
-      const todayApplications = mockApplications.filter(app => 
+      const todayApplications = (applicationsData || []).filter(app => 
         app.created_at.startsWith(today)
       ).length;
-      const pendingApplications = mockApplications.filter(app => 
+      const pendingApplications = (applicationsData || []).filter(app => 
         app.status === 'pending'
       ).length;
 
@@ -274,12 +260,18 @@ export default function AdminPanel() {
 
   const updateApplicationStatus = async (applicationId: string, newStatus: string) => {
     try {
-      // Update the mock application status
-      setApplications(prev => prev.map(app => 
-        app.id === applicationId 
-          ? { ...app, status: newStatus, updated_at: new Date().toISOString() }
-          : app
-      ));
+      // Update in Supabase
+      const { error } = await supabase
+        .from('applications')
+        .update({ 
+          status: newStatus,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', applicationId);
+
+      if (error) {
+        throw error;
+      }
 
       toast.success(`Application ${newStatus} successfully`);
       await fetchAdminData(); // Refresh data
@@ -293,8 +285,15 @@ export default function AdminPanel() {
     if (!confirm('Are you sure you want to delete this application?')) return;
 
     try {
-      // Remove from mock applications
-      setApplications(prev => prev.filter(app => app.id !== applicationId));
+      // Delete from Supabase
+      const { error } = await supabase
+        .from('applications')
+        .delete()
+        .eq('id', applicationId);
+
+      if (error) {
+        throw error;
+      }
 
       toast.success('Application deleted successfully');
       await fetchAdminData(); // Refresh data

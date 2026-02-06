@@ -94,22 +94,25 @@
 ## 🛠️ Technology Stack
 
 ### Frontend Technologies
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **React** | 18.x | UI framework |
-| **TypeScript** | 5.x | Type safety |
-| **Vite** | 5.x | Build tool |
-| **Tailwind CSS** | 3.x | Styling framework |
-| **shadcn/ui** | Latest | Component library |
-| **React Router** | 6.x | Navigation |
+| Technology | Version | Purpose | Status |
+|------------|---------|---------|--------|
+| **React** | 18.3.1 | UI framework | ✅ Latest |
+| **TypeScript** | 5.9.3 | Type safety | ✅ Latest |
+| **Vite** | 5.4.21 | Build tool | ✅ Latest |
+| **Tailwind CSS** | 3.4.19 | Styling framework | ✅ Latest |
+| **shadcn/ui** | Latest | Component library | ✅ Latest |
+| **React Router** | 6.30.3 | Navigation | ✅ Latest |
+| **TanStack Query** | 5.90.20 | Data fetching | ✅ Latest |
+| **Lucide React** | 0.462.0 | Icons | ✅ Latest |
 
 ### Backend & Services
-| Service | Purpose | Configuration |
-|---------|---------|---------------|
-| **Supabase** | Database, Auth, Real-time | PostgreSQL backend |
-| **Supabase Auth** | User authentication | Email/password |
-| **Supabase RLS** | Row Level Security | Data protection |
-| **Session Storage** | Admin authentication | Secure admin access |
+| Service | Version | Purpose | Configuration |
+|---------|---------|---------|---------------|
+| **Supabase** | 2.95.3 | Database, Auth, Real-time | PostgreSQL backend |
+| **Supabase Auth** | Latest | User authentication | Email/password |
+| **Supabase RLS** | Latest | Row Level Security | Data protection |
+| **Session Storage** | Native | Admin authentication | Secure admin access |
+| **data.gov.in API** | Latest | Government data | Real-time cache |
 
 ### AI & Voice Features
 | Feature | Technology | Capability |
@@ -191,6 +194,13 @@ npm run preview
 3. Enable HTTPS for production deployments
 4. Regularly rotate admin credentials
 5. Monitor admin access logs
+
+### 7. Essential Mode
+The platform includes an **Essential Mode** for government offices and users who prefer minimal, professional interfaces:
+- **Toggle**: Click "Essential Mode" button in header
+- **Features**: White background, borders instead of shadows, system fonts, no animations
+- **Purpose**: Government-grade professional UI, not a degraded fallback
+- **Accessibility**: Fully accessible with keyboard and screen reader support
 
 ---
 
