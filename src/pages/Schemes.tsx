@@ -77,18 +77,29 @@ export default function Schemes() {
   };
 
   // Get scheme benefits in current language
-  const getBenefits = (scheme: any): string[] => {
-    return lang === "hi" ? scheme.benefits_hi : scheme.benefits_en;
+  const getBenefits = (scheme: Scheme): string[] => {
+    const benefits = lang === "hi" && scheme.benefitsHi ? scheme.benefitsHi :
+                    lang === "mr" && scheme.benefitsMr ? scheme.benefitsMr :
+                    scheme.benefits;
+    
+    if (Array.isArray(benefits)) {
+      return benefits;
+    }
+    return benefits ? [benefits] : [];
   };
 
   // Get scheme name in current language
-  const getSchemeName = (scheme: any): string => {
-    return lang === "hi" ? scheme.name_hi : scheme.name_en;
+  const getSchemeName = (scheme: Scheme): string => {
+    return lang === "hi" && scheme.nameHi ? scheme.nameHi :
+           lang === "mr" && scheme.nameMr ? scheme.nameMr :
+           scheme.name;
   };
 
   // Get scheme description in current language
-  const getSchemeDescription = (scheme: any): string => {
-    return lang === "hi" ? scheme.description_hi : scheme.description_en;
+  const getSchemeDescription = (scheme: Scheme): string => {
+    return lang === "hi" && scheme.descriptionHi ? scheme.descriptionHi :
+           lang === "mr" && scheme.descriptionMr ? scheme.descriptionMr :
+           scheme.description;
   };
 
   // Clear all filters
@@ -125,20 +136,20 @@ export default function Schemes() {
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 max-w-4xl mx-auto">
             <div className="bg-blue-50 rounded-lg p-4">
-              <div className="text-2xl font-bold text-blue-700">{schemes.length}+</div>
-              <div className="text-sm text-blue-600">{lang === "hi" ? "योजनाएं" : "Schemes"}</div>
+              <div className="text-2xl font-bold text-blue-700">{schemes.length}</div>
+              <div className="text-sm text-blue-600">{lang === "hi" ? "योजनाएं" : lang === "mr" ? "योजना" : "Schemes"}</div>
             </div>
             <div className="bg-green-50 rounded-lg p-4">
               <div className="text-2xl font-bold text-green-700">{indianStates.length}</div>
-              <div className="text-sm text-green-600">{lang === "hi" ? "राज्य/केंद्र शासित प्रदेश" : "States/UTs"}</div>
+              <div className="text-sm text-green-600">{lang === "hi" ? "राज्य/केंद्र शासित प्रदेश" : lang === "mr" ? "राज्य/केंद्र शासित प्रदेश" : "States/UTs"}</div>
             </div>
             <div className="bg-orange-50 rounded-lg p-4">
               <div className="text-2xl font-bold text-orange-700">24x7</div>
-              <div className="text-sm text-orange-600">{lang === "hi" ? "सहायता" : "Support"}</div>
+              <div className="text-sm text-orange-600">{lang === "hi" ? "सहायता" : lang === "mr" ? "सहाय्य" : "Support"}</div>
             </div>
             <div className="bg-purple-50 rounded-lg p-4">
               <div className="text-2xl font-bold text-purple-700">100%</div>
-              <div className="text-sm text-purple-600">{lang === "hi" ? "मुफ्त" : "Free"}</div>
+              <div className="text-sm text-purple-600">{lang === "hi" ? "मुफ्त" : lang === "mr" ? "मोफत" : "Free"}</div>
             </div>
           </div>
         </div>
@@ -317,17 +328,12 @@ export default function Schemes() {
                       <span className="mr-1">{getCategoryIcon(scheme.category)}</span>
                       {scheme.category}
                     </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      {scheme.schemeType}
-                    </Badge>
                   </div>
                 </div>
-                {scheme.ministry && (
-                  <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
-                    <Building2 className="h-3 w-3" />
-                    {scheme.ministry}
-                  </p>
-                )}
+                <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                  <Building2 className="h-3 w-3" />
+                  {scheme.state}
+                </p>
               </CardHeader>
               
               <CardContent className="space-y-4">
@@ -360,28 +366,41 @@ export default function Schemes() {
                 )}
 
                 {/* Eligibility Highlights */}
-                {scheme.eligibility && (
+                {((Array.isArray(scheme.eligibility) && scheme.eligibility.length > 0) || 
+                  (typeof scheme.eligibility === 'object' && scheme.eligibility)) && (
                   <div className="bg-blue-50 rounded-lg p-3">
                     <p className="text-xs font-semibold text-blue-700 mb-1">
                       {lang === "hi" ? "पात्रता:" : "Eligibility:"}
                     </p>
                     <div className="text-xs text-blue-600 space-y-1">
-                      {scheme.eligibility.residence && (
-                        <div className="flex items-center gap-1">
-                          <MapPin className="h-3 w-3" />
-                          <span>{scheme.eligibility.residence}</span>
-                        </div>
+                      {Array.isArray(scheme.eligibility) ? (
+                        // Handle array format
+                        scheme.eligibility.slice(0, 2).map((criteria, idx) => (
+                          <div key={idx} className="flex items-start gap-1">
+                            <Users className="h-3 w-3 mt-0.5 shrink-0" />
+                            <span>{lang === "hi" ? (scheme.eligibilityHi?.[idx] || criteria) : lang === "mr" ? (scheme.eligibilityMr?.[idx] || criteria) : criteria}</span>
+                          </div>
+                        ))
+                      ) : (
+                        // Handle object format
+                        <>
+                          {scheme.eligibility.age && (
+                            <div className="flex items-start gap-1">
+                              <Users className="h-3 w-3 mt-0.5 shrink-0" />
+                              <span>{lang === "hi" ? "आयु: " : "Age: "}{scheme.eligibility.age}</span>
+                            </div>
+                          )}
+                          {scheme.eligibility.income && (
+                            <div className="flex items-start gap-1">
+                              <Users className="h-3 w-3 mt-0.5 shrink-0" />
+                              <span>{lang === "hi" ? "आय: " : "Income: "}{scheme.eligibility.income}</span>
+                            </div>
+                          )}
+                        </>
                       )}
-                      {scheme.eligibility.age && (
-                        <div className="flex items-center gap-1">
-                          <Users className="h-3 w-3" />
-                          <span>{lang === "hi" ? "आयु: " : "Age: "}{scheme.eligibility.age}</span>
-                        </div>
-                      )}
-                      {scheme.eligibility.income && (
-                        <div className="flex items-center gap-1">
-                          <Banknote className="h-3 w-3" />
-                          <span>{lang === "hi" ? "आय: " : "Income: "}{scheme.eligibility.income}</span>
+                      {Array.isArray(scheme.eligibility) && scheme.eligibility.length > 2 && (
+                        <div className="text-blue-600 text-xs font-medium">
+                          +{scheme.eligibility.length - 2} {lang === "hi" ? "और शर्तें" : "more criteria"}
                         </div>
                       )}
                     </div>
@@ -390,22 +409,12 @@ export default function Schemes() {
 
                 {/* Target Audience & States */}
                 <div className="flex flex-wrap gap-1">
-                  {scheme.targetAudience?.map((audience) => (
-                    <Badge key={audience} variant="outline" className="text-xs">
-                      {audience === "student" ? "🎓" : audience === "citizen" ? "🧑‍💼" : "📋"} {audience}
-                    </Badge>
-                  ))}
-                  {scheme.states?.includes("All India") ? (
-                    <Badge variant="secondary" className="text-xs">
-                      🇮🇳 All India
-                    </Badge>
-                  ) : (
-                    scheme.states?.slice(0, 2).map(state => (
-                      <Badge key={state} variant="outline" className="text-xs">
-                        📍 {state}
-                      </Badge>
-                    ))
-                  )}
+                  <Badge variant="outline" className="text-xs">
+                    {scheme.category === "Student" ? "🎓" : "🧑‍💼"} {scheme.category}
+                  </Badge>
+                  <Badge variant="secondary" className="text-xs">
+                    {scheme.state === "All India" ? "🇮🇳 All India" : `📍 ${scheme.state}`}
+                  </Badge>
                 </div>
 
                 {/* Action Buttons */}
@@ -522,7 +531,7 @@ export default function Schemes() {
                   </div>
                   <div className="flex-1">
                     <p className="font-semibold text-sm text-gray-900">
-                      {lang === "hi" ? helpline.name_hi : helpline.name_en}
+                      {lang === "hi" ? helpline.nameHi : lang === "mr" ? helpline.nameMr : helpline.name}
                     </p>
                     <a href={`tel:${helpline.number}`} className="text-red-600 font-bold hover:text-red-700">
                       {helpline.number}

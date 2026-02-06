@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { cleanupAuthState } from "@/lib/auth";
 import { useProfile } from "@/hooks/useProfile";
@@ -39,18 +39,52 @@ export default function Auth() {
 
   // Get the intended destination from location state
   const from = location.state?.from?.pathname || "/";
+  
+  // Use ref to persist hasNavigated across renders
+  const hasNavigatedRef = useRef(false);
+  const hasShownToastRef = useRef(false);
 
   // Redirect if already authenticated
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
+    let mounted = true;
+    
+    // Check initial session without showing welcome message
+    const checkInitialSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user && mounted && !hasNavigatedRef.current) {
+          hasNavigatedRef.current = true;
+          navigate(from, { replace: true });
+        }
+      } catch (error) {
+        console.error('Error checking initial session:', error);
+      }
+    };
+
+    checkInitialSession();
+    
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('Auth state change:', event, session?.user?.email);
+      
+      if (!mounted) return;
+      
+      // Only handle actual sign-in events, not initial loads or token refresh
+      if (session?.user && !hasNavigatedRef.current && event === 'SIGNED_IN') {
+        hasNavigatedRef.current = true;
+        // Only show toast once
+        if (!hasShownToastRef.current) {
+          hasShownToastRef.current = true;
+          toast.success("Welcome back!");
+        }
         navigate(from, { replace: true });
       }
     });
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user) navigate(from, { replace: true });
-    });
-    return () => subscription.unsubscribe();
+    
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, [navigate, from]);
 
   const canonicalHref = useMemo(() => (typeof window !== "undefined" ? `${window.location.origin}/auth` : "/auth"), []);
@@ -70,25 +104,17 @@ export default function Auth() {
         sessionStorage.setItem("admin_authenticated", "true");
         sessionStorage.setItem("admin_username", adminUsername);
         
-        // Trigger storage event for other components
-        window.dispatchEvent(new Event('storage'));
+        // Trigger custom event for same-window components
+        window.dispatchEvent(new CustomEvent('adminStatusChange'));
         
-        toast({ title: "Admin login successful!", description: "Welcome to Admin Panel" });
+        toast.success("Admin login successful! Welcome to Admin Panel");
         navigate('/admin', { replace: true });
       } else {
-        toast({ 
-          title: "Invalid credentials", 
-          description: "Please check your admin credentials and try again.", 
-          variant: "destructive" as any 
-        });
+        toast.error("Invalid credentials. Please check your admin credentials and try again.");
       }
     } catch (err: any) {
       console.error('Admin login error:', err);
-      toast({ 
-        title: "Login failed", 
-        description: "An unexpected error occurred. Please try again.", 
-        variant: "destructive" as any 
-      });
+      toast.error("Login failed. An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -105,22 +131,14 @@ export default function Auth() {
       const result = await signIn(email, password);
       
       if (result.success) {
-        toast({ title: "Logged in", description: "Welcome back!" });
-        navigate(from, { replace: true });
+        // Don't show toast here - it will be shown by the auth state change listener
+        // Just navigate, the welcome message will be handled by the auth state listener
       } else {
-        toast({ 
-          title: "Login failed", 
-          description: result.error || "Please check your credentials and try again.", 
-          variant: "destructive" as any 
-        });
+        toast.error(result.error || "Please check your credentials and try again.");
       }
     } catch (err: any) {
       console.error('Login error:', err);
-      toast({ 
-        title: "Login failed", 
-        description: err?.message || "An unexpected error occurred. Please try again.", 
-        variant: "destructive" as any 
-      });
+      toast.error(err?.message || "An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -170,16 +188,10 @@ export default function Auth() {
         }
         
         if (!data.user.email_confirmed_at) {
-          toast({ 
-            title: "Check your email", 
-            description: "We sent you a confirmation link to complete your registration. If you don't receive it, check your spam folder or contact support." 
-          });
+          toast.success("Check your email - We sent you a confirmation link to complete your registration.");
         } else {
           // User is already confirmed (email confirmation disabled)
-          toast({ 
-            title: "Account created!", 
-            description: "Welcome to Government & Student Help Platform!" 
-          });
+          toast.success("Account created! Welcome to Government & Student Help Platform!");
           // Redirect immediately since no email confirmation is needed
           setTimeout(() => {
             navigate(from, { replace: true });
@@ -187,7 +199,7 @@ export default function Auth() {
         }
       }
     } catch (err: any) {
-      toast({ title: "Signup failed", description: err?.message || "Please try again.", variant: "destructive" as any });
+      toast.error(err?.message || "Signup failed. Please try again.");
     } finally {
       setLoading(false);
     }

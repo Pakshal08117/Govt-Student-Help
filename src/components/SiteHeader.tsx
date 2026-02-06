@@ -42,15 +42,23 @@ export default function SiteHeader() {
 
     checkAdminStatus();
     
-    // Check admin status periodically
-    const interval = setInterval(checkAdminStatus, 1000);
+    // Listen for storage changes (more efficient than polling)
+    const handleStorageChange = () => {
+      checkAdminStatus();
+    };
     
-    // Listen for storage changes
-    window.addEventListener('storage', checkAdminStatus);
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Custom event for same-window storage changes
+    const handleCustomStorageChange = () => {
+      checkAdminStatus();
+    };
+    
+    window.addEventListener('adminStatusChange', handleCustomStorageChange);
     
     return () => {
-      clearInterval(interval);
-      window.removeEventListener('storage', checkAdminStatus);
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('adminStatusChange', handleCustomStorageChange);
     };
   }, []);
 

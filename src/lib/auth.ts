@@ -1,20 +1,24 @@
-export const cleanupAuthState = () => {
-  try {
-    // Remove known Supabase auth keys in localStorage
-    Object.keys(localStorage).forEach((key) => {
-      if (key.startsWith("supabase.auth.") || key.includes("sb-")) {
-        try { localStorage.removeItem(key); } catch {}
-      }
-    });
-    // Remove from sessionStorage if used
-    Object.keys(sessionStorage || {}).forEach((key) => {
-      if (key.startsWith("supabase.auth.") || key.includes("sb-")) {
-        try { sessionStorage.removeItem(key); } catch {}
-      }
-    });
-    // Legacy key cleanup
-    try { localStorage.removeItem("supabase.auth.token"); } catch {}
-  } catch {
-    // ignore
-  }
-};
+// Authentication utility functions
+
+export function cleanupAuthState() {
+  // Clear any cached auth data
+  localStorage.removeItem('supabase.auth.token');
+  sessionStorage.removeItem('supabase.auth.token');
+  
+  // Clear admin session
+  sessionStorage.removeItem('admin_authenticated');
+  sessionStorage.removeItem('admin_username');
+  
+  // Trigger admin status change event
+  window.dispatchEvent(new CustomEvent('adminStatusChange'));
+}
+
+export function isAdminAuthenticated(): boolean {
+  const isAuthenticated = sessionStorage.getItem("admin_authenticated") === "true";
+  const username = sessionStorage.getItem("admin_username");
+  return isAuthenticated && username === "India";
+}
+
+export function getAdminUsername(): string | null {
+  return sessionStorage.getItem("admin_username");
+}

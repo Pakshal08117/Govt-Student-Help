@@ -191,10 +191,14 @@ export default function Apply() {
 
   const currentItem = scheme || service;
   const itemName = scheme ? 
-    (lang === 'hi' ? scheme.name_hi : scheme.name_en) : 
-    (service ? service.name_en : "");
+    (lang === 'hi' && scheme.nameHi ? scheme.nameHi : 
+     lang === 'mr' && scheme.nameMr ? scheme.nameMr : 
+     scheme.name) : 
+    (service ? (lang === 'hi' && service.nameHi ? service.nameHi : 
+                lang === 'mr' && service.nameMr ? service.nameMr : 
+                service.name) : "");
   const isHospitalService = (service?.category === "Health" || scheme?.category === "Health") || 
-                          (service?.name_en.toLowerCase().includes("hospital") || false);
+                          (service?.name?.toLowerCase().includes("hospital") || false);
 
   return (
     <>

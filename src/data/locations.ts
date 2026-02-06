@@ -2,13 +2,13 @@
 
 export type Category = "Health" | "Education" | "Agriculture" | "Revenue" | "Public Works" | "Other";
 
-export const categories: { id: Category; en: string; hi: string }[] = [
-  { id: "Health", en: "Health & Welfare", hi: "स्वास्थ्य और कल्याण" },
-  { id: "Education", en: "Education & Scholarships", hi: "शिक्षा और छात्रवृत्ति" },
-  { id: "Agriculture", en: "Agriculture & Farmers", hi: "कृषि और किसान" },
-  { id: "Revenue", en: "Employment & Business", hi: "रोजगार और व्यापार" },
-  { id: "Public Works", en: "Housing & Infrastructure", hi: "आवास और बुनियादी ढांचा" },
-  { id: "Other", en: "Other Schemes", hi: "अन्य योजनाएं" },
+export const categories: { id: Category; en: string; hi: string; mr: string }[] = [
+  { id: "Health", en: "Health & Welfare", hi: "स्वास्थ्य और कल्याण", mr: "आरोग्य आणि कल्याण" },
+  { id: "Education", en: "Education & Scholarships", hi: "शिक्षा और छात्रवृत्ति", mr: "शिक्षण आणि शिष्यवृत्ती" },
+  { id: "Agriculture", en: "Agriculture & Farmers", hi: "कृषि और किसान", mr: "कृषी आणि शेतकरी" },
+  { id: "Revenue", en: "Revenue & Certificates", hi: "राजस्व और प्रमाण पत्र", mr: "महसूल आणि प्रमाणपत्रे" },
+  { id: "Public Works", en: "Public Works & Infrastructure", hi: "लोक निर्माण और बुनियादी ढांचा", mr: "सार्वजनिक बांधकाम आणि पायाभूत सुविधा" },
+  { id: "Other", en: "Other Services", hi: "अन्य सेवाएं", mr: "इतर सेवा" },
 ];
 
 // All Indian States and Union Territories

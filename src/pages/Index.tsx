@@ -19,16 +19,14 @@ import {
 } from "lucide-react";
 
 export default function Index() {
-  const { lang } = useLang();
+  const { lang, t } = useLang();
   const navigate = useNavigate();
 
   const userTypes = [
     {
       id: 'student',
-      title: lang === 'en' ? 'Students' : lang === 'mr' ? 'विद्यार्थी' : 'छात्र',
-      description: lang === 'en' ? 'Scholarships, education schemes, and student services' : 
-                   lang === 'mr' ? 'शिष्यवृत्ती, शिक्षण योजना आणि विद्यार्थी सेवा' : 
-                   'छात्रवृत्ति, शिक्षा योजनाएं और छात्र सेवाएं',
+      title: t('students'),
+      description: t('studentDesc'),
       icon: GraduationCap,
       color: 'from-blue-500 to-blue-600',
       bgColor: 'bg-blue-50',
@@ -38,10 +36,8 @@ export default function Index() {
     },
     {
       id: 'citizen',
-      title: lang === 'en' ? 'Citizens' : lang === 'mr' ? 'नागरिक' : 'नागरिक',
-      description: lang === 'en' ? 'Government services, welfare schemes, and citizen benefits' : 
-                   lang === 'mr' ? 'सरकारी सेवा, कल्याण योजना आणि नागरिक लाभ' : 
-                   'सरकारी सेवाएं, कल्याण योजनाएं और नागरिक लाभ',
+      title: t('citizens'),
+      description: t('citizenDesc'),
       icon: Users,
       color: 'from-green-500 to-green-600',
       bgColor: 'bg-green-50',
@@ -51,10 +47,8 @@ export default function Index() {
     },
     {
       id: 'scheme_applicant',
-      title: lang === 'en' ? 'Scheme Seekers' : lang === 'mr' ? 'योजना शोधक' : 'योजना आवेदक',
-      description: lang === 'en' ? 'Apply for specific government schemes and programs' : 
-                   lang === 'mr' ? 'विशिष्ट सरकारी योजना आणि कार्यक्रमांसाठी अर्ज करा' : 
-                   'विशिष्ट सरकारी योजनाओं और कार्यक्रमों के लिए आवेदन करें',
+      title: t('schemeSeekers'),
+      description: t('schemeSeekerDesc'),
       icon: FileText,
       color: 'from-orange-500 to-orange-600',
       bgColor: 'bg-orange-50',
@@ -67,27 +61,27 @@ export default function Index() {
   const quickStats = [
     { 
       number: '40+', 
-      label: lang === 'en' ? 'Government Schemes' : lang === 'mr' ? 'सरकारी योजना' : 'सरकारी योजनाएं',
+      label: t('governmentSchemesShort'),
       icon: FileText 
     },
     { 
       number: '28+', 
-      label: lang === 'en' ? 'States & UTs' : lang === 'mr' ? 'राज्य आणि केंद्रशासित प्रदेश' : 'राज्य और केंद्र शासित प्रदेश',
+      label: t('statesAndUTs'),
       icon: MapPin 
     },
     { 
       number: '24x7', 
-      label: lang === 'en' ? 'Support Available' : lang === 'mr' ? 'सहाय्य उपलब्ध' : 'सहायता उपलब्ध',
+      label: t('supportAvailable'),
       icon: Clock 
     },
     { 
       number: '100%', 
-      label: lang === 'en' ? 'Free Services' : lang === 'mr' ? 'मोफत सेवा' : 'मुफ्त सेवाएं',
+      label: t('freeServices'),
       icon: Shield 
     }
   ];
 
-  const featuredSchemes = [
+  const getFeaturedSchemes = () => [
     {
       name: 'PM-KISAN',
       description: lang === 'en' ? 'Rs 6,000/year for farmers' : lang === 'mr' ? 'शेतकऱ्यांसाठी ₹6,000/वर्ष' : 'किसानों के लिए ₹6,000/वर्ष',
@@ -113,6 +107,8 @@ export default function Index() {
       icon: '🏠'
     }
   ];
+  
+  const featuredSchemes = getFeaturedSchemes();
 
   const handleUserTypeSelect = (userType: string) => {
     navigate(`/schemes?userType=${userType}`);
@@ -134,30 +130,22 @@ export default function Index() {
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-100 to-green-100 px-4 py-2 rounded-full mb-6">
               <span className="text-2xl">🇮🇳</span>
               <span className="text-sm font-semibold text-gray-700">
-                {lang === 'en' ? 'Government of India Initiative' : 
-                 lang === 'mr' ? 'भारत सरकारचा उपक्रम' : 
-                 'भारत सरकार की पहल'}
+                {t('govInitiative')}
               </span>
             </div>
 
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               <span className="bg-gradient-to-r from-blue-700 via-green-600 to-orange-500 bg-clip-text text-transparent">
-                {lang === 'en' ? 'Government & Student' : 
-                 lang === 'mr' ? 'सरकारी व विद्यार्थी' : 
-                 'सरकारी व छात्र'}
+                {t('govAndStudent')}
               </span>
               <br />
               <span className="text-gray-800">
-                {lang === 'en' ? 'Help Platform' : 
-                 lang === 'mr' ? 'मदत प्लॅटफॉर्म' : 
-                 'सहायता प्लेटफॉर्म'}
+                {t('helpPlatform')}
               </span>
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-              {lang === 'en' ? 'One-stop assistance for students and citizens across India' : 
-               lang === 'mr' ? 'भारतभरातील विद्यार्थी आणि नागरिकांसाठी एकत्रित सहाय्य' : 
-               'भारत भर के छात्रों और नागरिकों के लिए एकीकृत सहायता'}
+              {t('oneStopAssistance')}
             </p>
 
             {/* Quick Stats */}
@@ -183,9 +171,7 @@ export default function Index() {
               className="bg-gradient-to-r from-blue-700 to-green-600 hover:from-blue-800 hover:to-green-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
             >
               <span>
-                {lang === 'en' ? 'Explore All Schemes' : 
-                 lang === 'mr' ? 'सर्व योजना पहा' : 
-                 'सभी योजनाएं देखें'}
+                {t('exploreAllSchemes')}
               </span>
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
@@ -198,14 +184,10 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {lang === 'en' ? 'Who Are You?' : 
-               lang === 'mr' ? 'तुम्ही कोण आहात?' : 
-               'आप कौन हैं?'}
+              {t('whoAreYou')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              {lang === 'en' ? 'Choose your category to find relevant government schemes and services' : 
-               lang === 'mr' ? 'संबंधित सरकारी योजना आणि सेवा शोधण्यासाठी तुमची श्रेणी निवडा' : 
-               'संबंधित सरकारी योजनाओं और सेवाओं को खोजने के लिए अपनी श्रेणी चुनें'}
+              {t('chooseCategory')}
             </p>
           </div>
 
@@ -244,9 +226,7 @@ export default function Index() {
                       className={`w-full bg-gradient-to-r ${type.color} hover:shadow-lg transition-all duration-200`}
                     >
                       <span className="text-white font-semibold">
-                        {lang === 'en' ? 'View Schemes' : 
-                         lang === 'mr' ? 'योजना पहा' : 
-                         'योजनाएं देखें'}
+                        {t('viewSchemes')}
                       </span>
                       <ArrowRight className="w-4 h-4 ml-2 text-white" />
                     </Button>
@@ -263,14 +243,10 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {lang === 'en' ? 'Popular Government Schemes' : 
-               lang === 'mr' ? 'लोकप्रिय सरकारी योजना' : 
-               'लोकप्रिय सरकारी योजनाएं'}
+              {t('popularGovSchemes')}
             </h2>
             <p className="text-lg text-gray-600">
-              {lang === 'en' ? 'Most accessed schemes by citizens across India' : 
-               lang === 'mr' ? 'भारतभरातील नागरिकांद्वारे सर्वाधिक वापरल्या जाणाऱ्या योजना' : 
-               'भारत भर के नागरिकों द्वारा सबसे अधिक उपयोग की जाने वाली योजनाएं'}
+              {t('mostAccessedSchemes')}
             </p>
           </div>
 
@@ -298,9 +274,7 @@ export default function Index() {
               size="lg"
               className="border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white"
             >
-              {lang === 'en' ? 'View All Schemes' : 
-               lang === 'mr' ? 'सर्व योजना पहा' : 
-               'सभी योजनाएं देखें'}
+              {t('viewAllSchemes')}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
@@ -313,34 +287,26 @@ export default function Index() {
           <div className="bg-gradient-to-r from-blue-700 via-green-600 to-orange-500 rounded-2xl p-8 md:p-12 text-white text-center">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                {lang === 'en' ? 'Trusted by Millions' : 
-                 lang === 'mr' ? 'लाखो लोकांचा विश्वास' : 
-                 'लाखों लोगों का भरोसा'}
+                {t('trustedByMillions')}
               </h2>
               
               <div className="grid md:grid-cols-3 gap-8 mb-8">
                 <div className="text-center">
                   <div className="text-4xl font-bold mb-2">1M+</div>
                   <div className="text-lg opacity-90">
-                    {lang === 'en' ? 'Citizens Helped' : 
-                     lang === 'mr' ? 'नागरिकांना मदत' : 
-                     'नागरिकों की मदद'}
+                    {t('citizensHelped')}
                   </div>
                 </div>
                 <div className="text-center">
                   <div className="text-4xl font-bold mb-2">50K+</div>
                   <div className="text-lg opacity-90">
-                    {lang === 'en' ? 'Applications Processed' : 
-                     lang === 'mr' ? 'अर्ज प्रक्रिया' : 
-                     'आवेदन प्रसंस्कृत'}
+                    {t('applicationsProcessed')}
                   </div>
                 </div>
                 <div className="text-center">
                   <div className="text-4xl font-bold mb-2">24x7</div>
                   <div className="text-lg opacity-90">
-                    {lang === 'en' ? 'Support Available' : 
-                     lang === 'mr' ? 'सहाय्य उपलब्ध' : 
-                     'सहायता उपलब्ध'}
+                    {t('supportAvailable')}
                   </div>
                 </div>
               </div>
@@ -349,17 +315,13 @@ export default function Index() {
                 <div className="flex items-center space-x-2">
                   <Shield className="w-4 h-4" />
                   <span>
-                    {lang === 'en' ? 'Government Verified' : 
-                     lang === 'mr' ? 'सरकार सत्यापित' : 
-                     'सरकार सत्यापित'}
+                    {t('governmentVerified')}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Star className="w-4 h-4" />
                   <span>
-                    {lang === 'en' ? '100% Free Service' : 
-                     lang === 'mr' ? '100% मोफत सेवा' : 
-                     '100% मुफ्त सेवा'}
+                    {t('freeService')}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">

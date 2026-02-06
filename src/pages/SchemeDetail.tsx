@@ -96,15 +96,30 @@ export default function SchemeDetail() {
   };
 
   const getSchemeName = (scheme: any): string => {
-    return lang === 'hi' ? scheme?.name_hi : scheme?.name_en;
+    return scheme?.name_hi && lang === 'hi' ? scheme.name_hi : 
+           scheme?.nameHi && lang === 'hi' ? scheme.nameHi :
+           scheme?.nameMr && lang === 'mr' ? scheme.nameMr :
+           scheme?.name || 'Scheme Name';
   };
 
   const getSchemeDescription = (scheme: any): string => {
-    return lang === 'hi' ? scheme?.description_hi : scheme?.description_en;
+    return scheme?.description_hi && lang === 'hi' ? scheme.description_hi :
+           scheme?.descriptionHi && lang === 'hi' ? scheme.descriptionHi :
+           scheme?.descriptionMr && lang === 'mr' ? scheme.descriptionMr :
+           scheme?.description || 'Scheme Description';
   };
 
   const getBenefits = (scheme: any): string[] => {
-    return lang === 'hi' ? scheme?.benefits_hi : scheme?.benefits_en;
+    const benefits = scheme?.benefits_hi && lang === 'hi' ? scheme.benefits_hi :
+                    scheme?.benefitsHi && lang === 'hi' ? scheme.benefitsHi :
+                    scheme?.benefitsMr && lang === 'mr' ? scheme.benefitsMr :
+                    scheme?.benefits_en ? scheme.benefits_en :
+                    scheme?.benefits;
+    
+    if (Array.isArray(benefits)) {
+      return benefits;
+    }
+    return benefits ? [benefits] : [];
   };
 
   if (loading) {
@@ -191,7 +206,7 @@ export default function SchemeDetail() {
                       <Badge variant="outline" className="text-sm">
                         {scheme.schemeType}
                       </Badge>
-                      {scheme.states.includes("All India") && (
+                      {scheme?.state === "All India" && (
                         <Badge className="bg-green-100 text-green-700 text-sm">
                           🇮🇳 All India
                         </Badge>
@@ -258,7 +273,7 @@ export default function SchemeDetail() {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <div className="space-y-4">
-                      {scheme.eligibility.age && (
+                      {(typeof scheme?.eligibility === 'object' && scheme.eligibility?.age) && (
                         <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
                           <Users className="w-5 h-5 text-blue-600" />
                           <div>
@@ -270,7 +285,7 @@ export default function SchemeDetail() {
                         </div>
                       )}
                       
-                      {scheme.eligibility.income && (
+                      {(typeof scheme?.eligibility === 'object' && scheme.eligibility?.income) && (
                         <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
                           <Banknote className="w-5 h-5 text-blue-600" />
                           <div>
@@ -282,17 +297,19 @@ export default function SchemeDetail() {
                         </div>
                       )}
                       
-                      <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
-                        <MapPin className="w-5 h-5 text-blue-600" />
-                        <div>
-                          <span className="font-medium">
-                            {lang === 'hi' ? 'निवास: ' : lang === 'mr' ? 'निवास: ' : 'Residence: '}
-                          </span>
-                          <span>{scheme.eligibility.residence}</span>
+                      {(typeof scheme?.eligibility === 'object' && scheme.eligibility?.residence) && (
+                        <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                          <MapPin className="w-5 h-5 text-blue-600" />
+                          <div>
+                            <span className="font-medium">
+                              {lang === 'hi' ? 'निवास: ' : lang === 'mr' ? 'निवास: ' : 'Residence: '}
+                            </span>
+                            <span>{scheme.eligibility.residence}</span>
+                          </div>
                         </div>
-                      </div>
+                      )}
                       
-                      {scheme.eligibility.category && (
+                      {(typeof scheme?.eligibility === 'object' && scheme.eligibility?.category) && (
                         <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
                           <Users className="w-5 h-5 text-blue-600" />
                           <div>
@@ -303,6 +320,18 @@ export default function SchemeDetail() {
                           </div>
                         </div>
                       )}
+
+                      {/* Handle array format eligibility for backward compatibility */}
+                      {Array.isArray(scheme?.eligibility) && scheme.eligibility.map((criteria: string, index: number) => (
+                        <div key={index} className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+                          <Users className="w-5 h-5 text-blue-600 mt-0.5" />
+                          <span className="text-gray-700">
+                            {lang === 'hi' && scheme.eligibilityHi?.[index] ? scheme.eligibilityHi[index] :
+                             lang === 'mr' && scheme.eligibilityMr?.[index] ? scheme.eligibilityMr[index] :
+                             criteria}
+                          </span>
+                        </div>
+                      ))}
                     </div>
                   </AccordionContent>
                 </Card>
@@ -323,10 +352,25 @@ export default function SchemeDetail() {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <div className="grid gap-2">
-                      {scheme.eligibility.documents.map((doc: string, index: number) => (
+                      {/* Handle documents from eligibility object */}
+                      {(typeof scheme?.eligibility === 'object' && scheme.eligibility?.documents) && 
+                        scheme.eligibility.documents.map((doc: string, index: number) => (
+                          <div key={index} className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
+                            <FileText className="w-4 h-4 text-gray-500" />
+                            <span>{doc}</span>
+                          </div>
+                        ))
+                      }
+                      
+                      {/* Handle documents from separate documents array */}
+                      {scheme?.documents && scheme.documents.map((doc: string, index: number) => (
                         <div key={index} className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
                           <FileText className="w-4 h-4 text-gray-500" />
-                          <span>{doc}</span>
+                          <span>
+                            {lang === 'hi' && scheme.documentsHi?.[index] ? scheme.documentsHi[index] :
+                             lang === 'mr' && scheme.documentsMr?.[index] ? scheme.documentsMr[index] :
+                             doc}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -356,12 +400,26 @@ export default function SchemeDetail() {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <div className="space-y-3">
-                      {scheme.howToApply.map((step: string, index: number) => (
+                      {scheme?.howToApply && scheme.howToApply.map((step: string, index: number) => (
                         <div key={index} className="flex items-start gap-3">
                           <div className="w-6 h-6 bg-purple-100 text-purple-700 rounded-full flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-0.5">
                             {index + 1}
                           </div>
                           <span className="text-gray-700">{step}</span>
+                        </div>
+                      ))}
+                      
+                      {/* Fallback to applicationProcess if howToApply is not available */}
+                      {!scheme?.howToApply && scheme?.applicationProcess && scheme.applicationProcess.map((step: string, index: number) => (
+                        <div key={index} className="flex items-start gap-3">
+                          <div className="w-6 h-6 bg-purple-100 text-purple-700 rounded-full flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-0.5">
+                            {index + 1}
+                          </div>
+                          <span className="text-gray-700">
+                            {lang === 'hi' && scheme.applicationProcessHi?.[index] ? scheme.applicationProcessHi[index] :
+                             lang === 'mr' && scheme.applicationProcessMr?.[index] ? scheme.applicationProcessMr[index] :
+                             step}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -432,9 +490,9 @@ export default function SchemeDetail() {
                     {lang === 'hi' ? 'क्षेत्र' : lang === 'mr' ? 'क्षेत्र' : 'Coverage'}
                   </span>
                   <span className="text-sm">
-                    {scheme.states.includes("All India") ? 
+                    {scheme?.state === "All India" ? 
                       (lang === 'hi' ? 'अखिल भारत' : lang === 'mr' ? 'अखिल भारत' : 'All India') : 
-                      `${scheme.states.length} ${lang === 'hi' ? 'राज्य' : lang === 'mr' ? 'राज्ये' : 'states'}`
+                      scheme?.state || 'State specific'
                     }
                   </span>
                 </div>
@@ -444,11 +502,17 @@ export default function SchemeDetail() {
                     {lang === 'hi' ? 'लक्षित समूह' : lang === 'mr' ? 'लक्षित गट' : 'Target Group'}
                   </span>
                   <div className="flex flex-wrap gap-1">
-                    {scheme.targetAudience.map((audience: string) => (
+                    {scheme?.targetAudience && scheme.targetAudience.map((audience: string) => (
                       <Badge key={audience} variant="outline" className="text-xs">
                         {audience}
                       </Badge>
                     ))}
+                    {/* Fallback if no targetAudience */}
+                    {!scheme?.targetAudience && (
+                      <Badge variant="outline" className="text-xs">
+                        {scheme?.category || 'General'}
+                      </Badge>
+                    )}
                   </div>
                 </div>
               </CardContent>

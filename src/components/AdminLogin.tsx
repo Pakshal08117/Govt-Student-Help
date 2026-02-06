@@ -29,8 +29,8 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
       sessionStorage.setItem("admin_username", username);
       toast.success("Admin login successful!");
       
-      // Trigger storage event for other components
-      window.dispatchEvent(new Event('storage'));
+      // Trigger custom event for same-window components
+      window.dispatchEvent(new CustomEvent('adminStatusChange'));
       
       // Call onLogin callback
       onLogin();

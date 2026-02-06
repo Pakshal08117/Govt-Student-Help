@@ -1,484 +1,302 @@
-import type { Category } from "./locations";
+// Government Services Data
 
-export type ServiceItem = {
+export interface Service {
   id: string;
-  category: Category;
-  district: string;
-  taluka: string;
-  name_en: string;
-  name_mr: string;
-  name_hi: string;
-  office_en: string;
-  office_mr: string;
-  office_hi: string;
+  name: string;
+  nameHi: string;
+  nameMr: string;
+  description: string;
+  descriptionHi: string;
+  descriptionMr: string;
+  category: "Health" | "Education" | "Agriculture" | "Revenue" | "Public Works" | "Other";
+  office: string;
+  officeHi: string;
+  officeMr: string;
   address: string;
   phone: string;
   email: string;
-  hours: string;
-};
+  workingHours: string;
+  workingHoursHi: string;
+  workingHoursMr: string;
+  district: string;
+  taluka?: string;
+  documents: string[];
+  documentsHi: string[];
+  documentsMr: string[];
+  fees: string;
+  feesHi: string;
+  feesMr: string;
+  processingTime: string;
+  processingTimeHi: string;
+  processingTimeMr: string;
+  isOnline: boolean;
+  website?: string;
+  tags: string[];
+}
 
-export const services: ServiceItem[] = [
-  // District Collectorate Offices (Revenue - Administrative)
+// Sample services data - Comprehensive list of Government Services
+export const services: Service[] = [
   {
-    id: "COLL001",
+    id: "birth-certificate",
+    name: "Birth Certificate",
+    nameHi: "जन्म प्रमाण पत्र",
+    nameMr: "जन्म दाखला",
+    description: "Official document certifying birth registration",
+    descriptionHi: "जन्म पंजीकरण को प्रमाणित करने वाला आधिकारिक दस्तावेज",
+    descriptionMr: "जन्म नोंदणी प्रमाणित करणारे अधिकृत कागदपत्र",
     category: "Revenue",
-    district: "Ahmednagar",
-    taluka: "Ahmednagar",
-    name_en: "District Collectorate",
-    name_mr: "जिल्हा कलेक्टरेट",
-    name_hi: "जिला कलेक्टरेट",
-    office_en: "Collectorate Ahmednagar",
-    office_mr: "कलेक्टरेट अहमदनगर",
-    office_hi: "कलेक्टरेट अहमदनगर",
-    address: "Collectorate Campus, Ahmednagar - 414001",
-    phone: "0241-2421234",
-    email: "collector.ahmednagar@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
+    office: "Registrar Office",
+    officeHi: "रजिस्ट्रार कार्यालय",
+    officeMr: "रजिस्ट्रार कार्यालय",
+    address: "District Collectorate",
+    phone: "1077",
+    email: "registrar@gov.in",
+    workingHours: "10:00 AM - 5:00 PM (Mon-Fri)",
+    workingHoursHi: "सुबह 10:00 - शाम 5:00 (सोम-शुक्र)",
+    workingHoursMr: "सकाळी 10:00 - संध्याकाळी 5:00 (सोम-शुक्र)",
+    district: "All Districts",
+    documents: [
+      "Hospital discharge summary",
+      "Parents' identity proof",
+      "Address proof",
+      "Marriage certificate of parents"
+    ],
+    documentsHi: [
+      "अस्पताल डिस्चार्ज सारांश",
+      "माता-पिता का पहचान प्रमाण",
+      "पता प्रमाण",
+      "माता-पिता का विवाह प्रमाण पत्र"
+    ],
+    documentsMr: [
+      "हॉस्पिटल डिस्चार्ज सारांश",
+      "पालकांचा ओळख पुरावा",
+      "पत्ता पुरावा",
+      "पालकांचे लग्न प्रमाणपत्र"
+    ],
+    fees: "₹50",
+    feesHi: "₹50",
+    feesMr: "₹50",
+    processingTime: "7-15 days",
+    processingTimeHi: "7-15 दिन",
+    processingTimeMr: "7-15 दिवस",
+    isOnline: true,
+    website: "https://crsorgi.gov.in",
+    tags: ["birth", "certificate", "registration", "revenue"]
   },
   {
-    id: "COLL002",
+    id: "ration-card",
+    name: "Ration Card",
+    nameHi: "राशन कार्ड",
+    nameMr: "रेशन कार्ड",
+    description: "Food security card for subsidized food grains",
+    descriptionHi: "सब्सिडी वाले खाद्यान्न के लिए खाद्य सुरक्षा कार्ड",
+    descriptionMr: "अनुदानित धान्यासाठी अन्न सुरक्षा कार्ड",
     category: "Revenue",
-    district: "Akola",
-    taluka: "Akola",
-    name_en: "District Collectorate",
-    name_mr: "जिल्हा कलेक्टरेट",
-    name_hi: "जिला कलेक्टरेट",
-    office_en: "Collectorate Akola",
-    office_mr: "कलेक्टरेट अकोला",
-    office_hi: "कलेक्टरेट अकोला",
-    address: "Collectorate Campus, Akola - 444001",
-    phone: "0724-2433456",
-    email: "collector.akola@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
+    office: "Food & Civil Supplies Office",
+    officeHi: "खाद्य एवं नागरिक आपूर्ति कार्यालय",
+    officeMr: "अन्न व नागरी पुरवठा कार्यालय",
+    address: "Tehsil Office",
+    phone: "1967",
+    email: "fcs@gov.in",
+    workingHours: "10:00 AM - 5:00 PM (Mon-Fri)",
+    workingHoursHi: "सुबह 10:00 - शाम 5:00 (सोम-शुक्र)",
+    workingHoursMr: "सकाळी 10:00 - संध्याकाळी 5:00 (सोम-शुक्र)",
+    district: "All Districts",
+    documents: [
+      "Aadhaar card of all family members",
+      "Address proof",
+      "Income certificate",
+      "Family photograph"
+    ],
+    documentsHi: [
+      "सभी परिवारजनों का आधार कार्ड",
+      "पता प्रमाण",
+      "आय प्रमाण पत्र",
+      "पारिवारिक फोटो"
+    ],
+    documentsMr: [
+      "सर्व कुटुंबीयांचे आधार कार्ड",
+      "पत्ता पुरावा",
+      "उत्पन्न दाखला",
+      "कौटुंबिक फोटो"
+    ],
+    fees: "Free",
+    feesHi: "निःशुल्क",
+    feesMr: "मोफत",
+    processingTime: "15-30 days",
+    processingTimeHi: "15-30 दिन",
+    processingTimeMr: "15-30 दिवस",
+    isOnline: true,
+    website: "https://nfsa.gov.in",
+    tags: ["ration", "food", "subsidy", "pds"]
   },
   {
-    id: "COLL003",
+    id: "income-certificate",
+    name: "Income Certificate",
+    nameHi: "आय प्रमाण पत्र",
+    nameMr: "उत्पन्न दाखला",
+    description: "Certificate showing annual family income",
+    descriptionHi: "वार्षिक पारिवारिक आय दिखाने वाला प्रमाण पत्र",
+    descriptionMr: "वार्षिक कौटुंबिक उत्पन्न दर्शविणारा दाखला",
     category: "Revenue",
-    district: "Amravati",
-    taluka: "Amravati",
-    name_en: "District Collectorate",
-    name_mr: "जिल्हा कलेक्टरेट",
-    name_hi: "जिला कलेक्टरेट",
-    office_en: "Collectorate Amravati",
-    office_mr: "कलेक्टरेट अमरावती",
-    office_hi: "कलेक्टरेट अमरावती",
-    address: "Collectorate Campus, Amravati - 444601",
-    phone: "0721-2564789",
-    email: "collector.amravati@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
+    office: "Tehsildar Office",
+    officeHi: "तहसीलदार कार्यालय",
+    officeMr: "तहसीलदार कार्यालय",
+    address: "Tehsil Headquarters",
+    phone: "1077",
+    email: "tehsildar@gov.in",
+    workingHours: "10:00 AM - 5:00 PM (Mon-Fri)",
+    workingHoursHi: "सुबह 10:00 - शाम 5:00 (सोम-शुक्र)",
+    workingHoursMr: "सकाळी 10:00 - संध्याकाळी 5:00 (सोम-शुक्र)",
+    district: "All Districts",
+    documents: [
+      "Aadhaar card",
+      "Salary slips/Income proof",
+      "Bank statements",
+      "Property documents (if any)",
+      "Self-declaration affidavit"
+    ],
+    documentsHi: [
+      "आधार कार्ड",
+      "वेतन पर्ची/आय प्रमाण",
+      "बैंक स्टेटमेंट",
+      "संपत्ति दस्तावेज (यदि कोई हो)",
+      "स्व-घोषणा शपथ पत्र"
+    ],
+    documentsMr: [
+      "आधार कार्ड",
+      "पगार पर्ची/उत्पन्न पुरावा",
+      "बँक स्टेटमेंट",
+      "मालमत्ता कागदपत्रे (असल्यास)",
+      "स्व-घोषणा प्रतिज्ञापत्र"
+    ],
+    fees: "₹30",
+    feesHi: "₹30",
+    feesMr: "₹30",
+    processingTime: "7-15 days",
+    processingTimeHi: "7-15 दिन",
+    processingTimeMr: "7-15 दिवस",
+    isOnline: true,
+    tags: ["income", "certificate", "revenue", "financial"]
   },
   {
-    id: "COLL004",
+    id: "caste-certificate",
+    name: "Caste Certificate",
+    nameHi: "जाति प्रमाण पत्र",
+    nameMr: "जात दाखला",
+    description: "Certificate for caste verification",
+    descriptionHi: "जाति सत्यापन के लिए प्रमाण पत्र",
+    descriptionMr: "जात पडताळणीसाठी दाखला",
     category: "Revenue",
-    district: "Aurangabad",
-    taluka: "Aurangabad",
-    name_en: "District Collectorate",
-    name_mr: "जिल्हा कलेक्टरेट",
-    office_en: "Collectorate Aurangabad",
-    office_mr: "कलेक्टरेट औरंगाबाद",
-    address: "Collectorate Campus, Aurangabad - 431001",
-    phone: "0240-2334567",
-    email: "collector.aurangabad@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
+    office: "Tehsildar Office",
+    officeHi: "तहसीलदार कार्यालय",
+    officeMr: "तहसीलदार कार्यालय",
+    address: "Tehsil Headquarters",
+    phone: "1077",
+    email: "tehsildar@gov.in",
+    workingHours: "10:00 AM - 5:00 PM (Mon-Fri)",
+    workingHoursHi: "सुबह 10:00 - शाम 5:00 (सोम-शुक्र)",
+    workingHoursMr: "सकाळी 10:00 - संध्याकाळी 5:00 (सोम-शुक्र)",
+    district: "All Districts",
+    documents: [
+      "Aadhaar card",
+      "School leaving certificate",
+      "Father's caste certificate",
+      "Address proof",
+      "Passport size photographs"
+    ],
+    documentsHi: [
+      "आधार कार्ड",
+      "स्कूल छोड़ने का प्रमाण पत्र",
+      "पिता का जाति प्रमाण पत्र",
+      "पता प्रमाण",
+      "पासपोर्ट साइज फोटो"
+    ],
+    documentsMr: [
+      "आधार कार्ड",
+      "शाळा सोडल्याचा दाखला",
+      "वडिलांचा जात दाखला",
+      "पत्ता पुरावा",
+      "पासपोर्ट साइज फोटो"
+    ],
+    fees: "₹30",
+    feesHi: "₹30",
+    feesMr: "₹30",
+    processingTime: "15-30 days",
+    processingTimeHi: "15-30 दिन",
+    processingTimeMr: "15-30 दिवस",
+    isOnline: true,
+    tags: ["caste", "certificate", "revenue", "social"]
   },
   {
-    id: "COLL005",
+    id: "domicile-certificate",
+    name: "Domicile Certificate",
+    nameHi: "निवास प्रमाण पत्र",
+    nameMr: "मूळगाव दाखला",
+    description: "Certificate of permanent residence",
+    descriptionHi: "स्थायी निवास का प्रमाण पत्र",
+    descriptionMr: "कायमस्वरूपी निवासाचा दाखला",
     category: "Revenue",
-    district: "Beed",
-    taluka: "Beed",
-    name_en: "District Collectorate",
-    name_mr: "जिल्हा कलेक्टरेट",
-    office_en: "Collectorate Beed",
-    office_mr: "कलेक्टरेट बीड",
-    address: "Collectorate Campus, Beed - 431122",
-    phone: "02442-223456",
-    email: "collector.beed@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
-  },
-  {
-    id: "COLL006",
-    category: "Revenue",
-    district: "Bhandara",
-    taluka: "Bhandara",
-    name_en: "District Collectorate",
-    name_mr: "जिल्हा कलेक्टरेट",
-    office_en: "Collectorate Bhandara",
-    office_mr: "कलेक्टरेट भंडारा",
-    address: "Collectorate Campus, Bhandara - 441904",
-    phone: "07184-222345",
-    email: "collector.bhandara@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
-  },
-  {
-    id: "COLL007",
-    category: "Revenue",
-    district: "Buldhana",
-    taluka: "Buldhana",
-    name_en: "District Collectorate",
-    name_mr: "जिल्हा कलेक्टरेट",
-    office_en: "Collectorate Buldhana",
-    office_mr: "कलेक्टरेट बुलढाणा",
-    address: "Collectorate Campus, Buldhana - 443001",
-    phone: "07262-222345",
-    email: "collector.buldhana@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
-  },
-  {
-    id: "COLL008",
-    category: "Revenue",
-    district: "Chandrapur",
-    taluka: "Chandrapur",
-    name_en: "District Collectorate",
-    name_mr: "जिल्हा कलेक्टरेट",
-    office_en: "Collectorate Chandrapur",
-    office_mr: "कलेक्टरेट चंद्रपूर",
-    address: "Collectorate Campus, Chandrapur - 442401",
-    phone: "07172-222345",
-    email: "collector.chandrapur@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
-  },
-  {
-    id: "COLL009",
-    category: "Revenue",
-    district: "Dhule",
-    taluka: "Dhule",
-    name_en: "District Collectorate",
-    name_mr: "जिल्हा कलेक्टरेट",
-    office_en: "Collectorate Dhule",
-    office_mr: "कलेक्टरेट धुळे",
-    address: "Collectorate Campus, Dhule - 424001",
-    phone: "02562-222345",
-    email: "collector.dhule@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
-  },
-  {
-    id: "COLL010",
-    category: "Revenue",
-    district: "Gadchiroli",
-    taluka: "Gadchiroli",
-    name_en: "District Collectorate",
-    name_mr: "जिल्हा कलेक्टरेट",
-    office_en: "Collectorate Gadchiroli",
-    office_mr: "कलेक्टरेट गडचिरोली",
-    address: "Collectorate Campus, Gadchiroli - 442605",
-    phone: "07132-222345",
-    email: "collector.gadchiroli@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
-  },
-
-  // District Health Offices
-  {
-    id: "HEALTH001",
-    category: "Health",
-    district: "Pune",
-    taluka: "Pune City",
-    name_en: "District Hospital",
-    name_mr: "जिल्हा रुग्णालय",
-    office_en: "Sassoon General Hospital",
-    office_mr: "सासूण जनरल हॉस्पिटल",
-    address: "Near Railway Station, Pune - 411001",
-    phone: "020-26127777",
-    email: "dh.pune@maha.gov.in",
-    hours: "२४ तास आपत्कालीन सेवा (24 Hours Emergency)",
-  },
-  {
-    id: "HEALTH002",
-    category: "Health",
-    district: "Mumbai City",
-    taluka: "Mumbai City",
-    name_en: "King Edward Memorial Hospital",
-    name_mr: "किंग एडवर्ड मेमोरियल रुग्णालय",
-    office_en: "KEM Hospital Mumbai",
-    office_mr: "केईएम हॉस्पिटल मुंबई",
-    address: "Acharya Donde Marg, Parel, Mumbai - 400012",
-    phone: "022-24129884",
-    email: "kem.mumbai@maha.gov.in",
-    hours: "२४ तास आपत्कालीन सेवा (24 Hours Emergency)",
-  },
-  {
-    id: "HEALTH003",
-    category: "Health",
-    district: "Nagpur",
-    taluka: "Nagpur Urban",
-    name_en: "Government Medical College & Hospital",
-    name_mr: "शासकीय वैद्यकीय महाविद्यालय व रुग्णालय",
-    office_en: "GMCH Nagpur",
-    office_mr: "जीएमसीएच नागपूर",
-    address: "Medical Square, Nagpur - 440003",
-    phone: "0712-2704000",
-    email: "gmch.nagpur@maha.gov.in",
-    hours: "२४ तास आपत्कालीन सेवा (24 Hours Emergency)",
-  },
-
-  // Education Offices
-  {
-    id: "EDU001",
-    category: "Education",
-    district: "Mumbai City",
-    taluka: "Mumbai City",
-    name_en: "Education Officer",
-    name_mr: "शिक्षण अधिकारी",
-    office_en: "BMC Education Department",
-    office_mr: "बीएमसी शिक्षण विभाग",
-    address: "BMC Headquarters, CST, Mumbai - 400001",
-    phone: "022-22694725",
-    email: "education.bmc@mumbai.gov.in",
-    hours: "सोम–शुक्र 10:30–17:30 (Mon–Fri 10:30–17:30)",
-  },
-  {
-    id: "EDU002",
-    category: "Education",
-    district: "Thane",
-    taluka: "Thane",
-    name_en: "Zilla Parishad Education Officer",
-    name_mr: "जिल्हा परिषद शिक्षण अधिकारी",
-    office_en: "ZP Education Office Thane",
-    office_mr: "जि.प. शिक्षण कार्यालय ठाणे",
-    address: "ZP Campus, Thane - 400601",
-    phone: "022-25346789",
-    email: "zpedu.thane@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
-  },
-  {
-    id: "EDU003",
-    category: "Education",
-    district: "Nashik",
-    taluka: "Nashik",
-    name_en: "District Education Officer",
-    name_mr: "जिल्हा शिक्षण अधिकारी",
-    office_en: "DEO Nashik",
-    office_mr: "डीईओ नाशिक",
-    address: "Education Campus, Nashik - 422002",
-    phone: "0253-2576890",
-    email: "deo.nashik@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:30 (Mon–Fri 10:00–17:30)",
-  },
-
-  // Agriculture Offices
-  {
-    id: "AGRI001",
-    category: "Agriculture",
-    district: "Pune",
-    taluka: "Baramati",
-    name_en: "Krishi Vigyan Kendra",
-    name_mr: "कृषी विज्ञान केंद्र",
-    office_en: "KVK Baramati",
-    office_mr: "केव्हीके बारामती",
-    address: "Agriculture University Campus, Baramati - 413102",
-    phone: "02112-255123",
-    email: "kvk.baramati@maha.gov.in",
-    hours: "सोम–शनि 9:00–17:00 (Mon–Sat 9:00–17:00)",
-  },
-  {
-    id: "AGRI002",
-    category: "Agriculture",
-    district: "Ahmednagar",
-    taluka: "Ahmednagar",
-    name_en: "District Agriculture Officer",
-    name_mr: "जिल्हा कृषी अधिकारी",
-    office_en: "DAO Ahmednagar",
-    office_mr: "डीएओ अहमदनगर",
-    address: "Krishi Bhavan, Ahmednagar - 414001",
-    phone: "0241-2421890",
-    email: "dao.ahmednagar@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:00 (Mon–Fri 10:00–17:00)",
-  },
-  {
-    id: "AGRI003",
-    category: "Agriculture",
-    district: "Nashik",
-    taluka: "Nashik",
-    name_en: "Horticulture Department",
-    name_mr: "बागायती विभाग",
-    office_en: "District Horticulture Office",
-    office_mr: "जिल्हा बागायती कार्यालय",
-    address: "Krishi Bhavan, Nashik - 422002",
-    phone: "0253-2576543",
-    email: "hort.nashik@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:00 (Mon–Fri 10:00–17:00)",
-  },
-
-  // Police Stations
-  {
-    id: "POLICE001",
-    category: "Other",
-    district: "Mumbai City",
-    taluka: "Mumbai City",
-    name_en: "Police Station",
-    name_mr: "पोलीस स्टेशन",
-    office_en: "Colaba Police Station",
-    office_mr: "कोलाबा पोलीस स्टेशन",
-    address: "Colaba, Mumbai - 400005",
-    phone: "022-22182000",
-    email: "ps.colaba@maharashtrapolice.gov.in",
-    hours: "२४ तास सेवा (24 Hours Service)",
-  },
-  {
-    id: "POLICE002",
-    category: "Other",
-    district: "Pune",
-    taluka: "Pune City",
-    name_en: "Police Station",
-    name_mr: "पोलीस स्टेशन",
-    office_en: "Shivajinagar Police Station",
-    office_mr: "शिवाजीनगर पोलीस स्टेशन",
-    address: "Shivajinagar, Pune - 411005",
-    phone: "020-25531234",
-    email: "ps.shivajinagar@maharashtrapolice.gov.in",
-    hours: "२४ तास सेवा (24 Hours Service)",
-  },
-
-  // Post Offices
-  {
-    id: "POST001",
-    category: "Other",
-    district: "Mumbai City",
-    taluka: "Mumbai City",
-    name_en: "General Post Office",
-    name_mr: "मुख्य डाकघर",
-    office_en: "GPO Mumbai",
-    office_mr: "जीपीओ मुंबई",
-    address: "GPO Building, Fort, Mumbai - 400001",
-    phone: "022-22620111",
-    email: "gpo.mumbai@indiapost.gov.in",
-    hours: "सोम–शनि 9:00–17:00 (Mon–Sat 9:00–17:00)",
-  },
-  {
-    id: "POST002",
-    category: "Other",
-    district: "Pune",
-    taluka: "Pune City",
-    name_en: "General Post Office",
-    name_mr: "मुख्य डाकघर",
-    office_en: "GPO Pune",
-    office_mr: "जीपीओ पुणे",
-    address: "GPO Building, Pune - 411001",
-    phone: "020-26123456",
-    email: "gpo.pune@indiapost.gov.in",
-    hours: "सोम–शनि 9:00–17:00 (Mon–Sat 9:00–17:00)",
-  },
-
-  // RTO Offices
-  {
-    id: "RTO001",
-    category: "Other",
-    district: "Mumbai City",
-    taluka: "Mumbai City",
-    name_en: "Regional Transport Office",
-    name_mr: "प्रादेशिक परिवहन कार्यालय",
-    office_en: "RTO Mumbai Central",
-    office_mr: "आरटीओ मुंबई सेंट्रल",
-    address: "RTO Building, Mumbai Central - 400008",
-    phone: "022-23076111",
-    email: "rto.mumbai@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:00 (Mon–Fri 10:00–17:00)",
-  },
-  {
-    id: "RTO002",
-    category: "Other",
-    district: "Pune",
-    taluka: "Pune City",
-    name_en: "Regional Transport Office",
-    name_mr: "प्रादेशिक परिवहन कार्यालय",
-    office_en: "RTO Pune",
-    office_mr: "आरटीओ पुणे",
-    address: "RTO Building, Pune - 411001",
-    phone: "020-26123456",
-    email: "rto.pune@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:00 (Mon–Fri 10:00–17:00)",
-  },
-
-  // Bank Branches
-  {
-    id: "BANK001",
-    category: "Other",
-    district: "Mumbai City",
-    taluka: "Mumbai City",
-    name_en: "State Bank of India",
-    name_mr: "भारतीय स्टेट बँक",
-    office_en: "SBI Main Branch",
-    office_mr: "एसबीआय मुख्य शाखा",
-    address: "SBI Building, Fort, Mumbai - 400001",
-    phone: "022-22612345",
-    email: "sbi.mumbai@sbicard.com",
-    hours: "सोम–शुक्र 10:00–16:00 (Mon–Fri 10:00–16:00)",
-  },
-
-  // Employment Exchange
-  {
-    id: "EMPLOYMENT001",
-    category: "Other",
-    district: "Mumbai City",
-    taluka: "Mumbai City",
-    name_en: "Employment Exchange",
-    name_mr: "रोजगार कार्यालय",
-    office_en: "Employment Exchange Mumbai",
-    office_mr: "रोजगार कार्यालय मुंबई",
-    address: "Employment Building, Mumbai - 400001",
-    phone: "022-22612345",
-    email: "employment.mumbai@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:00 (Mon–Fri 10:00–17:00)",
-  },
-
-  // Ration Office
-  {
-    id: "RATION001",
-    category: "Other",
-    district: "Mumbai City",
-    taluka: "Mumbai City",
-    name_en: "Ration Office",
-    name_mr: "रेशन कार्यालय",
-    office_en: "Ration Office Mumbai",
-    office_mr: "रेशन कार्यालय मुंबई",
-    address: "Ration Building, Mumbai - 400001",
-    phone: "022-22612345",
-    email: "ration.mumbai@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:00 (Mon–Fri 10:00–17:00)",
-  },
-
-  // Electricity Office
-  {
-    id: "ELECTRICITY001",
-    category: "Other",
-    district: "Mumbai City",
-    taluka: "Mumbai City",
-    name_en: "Electricity Office",
-    name_mr: "वीज कार्यालय",
-    office_en: "BEST Electricity",
-    office_mr: "बेस्ट वीज",
-    address: "BEST Building, Mumbai - 400001",
-    phone: "022-22612345",
-    email: "electricity.mumbai@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:00 (Mon–Fri 10:00–17:00)",
-  },
-
-  // Public Works Department
-  {
-    id: "PWD001",
-    category: "Public Works",
-    district: "Mumbai City",
-    taluka: "Mumbai City",
-    name_en: "Public Works Department",
-    name_mr: "सार्वजनिक बांधकाम विभाग",
-    office_en: "PWD Mumbai",
-    office_mr: "पीडब्ल्यूडी मुंबई",
-    address: "PWD Building, Mumbai - 400001",
-    phone: "022-22612345",
-    email: "pwd.mumbai@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:00 (Mon–Fri 10:00–17:00)",
-  },
-  {
-    id: "PWD002",
-    category: "Public Works",
-    district: "Pune",
-    taluka: "Pune City",
-    name_en: "Public Works Department",
-    name_mr: "सार्वजनिक बांधकाम विभाग",
-    office_en: "PWD Pune",
-    office_mr: "पीडब्ल्यूडी पुणे",
-    address: "PWD Building, Pune - 411001",
-    phone: "020-26123456",
-    email: "pwd.pune@maha.gov.in",
-    hours: "सोम–शुक्र 10:00–17:00 (Mon–Fri 10:00–17:00)",
-  },
+    office: "Tehsildar Office",
+    officeHi: "तहसीलदार कार्यालय",
+    officeMr: "तहसीलदार कार्यालय",
+    address: "Tehsil Headquarters",
+    phone: "1077",
+    email: "tehsildar@gov.in",
+    workingHours: "10:00 AM - 5:00 PM (Mon-Fri)",
+    workingHoursHi: "सुबह 10:00 - शाम 5:00 (सोम-शुक्र)",
+    workingHoursMr: "सकाळी 10:00 - संध्याकाळी 5:00 (सोम-शुक्र)",
+    district: "All Districts",
+    documents: [
+      "Birth certificate",
+      "School leaving certificate",
+      "Aadhaar card",
+      "Ration card",
+      "Property documents"
+    ],
+    documentsHi: [
+      "जन्म प्रमाण पत्र",
+      "स्कूल छोड़ने का प्रमाण पत्र",
+      "आधार कार्ड",
+      "राशन कार्ड",
+      "संपत्ति दस्तावेज"
+    ],
+    documentsMr: [
+      "जन्म दाखला",
+      "शाळा सोडल्याचा दाखला",
+      "आधार कार्ड",
+      "रेशन कार्ड",
+      "मालमत्ता कागदपत्रे"
+    ],
+    fees: "₹30",
+    feesHi: "₹30",
+    feesMr: "₹30",
+    processingTime: "15-30 days",
+    processingTimeHi: "15-30 दिन",
+    processingTimeMr: "15-30 दिवस",
+    isOnline: true,
+    tags: ["domicile", "residence", "certificate", "revenue"]
+  }
 ];
+
+// Filter services by category and district
+export function getServicesByCategory(category: string): Service[] {
+  return services.filter(service => service.category === category);
+}
+
+export function getServicesByDistrict(district: string): Service[] {
+  return services.filter(service => 
+    service.district === "All Districts" || service.district === district
+  );
+}
+
+export function searchServices(query: string): Service[] {
+  const searchTerm = query.toLowerCase();
+  return services.filter(service => 
+    service.name.toLowerCase().includes(searchTerm) ||
+    service.nameHi.toLowerCase().includes(searchTerm) ||
+    service.nameMr.toLowerCase().includes(searchTerm) ||
+    service.description.toLowerCase().includes(searchTerm) ||
+    service.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+  );
+}

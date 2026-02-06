@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/contexts/LanguageContext";
-import { toast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { Phone, Mail, Globe, AlertTriangle, Building2, UserCheck, MapPin, Clock, ExternalLink } from "lucide-react";
 
 export default function Contact() {

@@ -1,66 +1,85 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
+import { User } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/contexts/AuthContext';
-import { Tables, TablesInsert, TablesUpdate } from '@/integrations/supabase/types';
 
-type Profile = Tables<'profiles'>;
-type ProfileInsert = TablesInsert<'profiles'>;
-type ProfileUpdate = TablesUpdate<'profiles'>;
+export interface Profile {
+  id: string;
+  email: string;
+  display_name?: string;
+  district?: string;
+  taluka?: string;
+  created_at: string;
+  updated_at: string;
+}
 
-export function useProfile() {
-  const { user } = useAuth();
-  const queryClient = useQueryClient();
+export function useProfile(user: User | null) {
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // Fetch user profile
-  const {
-    data: profile,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['profile', user?.id],
-    queryFn: async () => {
-      if (!user?.id) return null;
-      
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
+  useEffect(() => {
+    if (!user) {
+      setProfile(null);
+      return;
+    }
 
-      if (error) throw error;
-      return data as Profile;
-    },
-    enabled: !!user?.id,
-  });
+    const fetchProfile = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-  // Create profile mutation
-  const createProfile = useMutation({
-    mutationFn: async (profileData: Omit<ProfileInsert, 'id'>) => {
-      if (!user?.id) throw new Error('User not authenticated');
-      
-      const { data, error } = await supabase
-        .from('profiles')
-        .insert({ 
-          ...profileData, 
-          id: user.id,
-          email: user.email 
-        })
-        .select()
-        .single();
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
 
-      if (error) throw error;
-      return data as Profile;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['profile', user?.id] });
-    },
-  });
+        if (error) {
+          if (error.code === 'PGRST116') {
+            // Profile doesn't exist, create one
+            const newProfile = {
+              id: user.id,
+              email: user.email!,
+              display_name: user.user_metadata?.display_name || user.email?.split('@')[0],
+              district: user.user_metadata?.district,
+              taluka: user.user_metadata?.taluka,
+            };
 
-  // Update profile mutation
-  const updateProfile = useMutation({
-    mutationFn: async (updates: ProfileUpdate) => {
-      if (!user?.id) throw new Error('User not authenticated');
-      
+            const { data: createdProfile, error: createError } = await supabase
+              .from('profiles')
+              .insert(newProfile)
+              .select()
+              .single();
+
+            if (createError) {
+              throw createError;
+            }
+
+            setProfile(createdProfile);
+          } else {
+            throw error;
+          }
+        } else {
+          setProfile(data);
+        }
+      } catch (err) {
+        console.error('Profile fetch error:', err);
+        setError(err instanceof Error ? err.message : 'Failed to fetch profile');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [user]);
+
+  const updateProfile = async (updates: Partial<Profile>) => {
+    if (!user || !profile) return { success: false, error: 'No user or profile' };
+
+    try {
+      setLoading(true);
+      setError(null);
+
       const { data, error } = await supabase
         .from('profiles')
         .update(updates)
@@ -69,39 +88,22 @@ export function useProfile() {
         .single();
 
       if (error) throw error;
-      return data as Profile;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['profile', user?.id] });
-    },
-  });
 
-  // Check if username is available
-  const checkUsernameAvailability = async (username: string): Promise<boolean> => {
-    if (!username) return false;
-    
-    let query = supabase
-      .from('profiles')
-      .select('username')
-      .eq('username', username);
-    
-    // Only exclude current user if we have a valid user ID
-    if (user?.id) {
-      query = query.neq('id', user.id);
+      setProfile(data);
+      return { success: true };
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to update profile';
+      setError(errorMessage);
+      return { success: false, error: errorMessage };
+    } finally {
+      setLoading(false);
     }
-
-    const { data, error } = await query;
-
-    if (error) throw error;
-    return data.length === 0;
   };
 
   return {
     profile,
-    isLoading,
+    loading,
     error,
-    createProfile,
     updateProfile,
-    checkUsernameAvailability,
   };
 }

@@ -85,7 +85,9 @@ export default function Services() {
             </SelectTrigger>
             <SelectContent>
               {cats.map((c) => (
-                <SelectItem key={c.id} value={c.id}>{lang === "en" ? c.en : lang === "mr" ? c.mr : c.hi}</SelectItem>
+                <SelectItem key={c.id} value={c.id}>
+                  {lang === "hi" ? c.hi : lang === "mr" ? c.mr : c.en}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -106,11 +108,11 @@ export default function Services() {
             <Card key={s.id} className="hover:shadow-brand transition-smooth">
               <CardHeader>
                 <CardTitle>
-                  {lang === "en" ? s.name_en : lang === "mr" ? s.name_mr : s.name_hi || s.name_en}
+                  {lang === "hi" ? s.nameHi : lang === "mr" ? s.nameMr : s.name}
                 </CardTitle>
               </CardHeader>
               <CardContent className="grid gap-2 text-sm">
-                <div><span className="font-medium">{t("office")}:</span> {lang === "en" ? s.office_en : lang === "mr" ? s.office_mr : s.office_hi || s.office_en}</div>
+                <div><span className="font-medium">{t("office")}:</span> {lang === "hi" ? s.officeHi : lang === "mr" ? s.officeMr : s.office}</div>
                 <div><span className="font-medium">{t("address")}:</span> {s.address}</div>
                 <div className="flex items-center gap-2">
                   <span className="font-medium">{t("phone")}:</span> 
@@ -124,7 +126,7 @@ export default function Services() {
                     {s.email}
                   </a>
                 </div>
-                <div><span className="font-medium">{t("workingHours")}:</span> {s.hours}</div>
+                <div><span className="font-medium">{t("workingHours")}:</span> {lang === "hi" ? s.workingHoursHi : lang === "mr" ? s.workingHoursMr : s.workingHours}</div>
                 <div className="pt-2 flex gap-2 flex-wrap">
                   <a
                     className="inline-flex"
@@ -133,7 +135,7 @@ export default function Services() {
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.address)}`}
                     aria-label={t("getDirections")}
                   >
-                    <Button variant="hero" size="sm">{t("getDirections")}</Button>
+                    <Button variant="outline" size="sm">{t("getDirections")}</Button>
                   </a>
                   <a
                     className="inline-flex"

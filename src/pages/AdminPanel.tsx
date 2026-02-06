@@ -64,9 +64,6 @@ export default function AdminPanel() {
       
       if (isAdminAuthenticated && adminUsername === "India") {
         setIsAuthenticated(true);
-        if (!loading) {
-          toast.success(lang === "hi" ? "प्रशासक पैनल में स्वागत" : "Welcome to Admin Panel");
-        }
       } else {
         setIsAuthenticated(false);
       }
@@ -75,11 +72,22 @@ export default function AdminPanel() {
 
     checkAuth();
     
-    // Check authentication status periodically
+    // Check authentication status periodically (but don't show toast)
     const interval = setInterval(checkAuth, 1000);
     
     return () => clearInterval(interval);
-  }, [lang, loading]);
+  }, []);
+
+  // Show welcome toast only once when authenticated
+  useEffect(() => {
+    if (isAuthenticated && !loading) {
+      const hasShownWelcome = sessionStorage.getItem("admin_welcome_shown");
+      if (!hasShownWelcome) {
+        toast.success(lang === "hi" ? "प्रशासक पैनल में स्वागत" : "Welcome to Admin Panel");
+        sessionStorage.setItem("admin_welcome_shown", "true");
+      }
+    }
+  }, [isAuthenticated, loading, lang]);
 
   // Redirect non-admin users
   useEffect(() => {
@@ -258,6 +266,7 @@ export default function AdminPanel() {
   const handleLogout = () => {
     sessionStorage.removeItem("admin_authenticated");
     sessionStorage.removeItem("admin_username");
+    sessionStorage.removeItem("admin_welcome_shown");
     setIsAuthenticated(false);
     toast.success("Logged out successfully");
   };
@@ -336,8 +345,9 @@ export default function AdminPanel() {
   // Filter schemes based on search and filters
   const filteredSchemes = schemes.filter(scheme => {
     const searchMatch = searchTerm === "" || 
-      scheme.name_en.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      scheme.name_hi.includes(searchTerm) ||
+      scheme.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (scheme.nameHi && scheme.nameHi.includes(searchTerm)) ||
+      (scheme.nameMr && scheme.nameMr.includes(searchTerm)) ||
       scheme.category.toLowerCase().includes(searchTerm.toLowerCase());
 
     const categoryMatch = selectedCategory === "All" || scheme.category === selectedCategory;
@@ -616,14 +626,18 @@ export default function AdminPanel() {
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
                           <h3 className="text-lg font-semibold">
-                            {lang === "hi" ? scheme.name_hi : scheme.name_en}
+                            {lang === "hi" && scheme.nameHi ? scheme.nameHi : 
+                             lang === "mr" && scheme.nameMr ? scheme.nameMr : 
+                             scheme.name}
                           </h3>
                           <Badge variant="secondary">{scheme.category}</Badge>
                           <Badge variant="outline">{scheme.schemeType}</Badge>
                         </div>
                         
                         <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-                          {lang === "hi" ? scheme.description_hi : scheme.description_en}
+                          {lang === "hi" && scheme.descriptionHi ? scheme.descriptionHi : 
+                           lang === "mr" && scheme.descriptionMr ? scheme.descriptionMr : 
+                           scheme.description}
                         </p>
 
                         <div className="flex items-center gap-4 text-sm text-gray-500">
