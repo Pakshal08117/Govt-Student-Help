@@ -5,7 +5,6 @@
 [![Platform](https://img.shields.io/badge/Platform-All%20India-orange)](https://github.com)
 [![Languages](https://img.shields.io/badge/Languages-12%20Indian%20Languages-green)](https://github.com)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Admin](https://img.shields.io/badge/Admin-India%2F1234-red)](https://github.com)
 
 ## 🌟 Overview
 
@@ -17,7 +16,7 @@
 - 🗣️ **12 Indian Languages** - Complete multilingual support with voice interaction
 - 🤖 **AI Assistant** - Intelligent chatbot with voice commands in all Indian languages
 - 📱 **Mobile-First Design** - Responsive interface following Indian Government guidelines
-- 🔐 **Admin Panel** - Comprehensive management system (Credentials: India/1234)
+- 🔐 **Admin Panel** - Comprehensive management system with secure authentication
 - 📊 **Real-time Tracking** - Application status and progress monitoring
 - 🛡️ **Government Verified** - All information from official sources
 
@@ -149,7 +148,17 @@ cp .env.example .env
 # .env file configuration
 VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# Admin Credentials (IMPORTANT: Change these in production!)
+VITE_ADMIN_USERNAME=your_admin_username
+VITE_ADMIN_PASSWORD=your_secure_password
 ```
+
+**⚠️ SECURITY WARNING**: 
+- Default credentials are provided in `.env.example` for development only
+- **ALWAYS change admin credentials in production**
+- Never commit `.env` file to version control
+- Use strong passwords for production deployments
 
 ### 4. Database Setup (Supabase)
 1. Create account at [Supabase](https://supabase.com)
@@ -172,9 +181,16 @@ npm run preview
 
 ### 6. Admin Access
 - **URL**: `/admin` or via Auth page → Admin tab
-- **Username**: `India`
-- **Password**: `1234`
+- **Credentials**: Configured in `.env` file (see Environment Setup)
+- **Default Dev Credentials**: Check `.env.example` file
 - **Features**: User management, application oversight, system statistics
+
+**🔒 Security Best Practices**:
+1. Change default credentials immediately in production
+2. Use strong, unique passwords
+3. Enable HTTPS for production deployments
+4. Regularly rotate admin credentials
+5. Monitor admin access logs
 
 ---
 
@@ -251,7 +267,7 @@ govt-student-help-platform/
 ## 🔐 Admin Panel Features
 
 ### Authentication & Security
-- 🔑 **Secure Login**: Username `India`, Password `1234`
+- 🔑 **Secure Login**: Environment-based credentials (configured in .env file)
 - 🛡️ **Session Management**: Secure session-based authentication
 - 🔄 **Real-time Updates**: Live status synchronization
 - 🚪 **Multiple Access Points**: Auth page and direct panel access
