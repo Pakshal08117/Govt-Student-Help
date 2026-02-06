@@ -16,7 +16,8 @@ export function cleanupAuthState() {
 export function isAdminAuthenticated(): boolean {
   const isAuthenticated = sessionStorage.getItem("admin_authenticated") === "true";
   const username = sessionStorage.getItem("admin_username");
-  return isAuthenticated && username === "India";
+  const ADMIN_USERNAME = import.meta.env.VITE_ADMIN_USERNAME;
+  return isAuthenticated && username === ADMIN_USERNAME;
 }
 
 export function getAdminUsername(): string | null {

@@ -61,8 +61,9 @@ export default function AdminPanel() {
     const checkAuth = () => {
       const isAdminAuthenticated = sessionStorage.getItem("admin_authenticated") === "true";
       const adminUsername = sessionStorage.getItem("admin_username");
+      const ADMIN_USERNAME = import.meta.env.VITE_ADMIN_USERNAME;
       
-      if (isAdminAuthenticated && adminUsername === "India") {
+      if (isAdminAuthenticated && adminUsername === ADMIN_USERNAME) {
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);

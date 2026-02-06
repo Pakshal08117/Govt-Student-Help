@@ -37,7 +37,8 @@ export default function SiteHeader() {
     const checkAdminStatus = () => {
       const isAuthenticated = sessionStorage.getItem("admin_authenticated") === "true";
       const username = sessionStorage.getItem("admin_username");
-      setIsAdmin(isAuthenticated && username === "India");
+      const ADMIN_USERNAME = import.meta.env.VITE_ADMIN_USERNAME;
+      setIsAdmin(isAuthenticated && username === ADMIN_USERNAME);
     };
 
     checkAdminStatus();

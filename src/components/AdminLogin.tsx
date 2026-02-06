@@ -19,9 +19,15 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
     e.preventDefault();
     setLoading(true);
 
-    // Admin credentials - India/1234
-    const ADMIN_USERNAME = "India";
-    const ADMIN_PASSWORD = "1234";
+    // Get admin credentials from environment variables
+    const ADMIN_USERNAME = import.meta.env.VITE_ADMIN_USERNAME;
+    const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+
+    if (!ADMIN_USERNAME || !ADMIN_PASSWORD) {
+      toast.error("Admin credentials not configured. Please contact system administrator.");
+      setLoading(false);
+      return;
+    }
 
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
       // Store admin session
