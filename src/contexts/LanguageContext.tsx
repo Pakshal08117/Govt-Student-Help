@@ -663,50 +663,179 @@ const hindiStrings: Record<string, string> = {
   aboutBody: "यह प्लेटफॉर्म भारत भर के छात्रों और नागरिकों को सरकारी योजनाएं, छात्रवृत्ति और सेवाएं खोजने में मदद करता है। जानकारी नियमित रूप से india.gov.in, scholarships.gov.in और मंत्रालय की वेबसाइटों जैसे आधिकारिक स्रोतों से अपडेट की जाती है।",
 };
 
-// Bengali translations (key ones)
+// Bengali translations (comprehensive)
 const bengaliStrings: Record<string, string> = {
   home: "হোম",
   services: "সেবা",
   about: "সম্পর্কে",
   contact: "যোগাযোগ",
+  findSchemes: "প্রকল্প খুঁজুন",
   appName: "সরকারি ও ছাত্র সহায়তা",
   tagline: "ছাত্র এবং নাগরিকদের জন্য একীভূত সহায়তা",
+  heroTitle: "সরকারি প্রকল্প, বৃত্তি এবং সেবা খুঁজুন",
+  heroDesc: "ভারত জুড়ে ছাত্র এবং নাগরিকদের জন্য কেন্দ্রীয় এবং রাজ্য সরকারের প্রকল্প, বৃত্তি এবং সেবা আবিষ্কার করুন।",
+  
+  forWhom: "এটি কার জন্য?",
   students: "ছাত্রছাত্রী",
   citizens: "নাগরিক",
   schemeApplicants: "প্রকল্প আবেদনকারী",
+  quickLinks: "দ্রুত লিঙ্ক",
+  madeFor: "ছাত্র এবং নাগরিকদের জন্য তৈরি",
+  evolution: "বিবর্তন",
+  
+  selectUserType: "আমি একজন...",
+  studentDesc: "বৃত্তি, শিক্ষা প্রকল্প এবং ছাত্র সেবা খুঁজছি",
+  citizenDesc: "সরকারি সেবা, কল্যাণ প্রকল্প এবং নাগরিক সুবিধা খুঁজছি",
+  schemeApplicantDesc: "নির্দিষ্ট সরকারি প্রকল্পের জন্য আবেদন করতে চাই",
+  schemeSeekers: "প্রকল্প আবেদনকারী",
+  schemeSeekerDesc: "নির্দিষ্ট সরকারি প্রকল্প এবং কর্মসূচির জন্য আবেদন করুন",
+  
+  govInitiative: "ভারত সরকারের উদ্যোগ",
+  govAndStudent: "সরকারি ও ছাত্র",
+  helpPlatform: "সহায়তা প্ল্যাটফর্ম",
+  oneStopAssistance: "ভারত জুড়ে ছাত্র এবং নাগরিকদের জন্য একীভূত সহায়তা",
+  governmentSchemesShort: "সরকারি প্রকল্প",
+  statesAndUTs: "রাজ্য এবং কেন্দ্রশাসিত অঞ্চল",
+  supportAvailable: "সহায়তা উপলব্ধ",
+  freeServices: "বিনামূল্যে সেবা",
+  exploreAllSchemes: "সমস্ত প্রকল্প দেখুন",
+  whoAreYou: "আপনি কে?",
+  chooseCategory: "প্রাসঙ্গিক সরকারি প্রকল্প এবং সেবা খুঁজতে আপনার বিভাগ চয়ন করুন",
+  viewSchemes: "প্রকল্প দেখুন",
+  popularGovSchemes: "জনপ্রিয় সরকারি প্রকল্প",
+  mostAccessedSchemes: "ভারত জুড়ে নাগরিকদের দ্বারা সর্বাধিক ব্যবহৃত প্রকল্প",
+  viewAllSchemes: "সমস্ত প্রকল্প দেখুন",
+  trustedByMillions: "লক্ষ লক্ষ মানুষের বিশ্বাস",
+  citizensHelped: "নাগরিকদের সাহায্য করা হয়েছে",
+  applicationsProcessed: "আবেদন প্রক্রিয়াকৃত",
+  governmentVerified: "সরকার যাচাইকৃত",
+  freeService: "100% বিনামূল্যে সেবা",
+  
+  selectState: "রাজ্য নির্বাচন করুন",
+  selectDistrict: "জেলা নির্বাচন করুন",
+  allIndia: "সমগ্র ভারত",
   search: "অনুসন্ধান",
+  
+  categories: "সেবা বিভাগ",
   health: "স্বাস্থ্য",
   education: "শিক্ষা",
   agriculture: "কৃষি",
+  revenue: "রাজস্ব",
+  publicWorks: "জনকার্য",
+  more: "আরও",
   scholarship: "বৃত্তি",
   welfare: "কল্যাণ",
   employment: "কর্মসংস্থান",
+  
   lang: "EN/हि",
+  
   schemes: "প্রকল্প",
+  governmentSchemes: "সরকারি প্রকল্প এবং বৃত্তি",
+  browseSchemes: "ছাত্র, নাগরিক এবং কল্যাণ সুবিধাভোগীদের জন্য প্রকল্প ব্রাউজ করুন",
+  searchSchemes: "প্রকল্প খুঁজুন...",
+  showingNearbySchemes: "আপনার এলাকায় উপলব্ধ প্রকল্প দেখানো হচ্ছে",
+  emergencyHelplines: "জরুরি হেল্পলাইন",
+  visitWebsite: "ওয়েবসাইট দেখুন",
+  needHelpWithDocuments: "নথিতে সাহায্য প্রয়োজন?",
+  noSchemesFound: "আপনার মানদণ্ডের সাথে মিলে এমন কোনো প্রকল্প পাওয়া যায়নি",
+  scholarships: "বৃত্তি",
+  studentSchemes: "ছাত্র প্রকল্প",
+  citizenSchemes: "নাগরিক প্রকল্প",
+  welfareSchemes: "কল্যাণ প্রকল্প",
+  
+  tagStudent: "ছাত্র",
+  tagCitizen: "নাগরিক",
+  tagGovernment: "সরকারি",
+  tagScholarship: "বৃত্তি",
+  tagWelfare: "কল্যাণ",
+  tagEducation: "শিক্ষা",
+  
   apply: "আবেদন করুন",
   eligibility: "যোগ্যতা",
+  howToApply: "কীভাবে আবেদন করবেন",
+  step1: "ধাপ 1",
+  step2: "ধাপ 2",
+  step3: "ধাপ 3",
+  step4: "ধাপ 4",
+  checkEligibility: "যোগ্যতা পরীক্ষা করুন",
+  gatherDocuments: "নথি সংগ্রহ করুন",
+  fillForm: "আবেদন ফর্ম পূরণ করুন",
+  submitAndTrack: "জমা দিন এবং ট্র্যাক করুন",
+  trackApplication: "আবেদন ট্র্যাক করুন",
+  applicationStatus: "আবেদনের অবস্থা",
   pending: "অপেক্ষমাণ",
   approved: "অনুমোদিত",
   rejected: "প্রত্যাখ্যাত",
+  
+  adminPanel: "প্রশাসক প্যানেল",
+  manageApplications: "আবেদন এবং প্রকল্প পরিচালনা করুন",
+  totalApplications: "মোট আবেদন",
+  recentApplications: "সাম্প্রতিক আবেদন",
+  loading: "লোড হচ্ছে...",
+  noApplicationsYet: "এখনও কোনো আবেদন নেই",
+  review: "পর্যালোচনা",
+  approve: "অনুমোদন করুন",
+  reject: "প্রত্যাখ্যান করুন",
+  
   contactTitle: "আমাদের সাথে যোগাযোগ করুন",
   name: "নাম",
   message: "বার্তা",
   submit: "জমা দিন",
+  support: "সহায়তা",
+  supportPhone: "ফোন: 1077 (24x7 নাগরিক হেল্পলাইন)",
+  supportEmail: "ইমেল: support@govhelp.in",
+  
+  govContacts: "সরকারি যোগাযোগ",
+  helpline1077: "জাতীয় নাগরিক হেল্পলাইন",
+  helpline1077Phone: "ফোন: 1077 (24x7 বিনামূল্যে)",
+  helpline1077Desc: "সমস্ত সরকারি সেবা হেল্পলাইন",
+  
+  emergencyServices: "জরুরি সেবা",
+  police: "পুলিশ: 100",
+  fire: "ফায়ার: 101",
+  ambulance: "অ্যাম্বুলেন্স: 108",
+  disasterMgmt: "দুর্যোগ ব্যবস্থাপনা: 1070",
+  
   aboutTitle: "সরকারি ও ছাত্র সহায়তা প্ল্যাটফর্ম সম্পর্কে",
-  aboutBody: "এই প্ল্যাটফর্মটি ভারত জুড়ে ছাত্র এবং নাগরিকদের সরকারি প্রকল্প, বৃত্তি এবং সেবা খুঁজে পেতে সাহায্য করে।",
+  aboutBody: "এই প্ল্যাটফর্মটি ভারত জুড়ে ছাত্র এবং নাগরিকদের সরকারি প্রকল্প, বৃত্তি এবং সেবা খুঁজে পেতে সাহায্য করে। তথ্য নিয়মিত india.gov.in, scholarships.gov.in এবং মন্ত্রণালয়ের ওয়েবসাইটের মতো সরকারি উৎস থেকে আপডেট করা হয়।",
 };
 
-// Tamil translations (key ones)
+// Tamil translations (comprehensive)
 const tamilStrings: Record<string, string> = {
+  ...englishStrings, // Start with English as base
   home: "முகப்பு",
   services: "சேவைகள்",
   about: "பற்றி",
   contact: "தொடர்பு",
+  findSchemes: "திட்டங்களைக் கண்டறியவும்",
   appName: "அரசு மற்றும் மாணவர் உதவி",
   tagline: "மாணவர்கள் மற்றும் குடிமக்களுக்கான ஒருங்கிணைந்த உதவி",
+  heroTitle: "அரசு திட்டங்கள், உதவித்தொகைகள் மற்றும் சேவைகளைக் கண்டறியவும்",
+  heroDesc: "இந்தியா முழுவதும் உள்ள மாணவர்கள் மற்றும் குடிமக்களுக்கான மத்திய மற்றும் மாநில அரசு திட்டங்கள், உதவித்தொகைகள் மற்றும் சேவைகளைக் கண்டறியவும்।",
+  forWhom: "இது யாருக்கானது?",
   students: "மாணவர்கள்",
   citizens: "குடிமக்கள்",
   schemeApplicants: "திட்ட விண்ணப்பதாரர்கள்",
+  selectUserType: "நான் ஒரு...",
+  studentDesc: "உதவித்தொகைகள், கல்வி திட்டங்கள் மற்றும் மாணவர் சேவைகளைத் தேடுகிறேன்",
+  citizenDesc: "அரசு சேவைகள், நல்வாழ்வு திட்டங்கள் மற்றும் குடிமக்கள் நலன்களைத் தேடுகிறேன்",
+  schemeApplicantDesc: "குறிப்பிட்ட அரசு திட்டங்களுக்கு விண்ணப்பிக்க விரும்புகிறேன்",
+  schemeSeekers: "திட்ட விண்ணப்பதாரர்கள்",
+  govInitiative: "இந்திய அரசின் முயற்சி",
+  govAndStudent: "அரசு மற்றும் மாணவர்",
+  helpPlatform: "உதவி தளம்",
+  oneStopAssistance: "இந்தியா முழுவதும் உள்ள மாணவர்கள் மற்றும் குடிமக்களுக்கான ஒருங்கிணைந்த உதவி",
+  governmentSchemesShort: "அரசு திட்டங்கள்",
+  statesAndUTs: "மாநிலங்கள் மற்றும் யூனியன் பிரதேசங்கள்",
+  exploreAllSchemes: "அனைத்து திட்டங்களையும் ஆராயுங்கள்",
+  whoAreYou: "நீங்கள் யார்?",
+  chooseCategory: "தொடர்புடைய அரசு திட்டங்கள் மற்றும் சேவைகளைக் கண்டறிய உங்கள் வகையைத் தேர்ந்தெடுக்கவும்",
+  viewSchemes: "திட்டங்களைக் காண்க",
+  popularGovSchemes: "பிரபலமான அரசு திட்டங்கள்",
+  mostAccessedSchemes: "இந்தியா முழுவதும் உள்ள குடிமக்களால் அதிகம் பயன்படுத்தப்படும் திட்டங்கள்",
+  viewAllSchemes: "அனைத்து திட்டங்களையும் காண்க",
+  trustedByMillions: "மில்லியன் கணக்கானோரின் நம்பிக்கை",
+  citizensHelped: "குடிமக்களுக்கு உதவியது",
   search: "தேடல்",
   health: "சுகாதாரம்",
   education: "கல்வி",
@@ -714,7 +843,6 @@ const tamilStrings: Record<string, string> = {
   scholarship: "உதவித்தொகை",
   welfare: "நலன்",
   employment: "வேலைவாய்ப்பு",
-  lang: "EN/हि",
   schemes: "திட்டங்கள்",
   apply: "விண்ணப்பிக்கவும்",
   eligibility: "தகுதி",
@@ -726,20 +854,30 @@ const tamilStrings: Record<string, string> = {
   message: "செய்தி",
   submit: "சமர்ப்பிக்கவும்",
   aboutTitle: "அரசு மற்றும் மாணவர் உதவி தளம் பற்றி",
-  aboutBody: "இந்த தளம் இந்தியா முழுவதும் உள்ள மாணவர்கள் மற்றும் குடிமக்கள் அரசு திட்டங்கள், உதவித்தொகைகள் மற்றும் சேவைகளை கண்டறிய உதவுகிறது।",
+  aboutBody: "இந்த தளம் இந்தியா முழுவதும் உள்ள மாணவர்கள் மற்றும் குடிமக்கள் அரசு திட்டங்கள், உதவித்தொகைகள் மற்றும் சேவைகளைக் கண்டறிய உதவுகிறது।",
 };
 
-// Telugu translations (key ones)
+// Telugu translations (comprehensive)
 const teluguStrings: Record<string, string> = {
+  ...englishStrings, // Start with English as base
   home: "హోమ్",
   services: "సేవలు",
   about: "గురించి",
   contact: "సంప్రదింపులు",
   appName: "ప్రభుత్వ మరియు విద్యార్థి సహాయం",
   tagline: "విద్యార్థులు మరియు పౌరులకు సమగ్ర సహాయం",
+  heroTitle: "ప్రభుత్వ పథకాలు, స్కాలర్‌షిప్‌లు మరియు సేవలను కనుగొనండి",
+  heroDesc: "భారతదేశం అంతటా విద్యార్థులు మరియు పౌరుల కోసం కేంద్ర మరియు రాష్ట్ర ప్రభుత్వ పథకాలు, స్కాలర్‌షిప్‌లు మరియు సేవలను కనుగొనండి।",
   students: "విద్యార్థులు",
   citizens: "పౌరులు",
   schemeApplicants: "పథకం దరఖాస్తుదారులు",
+  govInitiative: "భారత ప్రభుత్వ చొరవ",
+  govAndStudent: "ప్రభుత్వ మరియు విద్యార్థి",
+  helpPlatform: "సహాయ వేదిక",
+  oneStopAssistance: "భారతదేశం అంతటా విద్యార్థులు మరియు పౌరులకు సమగ్ర సహాయం",
+  exploreAllSchemes: "అన్ని పథకాలను అన్వేషించండి",
+  whoAreYou: "మీరు ఎవరు?",
+  viewSchemes: "పథకాలను చూడండి",
   search: "వెతకండి",
   health: "ఆరోగ్యం",
   education: "విద్య",
@@ -747,7 +885,6 @@ const teluguStrings: Record<string, string> = {
   scholarship: "స్కాలర్‌షిప్",
   welfare: "సంక్షేమం",
   employment: "ఉపాధి",
-  lang: "EN/हि",
   schemes: "పథకాలు",
   apply: "దరఖాస్తు చేయండి",
   eligibility: "అర్హత",
@@ -1024,7 +1161,18 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const getAllLanguages = () => languageMetadata;
 
   const t = useMemo(
-    () => (key: string) => strings[lang][key] || strings.en[key] || key,
+    () => (key: string) => {
+      // Try the requested language first
+      if (strings[lang] && strings[lang][key]) {
+        return strings[lang][key];
+      }
+      // Fall back to English
+      if (strings.en && strings.en[key]) {
+        return strings.en[key];
+      }
+      // Return the key itself as last resort
+      return key;
+    },
     [lang]
   );
 

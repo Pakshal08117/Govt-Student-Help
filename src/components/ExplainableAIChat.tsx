@@ -173,7 +173,11 @@ export default function ExplainableAIChat() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-green-700">
                   <CheckCircle className="w-5 h-5" />
-                  Eligible Schemes ({response.eligibleSchemes.length})
+                  {lang === "hi" 
+                    ? `पात्र योजनाएं (${response.eligibleSchemes.length})`
+                    : lang === "mr"
+                    ? `पात्र योजना (${response.eligibleSchemes.length})`
+                    : `Eligible Schemes (${response.eligibleSchemes.length})`}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -192,7 +196,9 @@ export default function ExplainableAIChat() {
                     <p className="text-sm mb-3">{result.scheme.benefits}</p>
                     
                     <div className="space-y-2">
-                      <p className="text-sm font-semibold">Why you're eligible:</p>
+                      <p className="text-sm font-semibold">
+                        {lang === "hi" ? "आप पात्र क्यों हैं:" : lang === "mr" ? "तुम्ही पात्र का आहात:" : "Why you're eligible:"}
+                      </p>
                       {result.reasons.filter(r => r.startsWith('✓')).map((reason, i) => (
                         <div key={i} className="flex items-start gap-2 text-sm">
                           <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
@@ -202,7 +208,9 @@ export default function ExplainableAIChat() {
                     </div>
                     
                     <div className="mt-3 pt-3 border-t border-green-200">
-                      <p className="text-sm font-semibold mb-2">Required Documents:</p>
+                      <p className="text-sm font-semibold mb-2">
+                        {lang === "hi" ? "आवश्यक दस्तावेज़:" : lang === "mr" ? "आवश्यक कागदपत्रे:" : "Required Documents:"}
+                      </p>
                       <div className="flex flex-wrap gap-2">
                         {result.scheme.requiredDocuments.map((doc, i) => (
                           <Badge key={i} variant="outline" className="text-xs">
@@ -217,7 +225,7 @@ export default function ExplainableAIChat() {
                       className="mt-3 w-full bg-green-600 hover:bg-green-700"
                       onClick={() => window.open(result.scheme.officialLink, '_blank')}
                     >
-                      Apply Now
+                      {lang === "hi" ? "अभी आवेदन करें" : lang === "mr" ? "आता अर्ज करा" : "Apply Now"}
                       <ExternalLink className="w-4 h-4 ml-2" />
                     </Button>
                   </div>
@@ -232,7 +240,11 @@ export default function ExplainableAIChat() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-red-700">
                   <XCircle className="w-5 h-5" />
-                  Not Eligible Schemes ({response.notEligibleSchemes.length})
+                  {lang === "hi" 
+                    ? `अपात्र योजनाएं (${response.notEligibleSchemes.length})`
+                    : lang === "mr"
+                    ? `अपात्र योजना (${response.notEligibleSchemes.length})`
+                    : `Not Eligible Schemes (${response.notEligibleSchemes.length})`}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -246,7 +258,9 @@ export default function ExplainableAIChat() {
                     </div>
                     
                     <div className="space-y-2">
-                      <p className="text-sm font-semibold">Why you're not eligible:</p>
+                      <p className="text-sm font-semibold">
+                        {lang === "hi" ? "आप पात्र क्यों नहीं हैं:" : lang === "mr" ? "तुम्ही पात्र का नाही:" : "Why you're not eligible:"}
+                      </p>
                       {result.reasons.filter(r => r.startsWith('✗')).map((reason, i) => (
                         <div key={i} className="flex items-start gap-2 text-sm">
                           <XCircle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
@@ -256,7 +270,9 @@ export default function ExplainableAIChat() {
                       
                       {result.missingInfo.length > 0 && (
                         <div className="mt-2">
-                          <p className="text-sm font-semibold text-orange-700">Missing Information:</p>
+                          <p className="text-sm font-semibold text-orange-700">
+                            {lang === "hi" ? "गुम जानकारी:" : lang === "mr" ? "गहाळ माहिती:" : "Missing Information:"}
+                          </p>
                           {result.missingInfo.map((info, i) => (
                             <div key={i} className="flex items-start gap-2 text-sm text-orange-600">
                               <HelpCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
@@ -278,7 +294,11 @@ export default function ExplainableAIChat() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-orange-700">
                   <HelpCircle className="w-5 h-5" />
-                  To Find More Schemes, Please Answer:
+                  {lang === "hi" 
+                    ? "अधिक योजनाएं खोजने के लिए, कृपया उत्तर दें:"
+                    : lang === "mr"
+                    ? "अधिक योजना शोधण्यासाठी, कृपया उत्तर द्या:"
+                    : "To Find More Schemes, Please Answer:"}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -300,17 +320,31 @@ export default function ExplainableAIChat() {
       {!response && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Try These Examples:</CardTitle>
+            <CardTitle className="text-lg">
+              {lang === "hi" ? "ये उदाहरण आज़माएं:" : lang === "mr" ? "हे उदाहरणे वापरून पहा:" : "Try These Examples:"}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-2">
-              {[
+              {(lang === "hi" ? [
+                "मुझे कॉलेज के लिए छात्रवृत्ति चाहिए",
+                "स्वास्थ्य बीमा योजनाएं दिखाएं",
+                "मुझे किसान योजना चाहिए",
+                "कम आय के लिए आवास योजनाएं",
+                "व्यवसाय ऋण योजनाएं"
+              ] : lang === "mr" ? [
+                "मला महाविद्यालयासाठी शिष्यवृत्ती हवी",
+                "आरोग्य विमा योजना दाखवा",
+                "मला शेतकरी योजना हवी",
+                "कमी उत्पन्नासाठी गृहनिर्माण योजना",
+                "व्यवसाय कर्ज योजना"
+              ] : [
                 "I need scholarship for college",
                 "Show me health insurance schemes",
                 "मुझे किसान योजना चाहिए",
                 "Housing schemes for low income",
                 "Business loan schemes"
-              ].map((example, idx) => (
+              ]).map((example, idx) => (
                 <Button
                   key={idx}
                   variant="outline"
