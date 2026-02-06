@@ -59,6 +59,9 @@ export interface Helpline {
   category: "Emergency" | "Government" | "Health" | "Education" | "General";
 }
 
+// Import 50 real government schemes
+import { integratedSchemes } from './schemesIntegrated';
+
 // Sample schemes data - Comprehensive list of Indian Government Schemes
 export const schemes: Scheme[] = [
   {
@@ -782,7 +785,9 @@ export const schemes: Scheme[] = [
     tags: ["housing", "subsidy", "welfare", "loan"],
     isActive: true,
     lastUpdated: "2024-01-15"
-  }
+  },
+  // Merge 50 real government schemes with official links
+  ...integratedSchemes
 ];
 
 // Helplines data
