@@ -41,6 +41,78 @@ export type Database = {
         }
         Relationships: []
       }
+      scholarship_queries: {
+        Row: {
+          id: string
+          user_id: string | null
+          query_text: string
+          query_language: string
+          user_profile: Json | null
+          ai_response: Json | null
+          eligible_schemes: Json | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          query_text: string
+          query_language?: string
+          user_profile?: Json | null
+          ai_response?: Json | null
+          eligible_schemes?: Json | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          query_text?: string
+          query_language?: string
+          user_profile?: Json | null
+          ai_response?: Json | null
+          eligible_schemes?: Json | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      government_data_cache: {
+        Row: {
+          id: string
+          data_source: string
+          data_type: string
+          raw_data: Json
+          normalized_data: Json
+          fetch_date: string
+          last_updated: string
+          is_active: boolean
+          metadata: Json | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          data_source: string
+          data_type: string
+          raw_data: Json
+          normalized_data: Json
+          fetch_date?: string
+          last_updated?: string
+          is_active?: boolean
+          metadata?: Json | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          data_source?: string
+          data_type?: string
+          raw_data?: Json
+          normalized_data?: Json
+          fetch_date?: string
+          last_updated?: string
+          is_active?: boolean
+          metadata?: Json | null
+          created_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string

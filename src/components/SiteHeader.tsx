@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLang } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLowBandwidth } from "@/contexts/LowBandwidthContext";
 import { ThemeToggle } from "./ThemeToggle";
 import { 
   Menu, 
@@ -21,13 +22,16 @@ import {
   Users,
   BookOpen,
   HelpCircle,
-  Globe
+  Globe,
+  Wifi,
+  WifiOff
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function SiteHeader() {
   const { t, lang, setLang, getLanguageName, getAllLanguages } = useLang();
   const { user, signOut } = useAuth();
+  const { isLowBandwidth, toggleLowBandwidth } = useLowBandwidth();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -168,6 +172,29 @@ export default function SiteHeader() {
 
             {/* Theme Toggle */}
             <ThemeToggle />
+
+            {/* Low Bandwidth Toggle */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={toggleLowBandwidth}
+              className={cn(
+                "hidden sm:flex items-center space-x-1",
+                isLowBandwidth && "border-green-500 bg-green-50 text-green-700"
+              )}
+              title={isLowBandwidth ? "Disable Low Bandwidth Mode" : "Enable Low Bandwidth Mode"}
+            >
+              {isLowBandwidth ? (
+                <>
+                  <WifiOff className="w-4 h-4" />
+                  <span className="text-xs">Low BW</span>
+                </>
+              ) : (
+                <>
+                  <Wifi className="w-4 h-4" />
+                </>
+              )}
+            </Button>
 
             {/* User Menu */}
             {user ? (

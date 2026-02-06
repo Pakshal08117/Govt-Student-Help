@@ -6,6 +6,116 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Low Bandwidth Mode Styles */
+.low-bandwidth-mode {
+  /* Disable all animations and transitions */
+  * {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+  
+  /* Hide all images */
+  img:not([data-keep-in-low-bandwidth]) {
+    display: none !important;
+  }
+  
+  /* Hide background images */
+  [style*="background-image"]:not([data-keep-in-low-bandwidth]) {
+    background-image: none !important;
+  }
+  
+  /* Simplify gradients to solid colors */
+  .bg-gradient-to-r,
+  .bg-gradient-to-l,
+  .bg-gradient-to-t,
+  .bg-gradient-to-b,
+  .bg-gradient-to-br,
+  .bg-gradient-to-bl,
+  .bg-gradient-to-tr,
+  .bg-gradient-to-tl {
+    background-image: none !important;
+    background-color: #f3f4f6 !important;
+  }
+  
+  /* Remove shadows */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  /* Simplify borders */
+  * {
+    border-radius: 0.25rem !important;
+  }
+  
+  /* Remove hover effects */
+  *:hover {
+    transform: none !important;
+    scale: 1 !important;
+  }
+  
+  /* Hide decorative icons (keep functional ones) */
+  svg[data-decorative="true"] {
+    display: none !important;
+  }
+  
+  /* Simplify cards */
+  .card,
+  [class*="Card"] {
+    border: 1px solid #d1d5db !important;
+    background: white !important;
+  }
+  
+  /* Reduce padding/margins for compact layout */
+  .container {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  
+  /* Simplify buttons */
+  button,
+  .btn,
+  [class*="Button"] {
+    background: #3b82f6 !important;
+    color: white !important;
+    border: 1px solid #2563eb !important;
+    padding: 0.5rem 1rem !important;
+  }
+  
+  button:disabled {
+    background: #9ca3af !important;
+    border-color: #6b7280 !important;
+  }
+  
+  /* Text-only mode for content */
+  .low-bandwidth-text-only {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    color: #1f2937;
+  }
+}
+
+/* Low Bandwidth Mode Indicator */
+.low-bandwidth-indicator {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: #10b981;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 9999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.low-bandwidth-mode .low-bandwidth-indicator {
+  box-shadow: none !important;
+}
+
 @layer base {
   :root {
     /* Government India Official Color Palette */

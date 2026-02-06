@@ -899,8 +899,9 @@ const teluguStrings: Record<string, string> = {
   aboutBody: "ఈ వేదిక భారతదేశం అంతటా విద్యార్థులు మరియు పౌరులు ప్రభుత్వ పథకాలు, స్కాలర్‌షిప్‌లు మరియు సేవలను కనుగొనడంలో సహాయపడుతుంది।",
 };
 
-// Gujarati translations (key ones)
+// Gujarati translations (comprehensive)
 const gujaratiStrings: Record<string, string> = {
+  ...englishStrings,
   home: "હોમ",
   services: "સેવાઓ",
   about: "વિશે",
@@ -910,6 +911,13 @@ const gujaratiStrings: Record<string, string> = {
   students: "વિદ્યાર્થીઓ",
   citizens: "નાગરિકો",
   schemeApplicants: "યોજના અરજદારો",
+  govInitiative: "ભારત સરકારની પહેલ",
+  govAndStudent: "સરકારી અને વિદ્યાર્થી",
+  helpPlatform: "સહાય પ્લેટફોર્મ",
+  oneStopAssistance: "ભારતભરના વિદ્યાર્થીઓ અને નાગરિકો માટે એકીકૃત સહાય",
+  exploreAllSchemes: "બધી યોજનાઓ શોધો",
+  whoAreYou: "તમે કોણ છો?",
+  viewSchemes: "યોજનાઓ જુઓ",
   search: "શોધો",
   health: "આરોગ્ય",
   education: "શિક્ષણ",
@@ -917,7 +925,6 @@ const gujaratiStrings: Record<string, string> = {
   scholarship: "શિષ્યવૃત્તિ",
   welfare: "કલ્યાણ",
   employment: "રોજગાર",
-  lang: "EN/हि",
   schemes: "યોજનાઓ",
   apply: "અરજી કરો",
   eligibility: "પાત્રતા",
@@ -932,8 +939,9 @@ const gujaratiStrings: Record<string, string> = {
   aboutBody: "આ પ્લેટફોર્મ ભારતભરના વિદ્યાર્થીઓ અને નાગરિકોને સરકારી યોજનાઓ, શિષ્યવૃત્તિઓ અને સેવાઓ શોધવામાં મદદ કરે છે।",
 };
 
-// Kannada translations (key ones)
+// Kannada translations (comprehensive)
 const kannadaStrings: Record<string, string> = {
+  ...englishStrings,
   home: "ಮುಖ್ಯ ಪುಟ",
   services: "ಸೇವೆಗಳು",
   about: "ಬಗ್ಗೆ",
@@ -943,6 +951,13 @@ const kannadaStrings: Record<string, string> = {
   students: "ವಿದ್ಯಾರ್ಥಿಗಳು",
   citizens: "ನಾಗರಿಕರು",
   schemeApplicants: "ಯೋಜನೆ ಅರ್ಜಿದಾರರು",
+  govInitiative: "ಭಾರತ ಸರ್ಕಾರದ ಉಪಕ್ರಮ",
+  govAndStudent: "ಸರ್ಕಾರಿ ಮತ್ತು ವಿದ್ಯಾರ್ಥಿ",
+  helpPlatform: "ಸಹಾಯ ವೇದಿಕೆ",
+  oneStopAssistance: "ಭಾರತದಾದ್ಯಂತ ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ನಾಗರಿಕರಿಗೆ ಏಕೀಕೃತ ಸಹಾಯ",
+  exploreAllSchemes: "ಎಲ್ಲಾ ಯೋಜನೆಗಳನ್ನು ಅನ್ವೇಷಿಸಿ",
+  whoAreYou: "ನೀವು ಯಾರು?",
+  viewSchemes: "ಯೋಜನೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ",
   search: "ಹುಡುಕಿ",
   health: "ಆರೋಗ್ಯ",
   education: "ಶಿಕ್ಷಣ",
@@ -950,7 +965,6 @@ const kannadaStrings: Record<string, string> = {
   scholarship: "ವಿದ್ಯಾರ್ಥಿವೇತನ",
   welfare: "ಕಲ್ಯಾಣ",
   employment: "ಉದ್ಯೋಗ",
-  lang: "EN/हि",
   schemes: "ಯೋಜನೆಗಳು",
   apply: "ಅರ್ಜಿ ಸಲ್ಲಿಸಿ",
   eligibility: "ಅರ್ಹತೆ",
@@ -965,8 +979,9 @@ const kannadaStrings: Record<string, string> = {
   aboutBody: "ಈ ವೇದಿಕೆಯು ಭಾರತದಾದ್ಯಂತ ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ನಾಗರಿಕರು ಸರ್ಕಾರಿ ಯೋಜನೆಗಳು, ವಿದ್ಯಾರ್ಥಿವೇತನಗಳು ಮತ್ತು ಸೇವೆಗಳನ್ನು ಕಂಡುಹಿಡಿಯಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ।",
 };
 
-// Malayalam translations (key ones)
+// Malayalam translations (comprehensive)
 const malayalamStrings: Record<string, string> = {
+  ...englishStrings,
   home: "ഹോം",
   services: "സേവനങ്ങൾ",
   about: "കുറിച്ച്",
@@ -976,6 +991,13 @@ const malayalamStrings: Record<string, string> = {
   students: "വിദ്യാർത്ഥികൾ",
   citizens: "പൗരന്മാർ",
   schemeApplicants: "പദ്ധതി അപേക്ഷകർ",
+  govInitiative: "ഇന്ത്യാ ഗവൺമെന്റ് സംരംഭം",
+  govAndStudent: "സർക്കാർ, വിദ്യാർത്ഥി",
+  helpPlatform: "സഹായ പ്ലാറ്റ്ഫോം",
+  oneStopAssistance: "ഇന്ത്യയിലുടനീളമുള്ള വിദ്യാർത്ഥികൾക്കും പൗരന്മാർക്കും സമഗ്ര സഹായം",
+  exploreAllSchemes: "എല്ലാ പദ്ധതികളും പര്യവേക്ഷണം ചെയ്യുക",
+  whoAreYou: "നിങ്ങൾ ആരാണ്?",
+  viewSchemes: "പദ്ധതികൾ കാണുക",
   search: "തിരയുക",
   health: "ആരോഗ്യം",
   education: "വിദ്യാഭ്യാസം",
@@ -983,7 +1005,6 @@ const malayalamStrings: Record<string, string> = {
   scholarship: "സ്കോളർഷിപ്പ്",
   welfare: "ക്ഷേമം",
   employment: "തൊഴിൽ",
-  lang: "EN/हि",
   schemes: "പദ്ധതികൾ",
   apply: "അപേക്ഷിക്കുക",
   eligibility: "യോഗ്യത",
@@ -998,8 +1019,9 @@ const malayalamStrings: Record<string, string> = {
   aboutBody: "ഈ പ്ലാറ്റ്ഫോം ഇന്ത്യയിലുടനീളമുള്ള വിദ്യാർത്ഥികളെയും പൗരന്മാരെയും സർക്കാർ പദ്ധതികൾ, സ്കോളർഷിപ്പുകൾ, സേവനങ്ങൾ എന്നിവ കണ്ടെത്താൻ സഹായിക്കുന്നു।",
 };
 
-// Punjabi translations (key ones)
+// Punjabi translations (comprehensive)
 const punjabiStrings: Record<string, string> = {
+  ...englishStrings,
   home: "ਘਰ",
   services: "ਸੇਵਾਵਾਂ",
   about: "ਬਾਰੇ",
@@ -1009,6 +1031,13 @@ const punjabiStrings: Record<string, string> = {
   students: "ਵਿਦਿਆਰਥੀ",
   citizens: "ਨਾਗਰਿਕ",
   schemeApplicants: "ਸਕੀਮ ਅਰਜ਼ੀਦਾਰ",
+  govInitiative: "ਭਾਰਤ ਸਰਕਾਰ ਦੀ ਪਹਿਲਕਦਮੀ",
+  govAndStudent: "ਸਰਕਾਰੀ ਅਤੇ ਵਿਦਿਆਰਥੀ",
+  helpPlatform: "ਸਹਾਇਤਾ ਪਲੇਟਫਾਰਮ",
+  oneStopAssistance: "ਭਾਰਤ ਭਰ ਦੇ ਵਿਦਿਆਰਥੀਆਂ ਅਤੇ ਨਾਗਰਿਕਾਂ ਲਈ ਏਕੀਕ੍ਰਿਤ ਸਹਾਇਤਾ",
+  exploreAllSchemes: "ਸਾਰੀਆਂ ਸਕੀਮਾਂ ਦੀ ਪੜਚੋਲ ਕਰੋ",
+  whoAreYou: "ਤੁਸੀਂ ਕੌਣ ਹੋ?",
+  viewSchemes: "ਸਕੀਮਾਂ ਦੇਖੋ",
   search: "ਖੋਜੋ",
   health: "ਸਿਹਤ",
   education: "ਸਿੱਖਿਆ",
@@ -1016,7 +1045,6 @@ const punjabiStrings: Record<string, string> = {
   scholarship: "ਸਕਾਲਰਸ਼ਿਪ",
   welfare: "ਭਲਾਈ",
   employment: "ਰੁਜ਼ਗਾਰ",
-  lang: "EN/हि",
   schemes: "ਸਕੀਮਾਂ",
   apply: "ਅਰਜ਼ੀ ਦਿਓ",
   eligibility: "ਯੋਗਤਾ",
@@ -1031,8 +1059,9 @@ const punjabiStrings: Record<string, string> = {
   aboutBody: "ਇਹ ਪਲੇਟਫਾਰਮ ਭਾਰਤ ਭਰ ਦੇ ਵਿਦਿਆਰਥੀਆਂ ਅਤੇ ਨਾਗਰਿਕਾਂ ਨੂੰ ਸਰਕਾਰੀ ਸਕੀਮਾਂ, ਸਕਾਲਰਸ਼ਿਪਾਂ ਅਤੇ ਸੇਵਾਵਾਂ ਲੱਭਣ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ।",
 };
 
-// Odia translations (key ones)
+// Odia translations (comprehensive)
 const odiaStrings: Record<string, string> = {
+  ...englishStrings,
   home: "ଘର",
   services: "ସେବାଗୁଡ଼ିକ",
   about: "ବିଷୟରେ",
@@ -1042,6 +1071,13 @@ const odiaStrings: Record<string, string> = {
   students: "ଛାତ୍ରଛାତ୍ରୀ",
   citizens: "ନାଗରିକ",
   schemeApplicants: "ଯୋଜନା ଆବେଦନକାରୀ",
+  govInitiative: "ଭାରତ ସରକାରଙ୍କ ପଦକ୍ଷେପ",
+  govAndStudent: "ସରକାରୀ ଓ ଛାତ୍ର",
+  helpPlatform: "ସହାୟତା ପ୍ଲାଟଫର୍ମ",
+  oneStopAssistance: "ଭାରତର ଛାତ୍ର ଏବଂ ନାଗରିକମାନଙ୍କ ପାଇଁ ଏକୀକୃତ ସହାୟତା",
+  exploreAllSchemes: "ସମସ୍ତ ଯୋଜନା ଅନ୍ବେଷଣ କରନ୍ତୁ",
+  whoAreYou: "ଆପଣ କିଏ?",
+  viewSchemes: "ଯୋଜନାଗୁଡ଼ିକ ଦେଖନ୍ତୁ",
   search: "ଖୋଜନ୍ତୁ",
   health: "ସ୍ୱାସ୍ଥ୍ୟ",
   education: "ଶିକ୍ଷା",
@@ -1049,7 +1085,6 @@ const odiaStrings: Record<string, string> = {
   scholarship: "ଛାତ୍ରବୃତ୍ତି",
   welfare: "କଲ୍ୟାଣ",
   employment: "ନିଯୁକ୍ତି",
-  lang: "EN/हि",
   schemes: "ଯୋଜନାଗୁଡ଼ିକ",
   apply: "ଆବେଦନ କରନ୍ତୁ",
   eligibility: "ଯୋଗ୍ୟତା",
@@ -1064,8 +1099,9 @@ const odiaStrings: Record<string, string> = {
   aboutBody: "ଏହି ପ୍ଲାଟଫର୍ମ ଭାରତର ଛାତ୍ର ଏବଂ ନାଗରିକମାନଙ୍କୁ ସରକାରୀ ଯୋଜନା, ଛାତ୍ରବୃତ୍ତି ଏବଂ ସେବା ଖୋଜିବାରେ ସାହାଯ୍ୟ କରେ।",
 };
 
-// Assamese translations (key ones)
+// Assamese translations (comprehensive)
 const assameseStrings: Record<string, string> = {
+  ...englishStrings,
   home: "ঘৰ",
   services: "সেৱাসমূহ",
   about: "বিষয়ে",
@@ -1075,6 +1111,13 @@ const assameseStrings: Record<string, string> = {
   students: "ছাত্ৰ-ছাত্ৰী",
   citizens: "নাগৰিক",
   schemeApplicants: "আঁচনি আবেদনকাৰী",
+  govInitiative: "ভাৰত চৰকাৰৰ পদক্ষেপ",
+  govAndStudent: "চৰকাৰী আৰু ছাত্ৰ",
+  helpPlatform: "সহায় মঞ্চ",
+  oneStopAssistance: "ভাৰতৰ ছাত্ৰ আৰু নাগৰিকসকলৰ বাবে একীভূত সহায়",
+  exploreAllSchemes: "সকলো আঁচনি অন্বেষণ কৰক",
+  whoAreYou: "আপুনি কোন?",
+  viewSchemes: "আঁচনিসমূহ চাওক",
   search: "বিচাৰক",
   health: "স্বাস্থ্য",
   education: "শিক্ষা",
@@ -1082,14 +1125,13 @@ const assameseStrings: Record<string, string> = {
   scholarship: "বৃত্তি",
   welfare: "কল্যাণ",
   employment: "নিয়োগ",
-  lang: "EN/हि",
   schemes: "আঁচনিসমূহ",
   apply: "আবেদন কৰক",
   eligibility: "যোগ্যতা",
   pending: "বিচাৰাধীন",
   approved: "অনুমোদিত",
   rejected: "প্ৰত্যাখ্যান",
-  contactTitle: "আমাৰ লগত যোগাযোগ কৰক",
+  contactTitle: "আমাৰ সৈতে যোগাযোগ কৰক",
   name: "নাম",
   message: "বাৰ্তা",
   submit: "দাখিল কৰক",

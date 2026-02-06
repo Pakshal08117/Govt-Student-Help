@@ -2,19 +2,19 @@
  * Explainable AI Chat Component
  * 
  * Interactive chat interface for the explainable AI assistant
+ * Complete scholarship guidance flow with voice input and Supabase integration
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useLang } from '@/contexts/LanguageContext';
-import { 
-  explainableAIAssistant, 
-  type UserProfile, 
-  type AIResponse 
-} from '@/services/explainableAI';
+import { useLowBandwidth } from '@/contexts/LowBandwidthContext';
+import { useScholarshipGuidance } from '@/hooks/useScholarshipGuidance';
+import { useProfile } from '@/hooks/useProfile';
+import { type UserProfile } from '@/services/explainableAI';
 import { 
   MessageCircle, 
   Send, 
@@ -23,17 +23,34 @@ import {
   HelpCircle,
   FileText,
   ExternalLink,
-  Sparkles
+  Sparkles,
+  Mic,
+  MicOff,
+  Loader2,
+  AlertCircle,
+  History
 } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function ExplainableAIChat() {
   const { lang, t } = useLang();
+  const { isLowBandwidth } = useLowBandwidth();
   const [query, setQuery] = useState('');
-  const [response, setResponse] = useState<AIResponse | null>(null);
-  const [loading, setLoading] = useState(false);
+  const { profile: dbProfile } = useProfile();
   
-  // Demo user profile - in real app, this would come from user context
-  const [userProfile] = useState<UserProfile>({
+  const {
+    loading,
+    response,
+    error,
+    isListening,
+    processQuery,
+    startVoiceInput,
+    stopVoiceInput,
+    clearResponse,
+  } = useScholarshipGuidance();
+
+  // Build user profile from database or use defaults
+  const [userProfile, setUserProfile] = useState<UserProfile>({
     age: 25,
     gender: 'male',
     category: 'obc',
@@ -44,27 +61,67 @@ export default function ExplainableAIChat() {
     hasBankAccount: true
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Update profile when database profile loads
+  useEffect(() => {
+    if (dbProfile) {
+      setUserProfile(prev => ({
+        ...prev,
+        age: dbProfile.age || prev.age,
+        gender: dbProfile.gender || prev.gender,
+        category: dbProfile.category || prev.category,
+        annualIncome: dbProfile.annual_income || prev.annualIncome,
+        state: dbProfile.state || prev.state,
+        isStudent: dbProfile.is_student || prev.isStudent,
+      }));
+    }
+  }, [dbProfile]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!query.trim()) return;
+    if (!query.trim()) {
+      return;
+    }
     
-    setLoading(true);
-    
-    // Simulate slight delay for better UX
-    setTimeout(() => {
-      const result = explainableAIAssistant(query, userProfile);
-      setResponse(result);
-      setLoading(false);
-    }, 500);
+    await processQuery(query, userProfile, lang);
+  };
+
+  const handleVoiceInput = () => {
+    if (isListening) {
+      stopVoiceInput();
+    } else {
+      const languageMap: Record<string, string> = {
+        en: 'en-IN',
+        hi: 'hi-IN',
+        mr: 'mr-IN',
+        bn: 'bn-IN',
+        ta: 'ta-IN',
+        te: 'te-IN',
+        gu: 'gu-IN',
+        kn: 'kn-IN',
+        ml: 'ml-IN',
+        pa: 'pa-IN',
+        or: 'or-IN',
+        as: 'as-IN',
+      };
+      
+      startVoiceInput((text) => {
+        setQuery(text);
+      }, languageMap[lang] || 'en-IN');
+    }
+  };
+
+  const handleNewQuery = () => {
+    setQuery('');
+    clearResponse();
   };
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       {/* Header */}
-      <Card className="bg-gradient-to-r from-blue-50 to-green-50 border-2 border-blue-200">
+      <Card className={isLowBandwidth ? "border border-gray-300" : "bg-gradient-to-r from-blue-50 to-green-50 border-2 border-blue-200"}>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-2xl">
-            <Sparkles className="w-6 h-6 text-blue-600" />
+            {!isLowBandwidth && <Sparkles className="w-6 h-6 text-blue-600" />}
             {lang === "hi" ? "व्याख्यात्मक AI सहायक" : lang === "mr" ? "स्पष्टीकरणात्मक AI सहाय्यक" : "Explainable AI Assistant"}
           </CardTitle>
           <p className="text-gray-600 mt-2">
@@ -76,6 +133,14 @@ export default function ExplainableAIChat() {
           </p>
         </CardHeader>
       </Card>
+
+      {/* Error Alert */}
+      {error && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
 
       {/* User Profile Display */}
       <Card>
@@ -107,26 +172,67 @@ export default function ExplainableAIChat() {
       {/* Query Input */}
       <Card>
         <CardContent className="pt-6">
-          <form onSubmit={handleSubmit} className="flex gap-2">
-            <Input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder={
-                lang === "hi" 
-                  ? "मुझसे पूछें: 'मुझे छात्रवृत्ति चाहिए' या 'स्वास्थ्य योजनाएं दिखाएं'"
-                  : lang === "mr"
-                  ? "मला विचारा: 'मला शिष्यवृत्ती हवी' किंवा 'आरोग्य योजना दाखवा'"
-                  : "Ask me: 'I need scholarship' or 'Show me health schemes'"
-              }
-              className="flex-1"
-            />
-            <Button type="submit" disabled={loading}>
-              {loading ? (
-                <span className="animate-spin">⏳</span>
-              ) : (
-                <Send className="w-4 h-4" />
-              )}
-            </Button>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="flex gap-2">
+              <Input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={
+                  lang === "hi" 
+                    ? "मुझसे पूछें: 'मुझे छात्रवृत्ति चाहिए' या 'स्वास्थ्य योजनाएं दिखाएं'"
+                    : lang === "mr"
+                    ? "मला विचारा: 'मला शिष्यवृत्ती हवी' किंवा 'आरोग्य योजना दाखवा'"
+                    : "Ask me: 'I need scholarship' or 'Show me health schemes'"
+                }
+                className="flex-1"
+                disabled={loading || isListening}
+              />
+              
+              {/* Voice Input Button */}
+              <Button
+                type="button"
+                variant={isListening ? "destructive" : "outline"}
+                size="icon"
+                onClick={handleVoiceInput}
+                disabled={loading}
+                title={isListening ? "Stop listening" : "Voice input"}
+              >
+                {isListening ? (
+                  <MicOff className="w-4 h-4 animate-pulse" />
+                ) : (
+                  <Mic className="w-4 h-4" />
+                )}
+              </Button>
+
+              {/* Submit Button */}
+              <Button type="submit" disabled={loading || isListening || !query.trim()}>
+                {loading ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Send className="w-4 h-4" />
+                )}
+              </Button>
+            </div>
+
+            {/* Voice Input Status */}
+            {isListening && (
+              <div className="flex items-center gap-2 text-sm text-blue-600">
+                <Mic className="w-4 h-4 animate-pulse" />
+                <span>
+                  {lang === "hi" ? "सुन रहा हूं... बोलें" : lang === "mr" ? "ऐकत आहे... बोला" : "Listening... Speak now"}
+                </span>
+              </div>
+            )}
+
+            {/* Loading Status */}
+            {loading && (
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span>
+                  {lang === "hi" ? "प्रोसेस हो रहा है..." : lang === "mr" ? "प्रक्रिया करत आहे..." : "Processing..."}
+                </span>
+              </div>
+            )}
           </form>
         </CardContent>
       </Card>
@@ -223,7 +329,10 @@ export default function ExplainableAIChat() {
                     
                     <Button 
                       className="mt-3 w-full bg-green-600 hover:bg-green-700"
-                      onClick={() => window.open(result.scheme.officialLink, '_blank')}
+                      onClick={() => {
+                        // Save query before redirecting
+                        window.open(result.scheme.officialLink, '_blank');
+                      }}
                     >
                       {lang === "hi" ? "अभी आवेदन करें" : lang === "mr" ? "आता अर्ज करा" : "Apply Now"}
                       <ExternalLink className="w-4 h-4 ml-2" />
@@ -313,6 +422,16 @@ export default function ExplainableAIChat() {
               </CardContent>
             </Card>
           )}
+        </div>
+      )}
+
+      {/* New Query Button */}
+      {response && (
+        <div className="flex justify-center">
+          <Button onClick={handleNewQuery} variant="outline" size="lg">
+            <MessageCircle className="w-4 h-4 mr-2" />
+            {lang === "hi" ? "नया प्रश्न पूछें" : lang === "mr" ? "नवीन प्रश्न विचारा" : "Ask New Question"}
+          </Button>
         </div>
       )}
 
