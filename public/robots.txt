@@ -1,0 +1,30 @@
+# robots.txt for Government & Student Help Platform
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+
+# Sitemap location
+Sitemap: https://govt-student-help.vercel.app/sitemap.xml
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Crawl delay (optional, helps prevent server overload)
+Crawl-delay: 1

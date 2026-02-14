@@ -1,0 +1,764 @@
+/* Indian Government Design System - Official Colors & Typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Essential Mode - Government-Grade Professional UI */
+.essential-mode {
+  /* White background only */
+  background: white !important;
+  
+  /* Disable animations */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  /* Remove gradients - use white background */
+  .bg-gradient-to-r,
+  .bg-gradient-to-l,
+  .bg-gradient-to-t,
+  .bg-gradient-to-b,
+  .bg-gradient-to-br,
+  .bg-gradient-to-bl,
+  .bg-gradient-to-tr,
+  .bg-gradient-to-tl {
+    background-image: none !important;
+    background-color: white !important;
+  }
+  
+  /* Replace shadows with borders */
+  * {
+    box-shadow: none !important;
+  }
+  
+  /* Cards with borders instead of shadows */
+  [class*="Card"],
+  [class*="card"] {
+    border: 1px solid #d1d5db !important;
+    background: white !important;
+  }
+  
+  /* System font */
+  * {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  }
+  
+  /* Minimum font size */
+  body {
+    font-size: 14px !important;
+  }
+  
+  /* Text-first layout - maintain spacing */
+  .container {
+    max-width: 100% !important;
+  }
+  
+  /* Voice input button emphasis */
+  button[title*="Voice"],
+  button[title*="voice"],
+  button[aria-label*="Voice"],
+  button[aria-label*="voice"] {
+    border: 2px solid #2563eb !important;
+    background: #eff6ff !important;
+  }
+}
+
+@layer base {
+  :root {
+    /* Orange and White Color Palette */
+    --color-primary-bg: #FFFFFF;      /* White - Primary Background */
+    --color-secondary-bg: #FF6B35;    /* Orange - Secondary Background */
+    --color-accent-bg: #FF8C42;       /* Light Orange - Accent Background */
+    --color-text-emphasis: #000000;   /* Black - Text Emphasis */
+    
+    /* HSL equivalents for Tailwind */
+    --primary-bg: 0 0% 100%;          /* White in HSL */
+    --secondary-bg: 14 100% 60%;      /* Orange in HSL */
+    --accent-bg: 22 100% 63%;         /* Light Orange in HSL */
+    --text-emphasis: 0 0% 0%;         /* Black in HSL */
+    
+    /* Base theme colors using new palette */
+    --background: 0 0% 100%; /* White background */
+    --foreground: 0 0% 0%; /* Black text */
+    --card: 0 0% 100%; /* White for cards */
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    
+    /* Primary: Orange */
+    --primary: 14 100% 60%; /* Orange */
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary: Light Orange */
+    --secondary: 22 100% 63%; /* Light Orange */
+    --secondary-foreground: 0 0% 0%;
+    
+    /* Accent: Orange */
+    --accent: 14 100% 60%; /* Orange */
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 14 100% 60%;
+    --input: 0 0% 90%;
+    --ring: 14 100% 60%;
+    --radius: 0.5rem;
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 14 100% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 22 100% 63%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 14 100% 60%;
+    --sidebar-ring: 14 100% 60%;
+
+    /* Design tokens with new palette */
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(22 100% 95%) 50%, hsl(14 100% 90%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(22 100% 98%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(14 100% 60%) 0%, hsl(22 100% 63%) 100%);
+    --shadow-warm: 0 4px 12px -2px hsl(14 100% 60% / 0.15);
+    --shadow-card: 0 2px 8px -1px hsl(0 0% 0% / 0.08);
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    /* Dark Mode - Orange and Dark Background */
+    --color-primary-bg: #1A1A1A;      /* Dark background */
+    --color-secondary-bg: #FF6B35;    /* Orange stays same */
+    --color-accent-bg: #FF8C42;       /* Light Orange stays same */
+    --color-text-emphasis: #FFFFFF;   /* White for dark mode */
+    
+    --primary-bg: 0 0% 10%;
+    --secondary-bg: 14 100% 60%;
+    --accent-bg: 22 100% 63%;
+    --text-emphasis: 0 0% 100%;
+    
+    /* Dark Mode Theme */
+    --background: 0 0% 10%; /* Dark background */
+    --foreground: 0 0% 100%; /* White text */
+    --card: 0 0% 15%; /* Slightly lighter dark for cards */
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 15%;
+    --popover-foreground: 0 0% 100%;
+    
+    /* Primary: Orange */
+    --primary: 14 100% 60%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary: Light Orange */
+    --secondary: 22 100% 63%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Accent: Orange */
+    --accent: 14 100% 60%;
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 14 100% 60%;
+    --input: 0 0% 25%;
+    --ring: 14 100% 60%;
+    
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 14 100% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 22 100% 63%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 14 100% 60%;
+    --sidebar-ring: 14 100% 60%;
+    
+    /* Dark mode gradients */
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 10%) 0%, hsl(0 0% 15%) 50%, hsl(0 0% 20%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 15%) 0%, hsl(0 0% 18%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(14 100% 60%) 0%, hsl(22 100% 63%) 100%);
+    --shadow-warm: 0 4px 12px -2px hsl(14 100% 60% / 0.25);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 32;
+  }
+  
+  body {
+    @apply bg-background antialiased;
+    font-family: 'Inter', 'Noto Sans Devanagari', system-ui, sans-serif;
+  }
+  
+  /* Light mode ONLY - Make all text black and bold */
+  body:not(.dark) {
+    color: #000000 !important;
+    font-weight: 700 !important;
+  }
+  
+  body:not(.dark) *:not(.bg-orange-500):not(.bg-orange-600):not([class*="bg-gradient"]) {
+    color: #000000 !important;
+    font-weight: 700 !important;
+  }
+  
+  body:not(.dark) h1,
+  body:not(.dark) h2,
+  body:not(.dark) h3,
+  body:not(.dark) h4,
+  body:not(.dark) h5,
+  body:not(.dark) h6 {
+    color: #000000 !important;
+    font-weight: 900 !important;
+  }
+  
+  body:not(.dark) p,
+  body:not(.dark) span,
+  body:not(.dark) div,
+  body:not(.dark) a,
+  body:not(.dark) label,
+  body:not(.dark) li,
+  body:not(.dark) td,
+  body:not(.dark) th {
+    color: #000000 !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Override for white text on colored backgrounds in light mode */
+  body:not(.dark) .text-white,
+  body:not(.dark) button.bg-orange-500,
+  body:not(.dark) button.bg-orange-600,
+  body:not(.dark) button.bg-orange-500 *,
+  body:not(.dark) button.bg-orange-600 *,
+  body:not(.dark) .bg-orange-500 *,
+  body:not(.dark) .bg-orange-600 *,
+  body:not(.dark) .bg-gradient-to-r *,
+  body:not(.dark) [class*="bg-gradient"] *,
+  body:not(.dark) [class*="from-orange"] *,
+  body:not(.dark) [class*="from-yellow"] * {
+    color: #FFFFFF !important;
+  }
+  
+  /* Override gray text colors in light mode - force black */
+  body:not(.dark) .text-gray-600,
+  body:not(.dark) .text-gray-700,
+  body:not(.dark) .text-gray-500,
+  body:not(.dark) .text-gray-400,
+  body:not(.dark) .text-gray-300,
+  body:not(.dark) .text-muted-foreground {
+    color: #000000 !important;
+  }
+  
+  /* Dark mode - Make all text white and bold */
+  .dark {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+  }
+  
+  .dark *:not(.bg-orange-500):not(.bg-orange-600):not([class*="bg-gradient"]) {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+  }
+  
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    color: #FFFFFF !important;
+    font-weight: 900 !important;
+  }
+  
+  .dark p,
+  .dark span,
+  .dark div,
+  .dark a,
+  .dark label,
+  .dark li,
+  .dark td,
+  .dark th {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Override for white text on colored backgrounds in dark mode */
+  .dark .text-white,
+  .dark button.bg-orange-500,
+  .dark button.bg-orange-600,
+  .dark button.bg-orange-500 *,
+  .dark button.bg-orange-600 *,
+  .dark .bg-orange-500 *,
+  .dark .bg-orange-600 *,
+  .dark .bg-gradient-to-r *,
+  .dark [class*="bg-gradient"] *,
+  .dark [class*="from-orange"] *,
+  .dark [class*="from-yellow"] * {
+    color: #FFFFFF !important;
+  }
+  
+  /* Override gray text colors in dark mode - force white */
+  .dark .text-gray-600,
+  .dark .text-gray-700,
+  .dark .text-gray-500,
+  .dark .text-gray-400,
+  .dark .text-gray-300,
+  .dark .text-muted-foreground {
+    color: #FFFFFF !important;
+  }
+  
+  /* Special case: text that should be black in dark mode (rare) */
+  .dark .text-black {
+    color: #000000 !important;
+  }
+}
+
+/* Government UI Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse-slower {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(-5px) translateX(10px);
+  }
+  75% {
+    transform: translateY(-15px) translateX(5px);
+  }
+}
+
+@keyframes float-slower {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  33% {
+    transform: translateY(-8px) translateX(-5px);
+  }
+  66% {
+    transform: translateY(-12px) translateX(8px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@layer components {
+  /* Dashboard Text Styling - Bold Black Text */
+  .dashboard-text {
+    color: var(--color-text-emphasis);
+    font-weight: 700;
+  }
+
+  .dashboard-heading {
+    color: var(--color-text-emphasis);
+    font-weight: 700;
+  }
+
+  .dashboard-label {
+    color: var(--color-text-emphasis);
+    font-weight: 700;
+  }
+
+  .dashboard-stat {
+    color: var(--color-text-emphasis);
+    font-weight: 700;
+  }
+
+  /* Orange and White Component Styles */
+  .gov-card {
+    @apply bg-white border-2 border-secondary-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-200;
+  }
+
+  .gov-button-primary {
+    @apply text-white font-bold px-6 py-2.5 rounded-md transition-all duration-200 focus:ring-2 focus:ring-secondary-bg focus:ring-offset-2;
+    background: hsl(var(--secondary-bg));
+  }
+  
+  .dark .gov-button-primary {
+    background: hsl(var(--secondary-bg));
+  }
+
+  .gov-button-secondary {
+    @apply text-black font-bold px-6 py-2.5 rounded-md transition-all duration-200 focus:ring-2 focus:ring-accent-bg focus:ring-offset-2;
+    background: hsl(var(--accent-bg));
+  }
+  
+  .dark .gov-button-secondary {
+    background: hsl(var(--accent-bg));
+  }
+
+  .gov-button-accent {
+    @apply text-white font-bold px-6 py-2.5 rounded-md transition-all duration-200 focus:ring-2 focus:ring-secondary-bg focus:ring-offset-2;
+    background: hsl(var(--secondary-bg));
+  }
+  
+  .dark .gov-button-accent {
+    background: hsl(var(--secondary-bg));
+  }
+
+  .gov-input {
+    @apply border-2 border-secondary-bg rounded-md px-3 py-2 bg-white focus:ring-2 focus:ring-secondary-bg focus:border-secondary-bg transition-all duration-200;
+  }
+
+  .gov-badge-primary {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold;
+    background: hsl(var(--secondary-bg));
+    color: white;
+  }
+  
+  .dark .gov-badge-primary {
+    background: hsl(var(--secondary-bg));
+    color: white;
+  }
+
+  .gov-badge-secondary {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold;
+    background: hsl(var(--accent-bg));
+    color: black;
+  }
+  
+  .dark .gov-badge-secondary {
+    background: hsl(var(--accent-bg));
+    color: black;
+  }
+
+  .gov-badge-accent {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold;
+    background: hsl(var(--secondary-bg));
+    color: white;
+  }
+  
+  .dark .gov-badge-accent {
+    background: hsl(var(--secondary-bg));
+    color: white;
+  }
+
+  /* Light mode headings - bold and black */
+  body:not(.dark) h1, 
+  body:not(.dark) h2, 
+  body:not(.dark) h3, 
+  body:not(.dark) h4, 
+  body:not(.dark) h5, 
+  body:not(.dark) h6 {
+    color: #000000 !important;
+    font-weight: 900 !important;
+  }
+  
+  /* Dark mode headings - bold and white */
+  .dark h1, 
+  .dark h2, 
+  .dark h3, 
+  .dark h4, 
+  .dark h5, 
+  .dark h6 {
+    color: #FFFFFF !important;
+    font-weight: 900 !important;
+  }
+  
+  /* Light mode paragraphs and text - bold and black */
+  body:not(.dark) p, 
+  body:not(.dark) span:not(.bg-orange-500 *):not(.bg-orange-600 *):not(.bg-gradient-to-r *), 
+  body:not(.dark) div:not(.bg-orange-500):not(.bg-orange-600):not(.bg-gradient-to-r), 
+  body:not(.dark) a:not(.bg-orange-500):not(.bg-orange-600), 
+  body:not(.dark) label, 
+  body:not(.dark) li {
+    color: #000000 !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Dark mode paragraphs and text - bold and white */
+  .dark p, 
+  .dark span:not(.bg-orange-500 *):not(.bg-orange-600 *):not(.bg-gradient-to-r *), 
+  .dark div:not(.bg-orange-500):not(.bg-orange-600):not(.bg-gradient-to-r), 
+  .dark a:not(.bg-orange-500):not(.bg-orange-600), 
+  .dark label, 
+  .dark li {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Buttons with orange background get white text in light mode */
+  body:not(.dark) button, 
+  body:not(.dark) .bg-orange-500, 
+  body:not(.dark) .bg-orange-600 {
+    font-weight: 900 !important;
+  }
+  
+  body:not(.dark) button.bg-orange-500, 
+  body:not(.dark) button.bg-orange-600, 
+  body:not(.dark) .bg-orange-500 *, 
+  body:not(.dark) .bg-orange-600 * {
+    color: #FFFFFF !important;
+  }
+  
+  /* Buttons with orange background get white text in dark mode */
+  .dark button, 
+  .dark .bg-orange-500, 
+  .dark .bg-orange-600 {
+    font-weight: 900 !important;
+  }
+  
+  .dark button.bg-orange-500, 
+  .dark button.bg-orange-600, 
+  .dark .bg-orange-500 *, 
+  .dark .bg-orange-600 * {
+    color: #FFFFFF !important;
+  }
+
+  /* Text Highlighting and Emphasis - Light mode only */
+  body:not(.dark) h1, 
+  body:not(.dark) h2, 
+  body:not(.dark) h3, 
+  body:not(.dark) h4, 
+  body:not(.dark) h5, 
+  body:not(.dark) h6 {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    letter-spacing: -0.02em;
+  }
+  
+  /* Text Highlighting and Emphasis - Dark mode */
+  .dark h1, 
+  .dark h2, 
+  .dark h3, 
+  .dark h4, 
+  .dark h5, 
+  .dark h6 {
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+    letter-spacing: -0.02em;
+  }
+  
+  body:not(.dark) p, 
+  body:not(.dark) span, 
+  body:not(.dark) div, 
+  body:not(.dark) a, 
+  body:not(.dark) label {
+    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05);
+  }
+  
+  .dark p, 
+  .dark span, 
+  .dark div, 
+  .dark a, 
+  .dark label {
+    text-shadow: 0 0.5px 1px rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Highlighted text effect - Light mode */
+  body:not(.dark) .text-highlight {
+    background: linear-gradient(180deg, transparent 60%, rgba(255, 107, 53, 0.3) 60%);
+    padding: 0 4px;
+  }
+  
+  /* Strong emphasis - Light mode */
+  body:not(.dark) strong, 
+  body:not(.dark) b, 
+  body:not(.dark) .font-bold, 
+  body:not(.dark) .font-black {
+    font-weight: 900 !important;
+    color: #000000 !important;
+  }
+  
+  /* Strong emphasis - Dark mode */
+  .dark strong, 
+  .dark b, 
+  .dark .font-bold, 
+  .dark .font-black {
+    font-weight: 900 !important;
+    color: #FFFFFF !important;
+  }
+
+}
+@layer utilities {
+  .bg-gradient-hero {
+    background-image: var(--gradient-hero);
+  }
+  
+  .bg-gradient-card {
+    background-image: var(--gradient-card);
+  }
+  
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  
+  .shadow-warm {
+    box-shadow: var(--shadow-warm);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.4s ease-out;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  .animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
+  }
+  
+  .animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+  }
+  
+  .animate-float-slower {
+    animation: float-slower 12s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slower {
+    animation: pulse-slower 6s ease-in-out infinite;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+
+  .loading-shimmer {
+    background: linear-gradient(90deg, hsl(40 30% 90%) 25%, hsl(40 30% 85%) 50%, hsl(40 30% 90%) 75%);
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  .dark .loading-shimmer {
+    background: linear-gradient(90deg, hsl(30 15% 18%) 25%, hsl(30 15% 22%) 50%, hsl(30 15% 18%) 75%);
+    background-size: 200px 100%;
+  }
+}
+
+/* Accessibility Improvements */
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 220 13% 50%;
+    --input: 220 13% 50%;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
